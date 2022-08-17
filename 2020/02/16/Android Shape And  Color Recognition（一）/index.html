@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="代码记录 环境：Open CV 3.4.3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Shape And  Color Recognition(一)">
+<meta property="og:url" content="https://moonris.github.io/Nroma/2020/02/16/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="不可思议">
+<meta property="og:description" content="代码记录 环境：Open CV 3.4.3">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-02-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-16T08:48:08.594Z">
+<meta property="article:author" content="李龙飞">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://moonris.github.io/Nroma/2020/02/16/Android Shape And  Color Recognition（一）/"/>
+
+
+
+
+
+  <title>Android Shape And  Color Recognition(一) | 不可思议</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不可思议</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2020/02/16/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android Shape And  Color Recognition(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T08:00:00+08:00">
+                2020-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>代码记录</p>
+<p>环境：Open CV 3.4.3</p>
+<span id="more"></span>
+
+<h5 id="工具类"><a href="#工具类" class="headerlink" title="#工具类"></a>#工具类</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.opencv.android.Utils;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Core;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.CvType;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Mat;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.MatOfPoint;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Point;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Scalar;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Size;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgcodecs.Imgcodecs;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgproc.Imgproc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.graphics.Bitmap;</span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OpenCvUtils</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">tag</span> <span class="operator">=</span> <span class="string">&quot;CVUT2&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 得到图形中心点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Point <span class="title function_">getCenterPoint</span><span class="params">(Point[] points)</span> &#123;</span><br><span class="line">		<span class="type">double</span> <span class="variable">centerX</span> <span class="operator">=</span> <span class="number">0.0</span>;</span><br><span class="line">		<span class="type">double</span> <span class="variable">centerY</span> <span class="operator">=</span> <span class="number">0.0</span>;</span><br><span class="line">		<span class="keyword">for</span> (Point point : points) &#123;</span><br><span class="line">			centerX += point.x;</span><br><span class="line">			centerY += point.y;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">Point</span> <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Point</span>();</span><br><span class="line">		result.x = (<span class="type">int</span>) (centerX / points.length);</span><br><span class="line">		result.y = (<span class="type">int</span>) (centerY / points.length);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 获得角点 传入单调且不能是二值化的图像</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Point[] findp(Mat mat) &#123;</span><br><span class="line">		<span class="keyword">final</span> <span class="type">int</span> <span class="variable">maxCorners</span> <span class="operator">=</span> <span class="number">50</span>, blockSize = <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">final</span> <span class="type">double</span> <span class="variable">qualityLevel</span> <span class="operator">=</span> <span class="number">0.01</span>, minDistance = <span class="number">20.0</span>, k = <span class="number">0.04</span>;</span><br><span class="line">		<span class="keyword">final</span> <span class="type">boolean</span> <span class="variable">userHarrisDetector</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="type">MatOfPoint</span> <span class="variable">corners</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MatOfPoint</span>();<span class="comment">// 省略了转化成灰度图像</span></span><br><span class="line">		<span class="built_in">this</span>.toGrayMat(mat);</span><br><span class="line">		<span class="comment">// 计算角点</span></span><br><span class="line">		<span class="comment">// image：8位或32位浮点型输入图像，单通道</span></span><br><span class="line">		<span class="comment">// corners：保存检测出的角点</span></span><br><span class="line">		<span class="comment">// maxCorners：角点数目最大值，如果实际检测的角点超过此值，则只返回前maxCorners个强角点</span></span><br><span class="line">		<span class="comment">// qualityLevel：角点的品质因子---------重要</span></span><br><span class="line">		<span class="comment">// minDistance：对于初选出的角点而言，如果在其周围minDistance范围内存在其他更强角点，则将此角点删除</span></span><br><span class="line">		<span class="comment">// mask：指定感兴趣区，如不需在整幅图上寻找角点，则用此参数指定ROI。也可以new Mat()来代替，这样就是没有mask.</span></span><br><span class="line">		<span class="comment">// blockSize：计算协方差矩阵时的窗口大小</span></span><br><span class="line">		<span class="comment">// useHarrisDetector：指示是否使用Harris角点检测，如不指定，则计算shi-tomasi角点</span></span><br><span class="line">		<span class="comment">// harrisK：Harris角点检测需要的k值</span></span><br><span class="line">		Imgproc.goodFeaturesToTrack(mat, corners, maxCorners, qualityLevel,</span><br><span class="line">				minDistance, <span class="keyword">new</span> <span class="title class_">Mat</span>(), blockSize, userHarrisDetector, k);</span><br><span class="line">		Point[] pCorners = corners.toArray();</span><br><span class="line">		<span class="keyword">return</span> pCorners;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 画个圈圈祝福你</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawCircleByPoint</span><span class="params">(Mat mat, Point point)</span> &#123;</span><br><span class="line">		Imgproc.circle(mat, point, <span class="number">2</span>, <span class="keyword">new</span> <span class="title class_">Scalar</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 横向填充杂色</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">coverBackGroundToBlack</span><span class="params">(Mat mat)</span> &#123;</span><br><span class="line">		<span class="keyword">final</span> <span class="type">double</span> blackPixle[] = &#123; <span class="number">0.0</span> &#125;;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">0</span>; y &lt; mat.height(); y++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">0</span>; x &lt; mat.width(); x++) &#123;</span><br><span class="line">				<span class="type">double</span> pixle[] = mat.get(y, x);</span><br><span class="line">				<span class="keyword">if</span> (pixle[<span class="number">0</span>] == <span class="number">255.0</span>) &#123;<span class="comment">// 如果是白色</span></span><br><span class="line">					mat.put(y, x, blackPixle);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;<span class="comment">// 遇到黑色</span></span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> mat.width() - <span class="number">1</span>; x &gt; <span class="number">0</span>; x--) &#123;</span><br><span class="line">				<span class="type">double</span> pixle[] = mat.get(y, x);</span><br><span class="line">				<span class="keyword">if</span> (pixle[<span class="number">0</span>] == <span class="number">255.0</span>) &#123;<span class="comment">// 如果是白色</span></span><br><span class="line">					mat.put(y, x, blackPixle);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;<span class="comment">// 遇到黑色</span></span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Log.d(tag, <span class="string">&quot;背景涂黑完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 从Bitmap得到Mat</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Mat <span class="title function_">bitmapToMat</span><span class="params">(Bitmap bitmap)</span> &#123;</span><br><span class="line">		<span class="type">Bitmap</span> <span class="variable">bit</span> <span class="operator">=</span> bitmap.copy(Bitmap.Config.ARGB_8888, <span class="literal">false</span>);</span><br><span class="line">		<span class="type">Mat</span> <span class="variable">src</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Mat</span>(bit.getHeight(), bit.getWidth(), CvType.CV_8UC(<span class="number">3</span>));</span><br><span class="line">		Utils.bitmapToMat(bit, src);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;Bitmap转换Mat完成&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> src;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 膨胀处理 参数 3,3,1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toDilate</span><span class="params">(Mat mat, <span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> iterations)</span> &#123;</span><br><span class="line">		Imgproc.dilate(mat, mat, Imgproc.getStructuringElement(</span><br><span class="line">				Imgproc.MORPH_RECT, <span class="keyword">new</span> <span class="title class_">Size</span>(i, j)), <span class="keyword">new</span> <span class="title class_">Point</span>(-<span class="number">1</span>, -<span class="number">1</span>),</span><br><span class="line">				iterations);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;膨胀完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 腐蚀处理 参数3,3,1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toErode</span><span class="params">(Mat mat, <span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> iterations)</span> &#123;</span><br><span class="line">		Imgproc.erode(mat, mat, Imgproc.getStructuringElement(</span><br><span class="line">				Imgproc.MORPH_RECT, <span class="keyword">new</span> <span class="title class_">Size</span>(i, j)), <span class="keyword">new</span> <span class="title class_">Point</span>(-<span class="number">1</span>, -<span class="number">1</span>),</span><br><span class="line">				iterations);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;腐蚀完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 复制Mat对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Mat <span class="title function_">cloneMat</span><span class="params">(Mat mat)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> mat.clone();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 生成纯色Mat对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Mat <span class="title function_">makeBGRMat</span><span class="params">(<span class="type">int</span> b, <span class="type">int</span> g, <span class="type">int</span> r)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Mat</span>(<span class="number">360</span>, <span class="number">640</span>, CvType.CV_8UC3, <span class="keyword">new</span> <span class="title class_">Scalar</span>(b, g, r));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 查找轮廓并返回轮廓数组 最好传入阈值图</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;MatOfPoint&gt; <span class="title function_">findContoursList</span><span class="params">(Mat mat)</span> &#123;</span><br><span class="line">		List&lt;MatOfPoint&gt; contours = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;MatOfPoint&gt;();</span><br><span class="line">		<span class="type">Mat</span> <span class="variable">hierarchy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Mat</span>();</span><br><span class="line">		Imgproc.findContours(mat, contours, hierarchy, Imgproc.RETR_LIST,</span><br><span class="line">				Imgproc.CHAIN_APPROX_SIMPLE);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;找到轮廓&quot;</span> + contours.size() + <span class="string">&quot;个&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> contours;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 画出轮廓 根据轮廓数组在一张图上画 需指定数组下标</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawContoursToMat</span><span class="params">(Mat mat, List&lt;MatOfPoint&gt; contours,</span></span><br><span class="line"><span class="params">			<span class="type">int</span> index, <span class="type">int</span> b, <span class="type">int</span> g, <span class="type">int</span> r, <span class="type">int</span> size)</span> &#123;</span><br><span class="line">		Imgproc.drawContours(mat, contours, index, <span class="keyword">new</span> <span class="title class_">Scalar</span>(b, g, r, <span class="number">0</span>), size);</span><br><span class="line">		Log.v(tag, <span class="string">&quot;绘制第&quot;</span> + index + <span class="string">&quot;个轮廓&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 二值化图片 参数i,j参考150,255</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toBinaryMat</span><span class="params">(Mat from, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">		Imgproc.threshold(from, from, i, j, Imgproc.THRESH_BINARY);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;二值化完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 灰度化图像</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toGrayMat</span><span class="params">(Mat from)</span> &#123;</span><br><span class="line">		Imgproc.cvtColor(from, from, Imgproc.COLOR_BGR2GRAY);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;灰度化完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 图像颜色反转</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toReverseColorMat</span><span class="params">(Mat from)</span> &#123;</span><br><span class="line">		Core.bitwise_not(from, from);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;颜色反转完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 模糊图像，参数i,j,k参考5,5,0</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toGaussUnClearMat</span><span class="params">(Mat from, <span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">		Imgproc.GaussianBlur(from, from, <span class="keyword">new</span> <span class="title class_">Size</span>(i, j), k);</span><br><span class="line">		Log.d(tag, <span class="string">&quot;高斯模糊完成&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在图上写字</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printWordsOnMat</span><span class="params">(Mat mat, Point p, String text)</span> &#123;</span><br><span class="line">		p.x = p.x - <span class="number">100</span>;</span><br><span class="line">		Imgproc.putText(mat, text, p, <span class="number">18</span>, <span class="number">0.5</span>, <span class="keyword">new</span> <span class="title class_">Scalar</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 合并直线上的点[汇总]</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> points</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Point[] checkPoint(Point[] points) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">lastLength</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">thisLength</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		Point[] lp = points;</span><br><span class="line">		Point[] np;</span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">			np = checkPointOnce(lp);</span><br><span class="line">			thisLength = np.length;</span><br><span class="line">			<span class="keyword">if</span> (thisLength == lastLength) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			lastLength = thisLength;</span><br><span class="line">			lp = np;</span><br><span class="line">		&#125;</span><br><span class="line">		Log.d(tag, <span class="string">&quot;数组变化:&quot;</span> + points.length + <span class="string">&quot; -&gt; &quot;</span> + np.length);</span><br><span class="line">		<span class="keyword">return</span> np;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 合并直线上的点[分步]</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> Point[] checkPointOnce(Point[] points) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> points.length;</span><br><span class="line">		<span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;<span class="comment">// 是否找到可删除点</span></span><br><span class="line">		<span class="keyword">if</span> (length &lt; <span class="number">4</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> points;<span class="comment">// 如果小于四个点 免了判断</span></span><br><span class="line">		&#125;</span><br><span class="line">		label: <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; length; i++) &#123;<span class="comment">// 得到点1</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; length; j++) &#123;<span class="comment">// 得到点2</span></span><br><span class="line">				<span class="keyword">if</span> (j == i) &#123;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; length; k++) &#123;<span class="comment">// 得到点3</span></span><br><span class="line">					<span class="keyword">if</span> (k == j || k == i) &#123;</span><br><span class="line">						<span class="keyword">continue</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="comment">// int slope = 0;//斜率</span></span><br><span class="line">					<span class="type">double</span> <span class="variable">d1</span> <span class="operator">=</span> twoPointsAngel(points[i], points[j]);<span class="comment">// i,j直线角度</span></span><br><span class="line">					<span class="type">double</span> <span class="variable">d2</span> <span class="operator">=</span> twoPointsAngel(points[i], points[k]);<span class="comment">// i,k直线角度</span></span><br><span class="line">					<span class="type">double</span> <span class="variable">angelMin</span> <span class="operator">=</span> d1 - d2;</span><br><span class="line">					<span class="keyword">if</span> (Math.abs(angelMin) &lt; <span class="number">10</span>) &#123;<span class="comment">// 如果倾角非常接近，删除中间的点</span></span><br><span class="line">						<span class="type">int</span> <span class="variable">needDelete</span> <span class="operator">=</span> deleteMiddlePointToNull(points[i],</span><br><span class="line">								points[j], points[k]);</span><br><span class="line">						<span class="keyword">if</span> (needDelete == <span class="number">1</span>) &#123;</span><br><span class="line">							points[i] = <span class="literal">null</span>;</span><br><span class="line">						&#125; <span class="keyword">else</span> <span class="keyword">if</span> (needDelete == <span class="number">2</span>) &#123;</span><br><span class="line">							points[j] = <span class="literal">null</span>;</span><br><span class="line">						&#125; <span class="keyword">else</span> <span class="keyword">if</span> (needDelete == <span class="number">3</span>) &#123;</span><br><span class="line">							points[k] = <span class="literal">null</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						flag = <span class="literal">true</span>;</span><br><span class="line">						<span class="keyword">break</span> label;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (flag) &#123;</span><br><span class="line">			Point[] newPoints = <span class="keyword">new</span> <span class="title class_">Point</span>[length - <span class="number">1</span>];</span><br><span class="line">			<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (Point p : points) &#123;<span class="comment">// 准备一个没有空值的新数组</span></span><br><span class="line">				<span class="keyword">if</span> (<span class="literal">null</span> != p) &#123;</span><br><span class="line">					newPoints[index] = p;</span><br><span class="line">					index++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> newPoints;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> points;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 删除三点中处于中间的点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> <span class="title function_">deleteMiddlePointToNull</span><span class="params">(Point p1, Point p2, Point p3)</span> &#123;</span><br><span class="line">		<span class="type">double</span> <span class="variable">a</span> <span class="operator">=</span> p1.x + p1.y;</span><br><span class="line">		<span class="type">double</span> <span class="variable">b</span> <span class="operator">=</span> p2.x + p2.y;</span><br><span class="line">		<span class="type">double</span> <span class="variable">c</span> <span class="operator">=</span> p3.x + p3.y;</span><br><span class="line">		<span class="keyword">if</span> ((a &gt; b &amp;&amp; b &gt; c) || (a &lt; b &amp;&amp; b &lt; c)) &#123;<span class="comment">// b在中间</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> ((c &gt; a &amp;&amp; a &gt; b) || (c &lt; a &amp;&amp; a &lt; b)) &#123;<span class="comment">// a在中间</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 通过描边点得出形状</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">findShape</span><span class="params">(Point[] checkedPoints)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> checkedPoints.length;</span><br><span class="line">		<span class="keyword">if</span> (length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;ShapeError&quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;SanJiao&quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">5</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;WuJiao&quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length &gt; <span class="number">5</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;YuanXing&quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">4</span>) &#123;<span class="comment">// 四边形</span></span><br><span class="line">			<span class="type">double</span> <span class="variable">d1</span> <span class="operator">=</span> twoPointsDistance(checkedPoints[<span class="number">0</span>], checkedPoints[<span class="number">1</span>]);</span><br><span class="line">			<span class="type">double</span> <span class="variable">d2</span> <span class="operator">=</span> twoPointsDistance(checkedPoints[<span class="number">0</span>], checkedPoints[<span class="number">2</span>]);</span><br><span class="line">			<span class="type">double</span> <span class="variable">d3</span> <span class="operator">=</span> twoPointsDistance(checkedPoints[<span class="number">0</span>], checkedPoints[<span class="number">3</span>]);</span><br><span class="line">			Point[] p = <span class="keyword">new</span> <span class="title class_">Point</span>[<span class="number">2</span>];</span><br><span class="line">			<span class="comment">// 找与第一个点相邻的两个点(舍弃最远的那个点)</span></span><br><span class="line">			<span class="keyword">if</span> (d1 &gt; d2 &amp;&amp; d1 &gt; d3) &#123;<span class="comment">// d1最大，舍弃下标1</span></span><br><span class="line">				p[<span class="number">0</span>] = checkedPoints[<span class="number">2</span>];</span><br><span class="line">				p[<span class="number">1</span>] = checkedPoints[<span class="number">3</span>];</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (d2 &gt; d1 &amp;&amp; d2 &gt; d3) &#123;<span class="comment">// d2最大，舍弃下标2</span></span><br><span class="line">				p[<span class="number">0</span>] = checkedPoints[<span class="number">1</span>];</span><br><span class="line">				p[<span class="number">1</span>] = checkedPoints[<span class="number">3</span>];</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				p[<span class="number">0</span>] = checkedPoints[<span class="number">1</span>];</span><br><span class="line">				p[<span class="number">1</span>] = checkedPoints[<span class="number">2</span>];</span><br><span class="line">			&#125;<span class="comment">// 现在数组p中是两个最近的点</span></span><br><span class="line">			<span class="type">double</span> <span class="variable">angelL1</span> <span class="operator">=</span> twoPointsAngel(checkedPoints[<span class="number">0</span>], p[<span class="number">0</span>]);</span><br><span class="line">			<span class="type">double</span> <span class="variable">angelL2</span> <span class="operator">=</span> twoPointsAngel(checkedPoints[<span class="number">0</span>], p[<span class="number">1</span>]);</span><br><span class="line">			<span class="type">double</span> <span class="variable">angelP</span> <span class="operator">=</span> Math.abs(angelL1 - angelL2);</span><br><span class="line">			Log.d(tag, String.format(<span class="string">&quot;四边形某顶点角度为%.2f&quot;</span>, angelP));</span><br><span class="line">			<span class="keyword">if</span> (angelP &gt; <span class="number">80</span> &amp;&amp; angelP &lt; <span class="number">100</span>) &#123;<span class="comment">// 直角</span></span><br><span class="line">				<span class="type">double</span> <span class="variable">dis1</span> <span class="operator">=</span> twoPointsDistance(checkedPoints[<span class="number">0</span>], p[<span class="number">0</span>]);</span><br><span class="line">				<span class="type">double</span> <span class="variable">dis2</span> <span class="operator">=</span> twoPointsDistance(checkedPoints[<span class="number">0</span>], p[<span class="number">1</span>]);</span><br><span class="line">				<span class="type">double</span> <span class="variable">distanceRatio</span> <span class="operator">=</span> dis1 / dis2;</span><br><span class="line">				Log.d(tag, String.format(<span class="string">&quot;四边形临边长度差距比为%.2f&quot;</span>, distanceRatio));</span><br><span class="line">				<span class="keyword">if</span> (distanceRatio &gt; <span class="number">0.80</span> &amp;&amp; distanceRatio &lt; <span class="number">1.20</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="string">&quot;ZhengFang&quot;</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="string">&quot;ChangFang&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="string">&quot;LingXing&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;ShapeError&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 求两点之间距离</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> <span class="title function_">twoPointsDistance</span><span class="params">(Point p1, Point p2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> Math.sqrt(Math.pow(p1.x - p2.x, <span class="number">2</span>) + Math.pow(p1.y - p2.y, <span class="number">2</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 求两点所在直线水平夹角</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> <span class="title function_">twoPointsAngel</span><span class="params">(Point p1, Point p2)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (p1.y == p2.y) &#123;</span><br><span class="line">			p1.y += <span class="number">0.01</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Math.toDegrees(Math.atan((p1.x - p2.x) / (p1.y - p2.y)));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 将Mat对象保存到文件系统</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveMatAsPngFile</span><span class="params">(Mat mat, String filename)</span> &#123;</span><br><span class="line">		Log.d(tag, <span class="string">&quot;储存Mat&quot;</span>);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Imgcodecs.imwrite(Environment.getExternalStorageDirectory()</span><br><span class="line">					+ <span class="string">&quot;/CV/&quot;</span> + filename + <span class="string">&quot;.png&quot;</span>, mat);</span><br><span class="line">			Log.i(tag, <span class="string">&quot;Mat存储完成&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.e(tag, <span class="string">&quot;Mat存储出错&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 将Mat对象保存到文件系统</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveMatAsPngFileAndTimestamp</span><span class="params">(Mat mat, String filename)</span> &#123;</span><br><span class="line">		Log.d(tag, <span class="string">&quot;储存Mat&quot;</span>);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Imgcodecs.imwrite(Environment.getExternalStorageDirectory()</span><br><span class="line">					+ <span class="string">&quot;/CV/&quot;</span> + filename + System.currentTimeMillis() + <span class="string">&quot;.jpg&quot;</span>,</span><br><span class="line">					mat);</span><br><span class="line">			Log.i(tag, <span class="string">&quot;Mat存储完成&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.e(tag, <span class="string">&quot;Mat存储出错&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	private static final int[] RED = &#123; 255, 0, 0 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] GREEN = &#123; 0, 255, 0 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] BLUE = &#123; 0, 0, 255 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] YELLOW = &#123; 255, 255, 0 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] PIN = &#123; 255, 0, 255 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] QING = &#123; 0, 255, 255 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] BLACK = &#123; 0, 0, 0 &#125;;</span></span><br><span class="line"><span class="comment">//	private static final int[] WHITE = &#123; 255, 255, 255 &#125;;</span></span><br><span class="line"><span class="comment">//	</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] RED = &#123; <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] GREEN = &#123; <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] BLUE = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] YELLOW = &#123; <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] PIN = &#123; <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] QING = &#123; <span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] BLACK = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] WHITE = &#123; <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span> &#125;;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ArrayList&lt;<span class="type">int</span>[]&gt; COLORS = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		COLORS.add(RED);</span><br><span class="line">		COLORS.add(GREEN);</span><br><span class="line">		COLORS.add(BLUE);</span><br><span class="line">		COLORS.add(YELLOW);</span><br><span class="line">		COLORS.add(PIN);</span><br><span class="line">		COLORS.add(QING);</span><br><span class="line">		COLORS.add(BLACK);</span><br><span class="line">		COLORS.add(WHITE);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 确定形状的颜色</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">findColor</span><span class="params">(Mat colorfulMat, Point[] checkedPoints)</span> &#123;</span><br><span class="line">		<span class="type">Point</span> <span class="variable">centerPoint</span> <span class="operator">=</span> getCenterPoint(checkedPoints);</span><br><span class="line">		<span class="type">double</span>[] colorBGR = colorfulMat.get((<span class="type">int</span>) centerPoint.y,</span><br><span class="line">				(<span class="type">int</span>) centerPoint.x);</span><br><span class="line">		<span class="type">double</span> <span class="variable">maxlightR</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">// 确定亮度增大系数</span></span><br><span class="line">		<span class="type">double</span> <span class="variable">maxlightG</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">double</span> <span class="variable">maxlightB</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">0</span>; y &lt; colorfulMat.height(); y++) &#123;<span class="comment">// 遍历图片 找到最亮的点做参考</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">0</span>; x &lt; colorfulMat.width(); x++) &#123;</span><br><span class="line">				<span class="type">double</span> pixle[] = colorfulMat.get(y, x);</span><br><span class="line">				<span class="keyword">if</span> (pixle[<span class="number">0</span>] &gt; maxlightB)</span><br><span class="line">					maxlightB = pixle[<span class="number">0</span>];</span><br><span class="line">				<span class="keyword">if</span> (pixle[<span class="number">1</span>] &gt; maxlightG)</span><br><span class="line">					maxlightG = pixle[<span class="number">1</span>];</span><br><span class="line">				<span class="keyword">if</span> (pixle[<span class="number">2</span>] &gt; maxlightR)</span><br><span class="line">					maxlightR = pixle[<span class="number">2</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="comment">// 用于去除亮度和色调影响</span></span><br><span class="line">		maxlightR = <span class="number">255</span> / maxlightR;</span><br><span class="line">		maxlightG = <span class="number">255</span> / maxlightG;</span><br><span class="line">		maxlightB = <span class="number">255</span> / maxlightB;</span><br><span class="line">		<span class="type">int</span>[] colorRGB = &#123; (<span class="type">int</span>) (colorBGR[<span class="number">2</span>] * maxlightR),</span><br><span class="line">				(<span class="type">int</span>) (colorBGR[<span class="number">1</span>] * maxlightG),</span><br><span class="line">				(<span class="type">int</span>) (colorBGR[<span class="number">0</span>] * maxlightB) &#125;;</span><br><span class="line">		<span class="type">int</span>[] missNmuber = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">8</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">			missNmuber[i] = colorMiss(colorRGB, COLORS.get(i));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> <span class="variable">minIndex</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">minNumb</span> <span class="operator">=</span> <span class="number">999</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; missNmuber.length; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (missNmuber[i] &lt; minNumb) &#123;</span><br><span class="line">				minNumb = missNmuber[i];</span><br><span class="line">				minIndex = i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Log.d(tag, String.format(</span><br><span class="line">				<span class="string">&quot;R:%d, G:%d, B:%d, light:[%.2f * %.2f * %.2f]  =&gt;  &quot;</span>,</span><br><span class="line">				colorRGB[<span class="number">0</span>], colorRGB[<span class="number">1</span>], colorRGB[<span class="number">2</span>], maxlightR, maxlightG,</span><br><span class="line">				maxlightB));</span><br><span class="line">		<span class="keyword">switch</span> (minIndex) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Hong&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Lv&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Lan&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Huang&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Pin&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Qing&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Hei&quot;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;Bai&quot;</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;ColorError&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 计算颜色差距</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> <span class="title function_">colorMiss</span><span class="params">(<span class="type">int</span>[] c1, <span class="type">int</span>[] c2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> Math.abs(c1[<span class="number">0</span>] - c2[<span class="number">2</span>]) + Math.abs(c1[<span class="number">1</span>] - c2[<span class="number">1</span>])</span><br><span class="line">				+ Math.abs(c1[<span class="number">2</span>] - c2[<span class="number">0</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 从文件系统图片读取Mat对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> Mat <span class="title function_">getImageAsFile</span><span class="params">(String filename)</span> &#123;<span class="comment">// FIXME</span></span><br><span class="line">		Log.d(tag, <span class="string">&quot;读取Mat&quot;</span>);</span><br><span class="line">		<span class="type">Mat</span> <span class="variable">image</span> <span class="operator">=</span> Imgcodecs.imread(Environment.getExternalStorageDirectory()</span><br><span class="line">				+ <span class="string">&quot;/CV/&quot;</span> + filename);</span><br><span class="line">		Log.i(tag, <span class="string">&quot;Mat读取完成&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> image;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="调用方法"><a href="#调用方法" class="headerlink" title="#调用方法"></a>#调用方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">colorAndShape</span><span class="params">()</span> &#123;</span><br><span class="line">		timer = <span class="keyword">new</span> <span class="title class_">Timer</span>();</span><br><span class="line">		timer.schedule(<span class="keyword">new</span> <span class="title class_">TimerTask</span>() &#123;</span><br><span class="line">			<span class="type">OpenCvUtils</span> <span class="variable">cvut</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OpenCvUtils</span>();</span><br><span class="line">			ArrayList&lt;ColorShapeInfo&gt; resultList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">			<span class="type">int</span> <span class="variable">erzhi</span> <span class="operator">=</span> <span class="number">130</span>;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;<span class="comment">// timer线程</span></span><br><span class="line">				Log.d(<span class="string">&quot;pzj&quot;</span>, <span class="string">&quot;in to cv !!&quot;</span>);</span><br><span class="line">				<span class="comment">// new FileService().savePhoto(bitmap, &quot;CV/doit.png&quot;);</span></span><br><span class="line">				<span class="comment">// Mat image = cvut.getImageAsFile(&quot;CV/doit.png&quot;);</span></span><br><span class="line">				<span class="type">Mat</span> <span class="variable">image</span> <span class="operator">=</span> cvut.bitmapToMat(bitmap);</span><br><span class="line">				<span class="type">Mat</span> <span class="variable">m1</span> <span class="operator">=</span> cvut.cloneMat(image);</span><br><span class="line">				<span class="type">Mat</span> <span class="variable">declarMat</span> <span class="operator">=</span> cvut.cloneMat(image);</span><br><span class="line">				cvut.toReverseColorMat(image);<span class="comment">// 反色</span></span><br><span class="line">				cvut.toGaussUnClearMat(declarMat, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>);<span class="comment">// 模糊图像，用于推测颜色</span></span><br><span class="line">				<span class="type">Mat</span> <span class="variable">m2</span> <span class="operator">=</span> cvut.cloneMat(declarMat);</span><br><span class="line">				<span class="type">Mat</span> <span class="variable">srcWrite</span> <span class="operator">=</span> cvut.cloneMat(declarMat);</span><br><span class="line">				cvut.toDilate(image, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);<span class="comment">// 膨胀</span></span><br><span class="line">				cvut.toGrayMat(image);<span class="comment">// 灰度化</span></span><br><span class="line">				<span class="type">Mat</span> <span class="variable">binary</span> <span class="operator">=</span> cvut.cloneMat(image);</span><br><span class="line">				cvut.toBinaryMat(binary, erzhi, <span class="number">255</span>);<span class="comment">// 二值化</span></span><br><span class="line">				cvut.coverBackGroundToBlack(binary);<span class="comment">// 背景变黑</span></span><br><span class="line">				cvut.saveMatAsPngFileAndTimestamp(binary, <span class="string">&quot;binary&quot;</span>);<span class="comment">// SAVE</span></span><br><span class="line">				List&lt;MatOfPoint&gt; contoursList = cvut.findContoursList(binary);<span class="comment">// 找到轮廓</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; contoursList.size()</span><br><span class="line">						&amp;&amp; contoursList.size() &lt;= <span class="number">9</span>; i++) &#123;<span class="comment">// 处理单个轮廓</span></span><br><span class="line">					<span class="type">Mat</span> <span class="variable">mat</span> <span class="operator">=</span> cvut.makeBGRMat(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);<span class="comment">// 黑色背景</span></span><br><span class="line">					cvut.drawContoursToMat(mat, contoursList, i, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">1</span>);<span class="comment">// 白色描边</span></span><br><span class="line">					Point[] points = cvut.findp(mat);<span class="comment">// 找到描边点</span></span><br><span class="line">					Point[] checkedPoints = cvut.checkPoint(points);<span class="comment">// 清除同一条直线上的点</span></span><br><span class="line">					<span class="comment">//ColorShapeInfo csi = ;</span></span><br><span class="line">					<span class="comment">//String shape = cvut.findShape(checkedPoints);// 确定形状</span></span><br><span class="line">					<span class="comment">//String color = cvut.findColor(declarMat, checkedPoints);// 确定颜色</span></span><br><span class="line">					resultList.add(<span class="keyword">new</span> <span class="title class_">ColorShapeInfo</span>(cvut.findColor(declarMat, checkedPoints), cvut.findShape(checkedPoints)));</span><br><span class="line">					<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; checkedPoints.length; j++) &#123;</span><br><span class="line">						cvut.drawCircleByPoint(mat, checkedPoints[j]);</span><br><span class="line">					&#125;</span><br><span class="line">					cvut.saveMatAsPngFile(mat, <span class="string">&quot;Shape&quot;</span> + i);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> (resultList.size() != <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">//结果resultList通过Log打印出来了</span></span><br><span class="line">					Log.d(<span class="string">&quot;CvResoult&quot;</span>, Arrays.toString(resultList.toArray()));</span><br><span class="line">					cvut.saveMatAsPngFileAndTimestamp(m2, <span class="string">&quot;declar&quot;</span>);<span class="comment">// SAVE</span></span><br><span class="line">					cvut.saveMatAsPngFileAndTimestamp(m1, <span class="string">&quot;image&quot;</span>);<span class="comment">// SAVE</span></span><br><span class="line">					timer.cancel();</span><br><span class="line">					<span class="built_in">this</span>.cancel();</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					resultList.clear();</span><br><span class="line">					<span class="keyword">if</span> (erzhi &lt;= <span class="number">180</span>) &#123;</span><br><span class="line">						erzhi += <span class="number">5</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						erzhi = <span class="number">150</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;, <span class="number">0</span>, <span class="number">200</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/01/android1/" rel="next" title="Android嵌入式项目讲义">
+                <i class="fa fa-chevron-left"></i> Android嵌入式项目讲义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/11/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="Android Shape And  Color Recognition(二)">
+                Android Shape And  Color Recognition(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">#工具类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">#调用方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李龙飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
