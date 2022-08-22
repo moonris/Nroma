@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="Intent控制其他对象的访问。 Design principle代理分为四类：  远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。 虚拟代理（Virtual Proxy）：根据需要创建开销很大的对象，它可以缓存实体的附加信息，以便延迟对它的访问，例如在网站加载一个很大图片时，不能马上完成，可以用">
+<meta name="description" content="Intent控制其他对象的访问。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代理（Proxy）">
 <meta property="og:url" content="https://moonris.github.io/Nroma/2021/01/12/Proxy/index.html">
 <meta property="og:site_name" content="不可思议">
-<meta property="og:description" content="Intent控制其他对象的访问。 Design principle代理分为四类：  远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。 虚拟代理（Virtual Proxy）：根据需要创建开销很大的对象，它可以缓存实体的附加信息，以便延迟对它的访问，例如在网站加载一个很大图片时，不能马上完成，可以用">
+<meta property="og:description" content="Intent控制其他对象的访问。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-01-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-16T08:53:04.952Z">
+<meta property="article:modified_time" content="2022-08-22T05:35:48.655Z">
 <meta property="article:author" content="李龙飞">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -182,7 +182,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -191,8 +191,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -301,6 +331,8 @@
 
       
         <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>控制其他对象的访问。</p>
+<span id="more"></span>
+
 <h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>代理分为四类：</p>
 <ul>
 <li>远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。</li>
@@ -354,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/12/Simple%20Factory/" rel="next" title="简单工厂（Simple Factory）">
-                <i class="fa fa-chevron-left"></i> 简单工厂（Simple Factory）
+              <a href="/2021/01/12/Singleton/" rel="next" title="单例(Singleton)">
+                <i class="fa fa-chevron-left"></i> 单例(Singleton)
               </a>
             
           </div>
@@ -441,9 +473,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,15 +560,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -635,13 +661,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>

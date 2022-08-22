@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -95,7 +95,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -180,7 +180,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -189,8 +189,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -217,275 +247,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Observer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Observer/" itemprop="url">观察者（Observer）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义对象之间的多依赖一的关系，当一改变，所有多都会收到通知并更新。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>（主题）Subject：具有注册和移除观察者，通知观察者的功能，通过维护观察者列表来实现这些操作的。</p>
-<p>（观察者）Observer：观察者注册功能需要调用主题的registerObserver方法。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>主题接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">registerObserver</span><span class="params">(Observer observer)</span>;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">deleteObserver</span><span class="params">(Observer observer)</span>;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">notifyChange</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>观察者接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String data)</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">StatisticsDisplay</span><span class="params">(Subject subject)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主题实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ImpSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> List&lt;Observer&gt; observers=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> String data;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">registerObserver</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		observers.add(observer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteObserver</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">int</span> i=observers.indexOf(observer);</span><br><span class="line">		<span class="keyword">if</span>(i&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">			observers.remove(observer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyChange</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">for</span>(Observer observer:observers) &#123;</span><br><span class="line">			observer.update(data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">(String info)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.data=info;</span><br><span class="line">		System.out.println(<span class="string">&quot;更新&quot;</span>+info);</span><br><span class="line">		<span class="built_in">this</span>.notifyChange();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>观察者实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ImpObserver</span> <span class="keyword">implements</span> <span class="title class_">Observer</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String data)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;Observer1&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">StatisticsDisplay</span><span class="params">(Subject subject)</span> &#123;</span><br><span class="line">        subject.registerObserver(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>客户端调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Subject subject=<span class="keyword">new</span> <span class="title class_">ImpSubject</span>();</span><br><span class="line">		Observer observer=<span class="keyword">new</span> <span class="title class_">ImpObserver</span>();</span><br><span class="line">		observer.StatisticsDisplay(subject);</span><br><span class="line">		subject.notifyChange();</span><br><span class="line">		subject.deleteObserver(observer);</span><br><span class="line">		subject.notifyChange();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>思路：程序创建观察者实例，观察者调用StatisticsDisplay并传入主题对象来注册</p>
-<p>创建之后通过主题对象来通知或移除观察者。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Prototype/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Prototype/" itemprop="url">原型模式（Prototype）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>使用原型实例指定要创建的对象类型，通过复制这个原型来创建新对象。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。在请求时返回它的克隆。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>原型：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> Prototype <span class="title function_">myClone</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>克隆：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreatePrototype</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String filed;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">ConcreatePrototype</span><span class="params">(String filed)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.filed=filed;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    Prototype <span class="title function_">myClone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(filed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> filed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>请求原型，返回克隆对象：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">clone</span> <span class="operator">=</span> prototype.myClone();</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -570,174 +331,14 @@
 
       
         
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>控制其他对象的访问。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>代理分为四类：</p>
-<ul>
-<li>远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。</li>
-<li>虚拟代理（Virtual Proxy）：根据需要创建开销很大的对象，它可以缓存实体的附加信息，以便延迟对它的访问，例如在网站加载一个很大图片时，不能马上完成，可以用虚拟代理缓存图片的大小信息，然后生成一张临时图片代替原始图片。</li>
-<li>保护代理（Protection Proxy）：按权限控制对象的访问，它负责检查调用者是否具有实现一个请求所必须的访问权限。</li>
-<li>智能代理（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作：记录对象的引用次数；当第一次引用一个对象时，将它装入内存；在访问一个实际对象前，检查是否已经锁定了它，以确保其它对象不能改变它。</li>
-</ul>
-<p>Subject：抽象主题角色，声明了目标对象和代理对象的共同接口，这样一来在任何可以使用目标对象的地方都可以使用代理对象。</p>
-<p>RealSubject：具体主题角色，也称为委托角色或者被代理角色。定义了代理对象所代表的目标对象。</p>
-<p>Proxy：代理主题角色，也叫委托类、代理类。代理对象内部含有目标对象的引用，从而可以在任何时候操作目标对象；代理对象提供一个与目标对象相同的接口，以便可以在任何时候替代目标对象。代理对象通常在客户端调用传递给目标对象之前或之后，执行某个操作，而不是单纯地将调用传递给目标对象。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>主题角色接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主题角色实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;RealSubject&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代理类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Subject subject=<span class="literal">null</span>;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">if</span>(subject==<span class="literal">null</span>) &#123;</span><br><span class="line">			subject=<span class="keyword">new</span> <span class="title class_">RealSubject</span>();</span><br><span class="line">			System.out.println(<span class="string">&quot;Proxy&quot;</span>);</span><br><span class="line">			<span class="built_in">this</span>.subject.operate();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Subject subject=<span class="keyword">new</span> <span class="title class_">Proxy</span>();</span><br><span class="line">		subject.operate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：在代理类内代理创建具体角色的对象并处理一些业务之后，调用具体对象的方法后，将Proxy返回出来，用于都继承自Subject，故可以被用户看成具体角色。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Simple%20Factory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Simple%20Factory/" itemprop="url">简单工厂（Simple Factory）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h4><p>在创建对象时不向客户暴露对象内部细节，并提供一个创建对象的通用接口。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>简单工厂把实例化的操作单独放在一个类中，这个类就成为一个简单工厂类，让简单工厂来决定该实现哪一个子类。</p>
-<p>这样可以实现客户类和多个具体子类的解耦。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>父类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>三个子类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateProduct</span> <span class="keyword">implements</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateProduct1</span> <span class="keyword">implements</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateProduct2</span> <span class="keyword">implements</span> <span class="title class_">Product</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>工厂类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleFactory</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> Product <span class="title function_">createProduct</span><span class="params">(<span class="type">int</span> type)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(type == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreateProduct1</span>();</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(type == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreateProduct2</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreateProduct</span>();	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>客户类</p>
-<p>将需要的类实例化调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		SimpleFactory simpleFactory=<span class="keyword">new</span> <span class="title class_">SimpleFactory</span>();</span><br><span class="line">		Product product=simpleFactory.createProduct(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-          
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>控制其他对象的访问。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Proxy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -854,39 +455,138 @@
 
       
         
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>确保一个类只有一个实例，并通过该实例的全局访问方法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Singleton/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Simple%20Factory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Simple%20Factory/" itemprop="url">简单工厂（Simple Factory）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>确保一个类只有一个实例，并通过该实例的全局访问方法。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p> 使用一个私有构造方法、私有静态变量和一个公有静态方法实现。</p>
-<p>其中，</p>
-<p>私有构造方法保证其他类不能通过构造方法来创建对象实例。</p>
-<p>私有静态变量保证此静态变量不能被其他类调用。</p>
-<p>公有静态方法是全局访问方法。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><h5 id="1、懒汉式-线程不安全"><a href="#1、懒汉式-线程不安全" class="headerlink" title="1、懒汉式-线程不安全"></a>1、懒汉式-线程不安全</h5><p>私有静态实例被延迟创建，如果没有用到该实例，可节约资源</p>
-<p>但是如果多个线程同时进入<code>if(uniqueInstance==null)</code>，会导致多次创建实例，故线程不安全。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2、饿汉式-线程安全"><a href="#2、饿汉式-线程安全" class="headerlink" title="2、饿汉式-线程安全"></a>2、饿汉式-线程安全</h5><p>预先实例化，不会产生线程安全问题，但是也丢失了延迟实例化带来的节约资源的好处。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">uniqueInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3、懒汉式-线程安全"><a href="#3、懒汉式-线程安全" class="headerlink" title="3、懒汉式-线程安全"></a>3、懒汉式-线程安全</h5><p>可以给全局访问方法加一个锁，从而避免一个时间点多个线程进入。</p>
-<p>但是仍然有性能问题，如阻塞问题。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="4、双重校验锁-线程安全"><a href="#4、双重校验锁-线程安全" class="headerlink" title="4、双重校验锁-线程安全"></a>4、双重校验锁-线程安全</h5><p>对象只需要被实例化一次，之后可以直接使用，所以加锁只需要加部分代码，并在进入时判断是否被实例化，如果没有再加锁。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(uniqueInstance == <span class="literal">null</span>)&#123;</span><br><span class="line">             		uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第一个 if 语句用来避免 uniqueInstance 已经被实例化之后的加锁操作，而第二个 if 语句进行了加锁，所以只能有一个线程进入，就不会出现 uniqueInstance &#x3D;&#x3D; null 时两个线程同时进行实例化操作。</p>
-<h5 id="5、静态内部类实现-线程安全"><a href="#5、静态内部类实现-线程安全" class="headerlink" title="5、静态内部类实现-线程安全"></a>5、静态内部类实现-线程安全</h5><p>当Singleton被加载时，静态内部类并没有被加载，只有当有方法调用全局访问方法时，JVM初始化实例一次。</p>
-<p>既可以延迟初始化，也可以有JVM提供的线程安全。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">SingletonHolder</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> SingletonHolder.INSTANCE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="6、枚举实现"><a href="#6、枚举实现" class="headerlink" title="6、枚举实现"></a>6、枚举实现</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	INSTANCE;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String objectName;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getObject</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setObjectName</span><span class="params">(String objectName)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.objectName=objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//单例测试</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> &#123;</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">firstSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		firstSingleton.setObjectName(<span class="string">&quot;firstName&quot;</span>);</span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">secondSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		secondSingleton.setObjectName(<span class="string">&quot;secondName&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建实例会被覆盖</span></span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		System.out.println(secondSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//反射获取</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Singleton[] enumConstants = Singleton.class.getEnumConstants();</span><br><span class="line">			<span class="keyword">for</span>(Singleton enumConstant : enumConstants) &#123;</span><br><span class="line">				System.out.println(enumConstant.getObject());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以防止反射攻击。因为JVM会保证只实例化一次，且多次序列化后只会覆盖，并不会产生多个实例，不需要用transient 修饰</p>
-<p>反射攻击：通过setAccessible()可以将私有构造方法设置为公有，然后就可以实例化了。</p>
-<p>transient ：用transient关键字标记的成员变量不参与序列化过程。</p>
 
           
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h4><p>在创建对象时不向客户暴露对象内部细节，并提供一个创建对象的通用接口。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Simple%20Factory/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1003,167 +703,14 @@
 
       
         
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它所属的类。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>State：状态类</p>
-<p>Context：带有状态的类</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>状态接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">State</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doAction</span><span class="params">(Context context)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>启动状态实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StartState</span> <span class="keyword">implements</span> <span class="title class_">State</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doAction</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;Player is in start state&quot;</span>);</span><br><span class="line">		context.setState(<span class="built_in">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Start State&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>停止状态实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StopState</span> <span class="keyword">implements</span> <span class="title class_">State</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doAction</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;Player is in stop state&quot;</span>);</span><br><span class="line">		context.setState(<span class="built_in">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Stop State&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>带有状态的类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> State state;</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Context</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		state=<span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> State <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(State state)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.state = state;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Context context=<span class="keyword">new</span> <span class="title class_">Context</span>();</span><br><span class="line">		StartState startState=<span class="keyword">new</span> <span class="title class_">StartState</span>();</span><br><span class="line">		startState.doAction(context);</span><br><span class="line">		</span><br><span class="line">		System.out.println(context.getState().toString());</span><br><span class="line">		</span><br><span class="line">		StopState stopState=<span class="keyword">new</span> <span class="title class_">StopState</span>();</span><br><span class="line">		stopState.doAction(context);</span><br><span class="line">		System.out.println(context.getState().toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：启动带有状态的类，然后更改状态，观察带有状态的类的状态。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Strategy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Strategy/" itemprop="url">策略（Strategy）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义一系列算法，封装每个算法，并使它们可以互换。</p>
-<p>策略模式可以让算法独立于使用它的客户端。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Strategy：接口定义一个算法族，它们都实现了behavior()方法。</p>
-<p>Context：使用到该算法族的类，其中的doSomething()方法会调用behavior(), setStrategy(Strategy)方法可以动态的改变strategy对象，也就是说能动态的改变Context所使用的算法。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>算法族接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma.;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">behavior</span><span class="params">()</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实现类A：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateStrategyA</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">behavior</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;ConcreateStrategyA&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实现类B：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateStrategyB</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">behavior</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;ConcreateStrategyB&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用的类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> Strategy strategy;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(strategy!=<span class="literal">null</span>) &#123;</span><br><span class="line">			strategy.behavior();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStrategy</span><span class="params">(Strategy strategy)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.strategy = strategy;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Context context=<span class="keyword">new</span> <span class="title class_">Context</span>();</span><br><span class="line">		context.setStrategy(<span class="keyword">new</span> <span class="title class_">ConcreateStrategyA</span>());</span><br><span class="line">		context.doSomething();</span><br><span class="line">		</span><br><span class="line">		context.setStrategy(<span class="keyword">new</span> <span class="title class_">ConcreateStrategyB</span>());</span><br><span class="line">		context.doSomething();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路，传入的算法对象可以动态的改变，与此同时像类似状态一样，通过doSomething来执行behavior。</p>
-
-          
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它所属的类。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/State/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1280,24 +827,139 @@
 
       
         
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义算法框架，并将一些步骤的实现延迟到子类。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Template%20Method/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Strategy/" itemprop="url">策略（Strategy）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义算法框架，并将一些步骤的实现延迟到子类。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>算法模板框架：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractClass</span> &#123;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationA</span><span class="params">()</span>;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationB</span><span class="params">()</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//模板方法</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">templateMethod</span><span class="params">()</span> &#123;</span><br><span class="line">		primitiveOperationA();</span><br><span class="line">		primitiveOperationB();</span><br><span class="line">		<span class="comment">//内部也可以通过钩子方法来组合，略</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//钩子方法</span></span><br><span class="line">	<span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">hookMethod</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实现类A</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateMethodA</span> <span class="keyword">extends</span> <span class="title class_">AbstractClass</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationA</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;子类A -》A（）&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationB</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;子类A -》B（）&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实现类B</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateMethodB</span> <span class="keyword">extends</span> <span class="title class_">AbstractClass</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationA</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;子B -》A（）&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">primitiveOperationB</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;子B -》B（）&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] argc)</span> &#123;</span><br><span class="line">		AbstractClass abstractClassA=<span class="keyword">new</span> <span class="title class_">ConcreateMethodA</span>();</span><br><span class="line">		abstractClassA.templateMethod();</span><br><span class="line">		</span><br><span class="line">		AbstractClass abstractClassB=<span class="keyword">new</span> <span class="title class_">ConcreateMethodB</span>();</span><br><span class="line">		abstractClassB.templateMethod();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：在算法框架内定义模板方法templateMethod，通过子类调用模板方法来执行步骤，如果需要重新定义执行步骤，可以调用钩子方法作为判断条件来添加其他方法步骤</p>
 
           
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义一系列算法，封装每个算法，并使它们可以互换。</p>
+<p>策略模式可以让算法独立于使用它的客户端。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Strategy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1414,38 +1076,14 @@
 
       
         
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>为一个对象结构增加新能力。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Visitor：访问者，为每个ConcreateElement声明一个Visit操作</p>
-<p>ConcreateVisitor：具体访问者，存储遍历过程中的累计结果。</p>
-<p>ObjectStructure：对象结构，可以是组合结构，也可以是一个集合。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>访问者接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Visitor</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementA element)</span>;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementB element)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>具体访问者A</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateVisitorA</span> <span class="keyword">implements</span> <span class="title class_">Visitor</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementA element)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;具体访问者A访问&quot;</span>+element.operationA());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementB element)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;具体访问者A访问&quot;</span>+element.operationB());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>具体访问者B</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateVisitorB</span> <span class="keyword">implements</span> <span class="title class_">Visitor</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementA element)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;具体访问者B访问&quot;</span>+element.operationA());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visit</span><span class="params">(ConcreateElementB element)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;具体访问者B访问&quot;</span>+element.operationB());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>元素类接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Element</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(Visitor visitor)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>具体元素类A</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateElementA</span> <span class="keyword">implements</span> <span class="title class_">Element</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(Visitor visitor)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		visitor.visit(<span class="built_in">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">operationA</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;具体元素A动作&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>具体元素类B</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateElementB</span> <span class="keyword">implements</span> <span class="title class_">Element</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(Visitor visitor)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		visitor.visit(<span class="built_in">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">operationB</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;具体元素B动作&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对象结构</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ObjectStructure</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;Element&gt;list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(Visitor visitor)</span> &#123;</span><br><span class="line">		Iterator&lt;Element&gt; i = list.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext()) &#123;</span><br><span class="line">            ((Element) i.next()).accept(visitor);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Element element)</span> &#123;</span><br><span class="line">        list.add(element);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Element element)</span> &#123;</span><br><span class="line">        list.remove(element);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		ObjectStructure objectStructure=<span class="keyword">new</span> <span class="title class_">ObjectStructure</span>();</span><br><span class="line">		objectStructure.add(<span class="keyword">new</span> <span class="title class_">ConcreateElementA</span>());</span><br><span class="line">		objectStructure.add(<span class="keyword">new</span> <span class="title class_">ConcreateElementB</span>());</span><br><span class="line">		</span><br><span class="line">		Visitor visitor=<span class="keyword">new</span> <span class="title class_">ConcreateVisitorA</span>();</span><br><span class="line">		objectStructure.accept(visitor);</span><br><span class="line">		</span><br><span class="line">		Visitor visitor2=<span class="keyword">new</span> <span class="title class_">ConcreateVisitorB</span>();</span><br><span class="line">		objectStructure.accept(visitor2);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>思路：将具体元素对象存入对象结构类，再将具体访问对象通过对象结构类间接执行具体元素类accept方法，间接调用具体访问类的visit方法，同时调用动作方法。</p>
-
-          
+          <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>为一个对象结构增加新能力。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/12/Visitor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1608,6 +1246,255 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2020/11/12/NrmMybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/12/NrmMybatis/" itemprop="url">手写的类Mybatis的持久层框架NrmMybatis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T15:00:00+08:00">
+                2020-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>手写的一个类Mybatis的轮子，该项目我放在了github中。</p>
+<p>只写了select方法，其他可类推</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/11/12/NrmMybatis/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2020/11/12/NrmServer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/12/NrmServer/" itemprop="url">手写的类Tomcat的Web服务器：NrmServer</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T15:00:00+08:00">
+                2020-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>手写的一个类Tomcat的轮子，该项目我放在了github中。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/11/12/NrmServer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1656,9 +1543,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1727,15 +1614,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -1834,13 +1715,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 

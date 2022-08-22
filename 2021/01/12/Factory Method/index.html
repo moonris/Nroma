@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="Intent定义一个创建对象的接口，但由子类决定要实例化哪个类。 Design principle由子类来创建对象，父类有一个方法需要用到对象，但是这个对象放在一个抽象方法中要子类实现。子类实现后，父类的对象接口才会被实例化。 Implementationpackage cn.nroma;public abstract class Factory &amp;#123;	abstract public Pr">
+<meta name="description" content="Intent定义一个创建对象的接口，但由子类决定要实例化哪个类。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工厂方法（Factory Method）">
 <meta property="og:url" content="https://moonris.github.io/Nroma/2021/01/12/Factory%20Method/index.html">
 <meta property="og:site_name" content="不可思议">
-<meta property="og:description" content="Intent定义一个创建对象的接口，但由子类决定要实例化哪个类。 Design principle由子类来创建对象，父类有一个方法需要用到对象，但是这个对象放在一个抽象方法中要子类实现。子类实现后，父类的对象接口才会被实例化。 Implementationpackage cn.nroma;public abstract class Factory &amp;#123;	abstract public Pr">
+<meta property="og:description" content="Intent定义一个创建对象的接口，但由子类决定要实例化哪个类。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-01-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-16T08:50:08.601Z">
+<meta property="article:modified_time" content="2022-08-22T05:37:11.551Z">
 <meta property="article:author" content="李龙飞">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -182,7 +182,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -191,8 +191,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -301,6 +331,8 @@
 
       
         <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>定义一个创建对象的接口，但由子类决定要实例化哪个类。</p>
+<span id="more"></span>
+
 <h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>由子类来创建对象，父类有一个方法需要用到对象，但是这个对象放在一个抽象方法中要子类实现。子类实现后，父类的对象接口才会被实例化。</p>
 <h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Factory</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> <span class="keyword">public</span> Product <span class="title function_">factoryMethod</span><span class="params">()</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span> &#123;</span><br><span class="line">		Product product=factoryMethod();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -338,8 +370,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/12/Interpreter/" rel="next" title="解释器（Interpreter）">
-                <i class="fa fa-chevron-left"></i> 解释器（Interpreter）
+              <a href="/2021/01/12/Flyweight/" rel="next" title="享元（Flyweight）">
+                <i class="fa fa-chevron-left"></i> 享元（Flyweight）
               </a>
             
           </div>
@@ -425,9 +457,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,15 +544,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -619,13 +645,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>

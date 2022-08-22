@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="intent把一个类接口转换成另一个用户需要的接口。具体实现就是创建一个中间类，它既是目标类型（也就是目标接口实现），也有继承源类方法。 Design principleTarget ：用户需要的接口 Adaptee：源类 Adapter：适配器类 ImplementationTarget package cn.nroma;public interface Target &amp;#123;	public">
+<meta name="description" content="intent把一个类接口转换成另一个用户需要的接口。具体实现就是创建一个中间类，它既是目标类型（也就是目标接口实现），也有继承源类方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="适配器（Adapter）">
 <meta property="og:url" content="https://moonris.github.io/Nroma/2021/01/12/Adapter/index.html">
 <meta property="og:site_name" content="不可思议">
-<meta property="og:description" content="intent把一个类接口转换成另一个用户需要的接口。具体实现就是创建一个中间类，它既是目标类型（也就是目标接口实现），也有继承源类方法。 Design principleTarget ：用户需要的接口 Adaptee：源类 Adapter：适配器类 ImplementationTarget package cn.nroma;public interface Target &amp;#123;	public">
+<meta property="og:description" content="intent把一个类接口转换成另一个用户需要的接口。具体实现就是创建一个中间类，它既是目标类型（也就是目标接口实现），也有继承源类方法。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-01-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-16T08:47:55.797Z">
+<meta property="article:modified_time" content="2022-08-22T05:38:31.655Z">
 <meta property="article:author" content="李龙飞">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -182,7 +182,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -191,8 +191,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -301,6 +331,8 @@
 
       
         <h4 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h4><p>把一个类接口转换成另一个用户需要的接口。具体实现就是创建一个中间类，它既是目标类型（也就是目标接口实现），也有继承源类方法。</p>
+<span id="more"></span>
+
 <h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Target ：用户需要的接口</p>
 <p>Adaptee：源类</p>
 <p>Adapter：适配器类</p>
@@ -360,8 +392,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/12/Bridge/" rel="prev" title="桥接（Bridge）">
-                桥接（Bridge） <i class="fa fa-chevron-right"></i>
+              <a href="/2021/01/12/Abstract%20Factory/" rel="prev" title="抽象工厂（Abstract Factory）">
+                抽象工厂（Abstract Factory） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -437,9 +469,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,15 +556,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -631,13 +657,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
