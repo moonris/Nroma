@@ -231,143 +231,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Composite/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Composite/" itemprop="url">组合（Composite）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>将对象组合成树形结构来表示整体与部分的层次关系，允许用户以相同的方式处理单独对象和组合对象。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Component：组件，组合和叶子类的父类</p>
-<p>Composite：组合</p>
-<p>Leaf：叶子类</p>
-<p>组合对象拥有一个或多个组件对象，因此组合对象的操作可以委托给组件对象去处理，而组件对象可以是另一个组合对象或者叶子对象。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>组件类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">	<span class="keyword">protected</span> String name;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Component</span><span class="params">(String name)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.name=name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span> &#123;</span><br><span class="line">		print(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> level)</span>;</span><br><span class="line">	<span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span>;</span><br><span class="line">	<span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>组合类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Composite</span> <span class="keyword">extends</span> <span class="title class_">Component</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;Component&gt; child;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Composite</span><span class="params">(String name)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>(name);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		child =<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Component&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> level)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; level; i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;--&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;Composite:&quot;</span> + name);</span><br><span class="line">        <span class="keyword">for</span> (Component component : child) &#123;</span><br><span class="line">            component.print(level + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		child.add(component);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		child.remove(component);</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>叶子类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Leaf</span> <span class="keyword">extends</span> <span class="title class_">Component</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Leaf</span><span class="params">(String name)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>(name);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> level)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; level; i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;--&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;left:&quot;</span> + name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnsupportedOperationException</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnsupportedOperationException</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Composite root=<span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">		Component node1=<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">		Component node2=<span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">		Component node3=<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		root.add(node1);</span><br><span class="line">		root.add(node2);</span><br><span class="line">		root.add(node3);</span><br><span class="line">		</span><br><span class="line">		Component node21=<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;21&quot;</span>);</span><br><span class="line">		node2.add(node21);</span><br><span class="line">		root.print();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>思路：组合类为根，内置一个List存放其子树，其子树同样如此。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Decorator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -507,6 +370,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Command/" itemprop="url">命令（Command）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>将命令封装成对象，它具有以下作用：</p>
+<ul>
+<li>使用命令来参数化其他对象</li>
+<li>将命令放入队列中进行排队</li>
+<li>将命令的操作记录到日志中</li>
+<li>支持可撤销的操作</li>
+</ul>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><ul>
+<li>Command：命令</li>
+<li>Receiver：命令接收者，命令执行者</li>
+<li>Invoker：通过它来调用命令</li>
+<li>Client：可以设置命令与命令的接收者</li>
+</ul>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>创建一个命令接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写出命令执行对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Receiver</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;exceiver execute...&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写出命令实现类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommandA</span> <span class="keyword">implements</span> <span class="title class_">Command</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> Receiver receiver;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">CommandA</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.receiver=receiver;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;commandA execute...&quot;</span>);</span><br><span class="line">		receiver.execute();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommandB</span> <span class="keyword">implements</span> <span class="title class_">Command</span>&#123;</span><br><span class="line"><span class="keyword">private</span> Receiver receiver;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">CommandB</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.receiver=receiver;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;commandB execute...&quot;</span>);</span><br><span class="line">		receiver.execute();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>创建命令入口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Invoker</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> Command commandA;</span><br><span class="line">	<span class="keyword">private</span> Command commandB;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Invoker</span><span class="params">(Command commandA,Command commandB)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.commandA=commandA;</span><br><span class="line">		<span class="built_in">this</span>.commandB=commandB;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">orderA</span><span class="params">()</span> &#123;</span><br><span class="line">		commandA.execute();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">orderB</span><span class="params">()</span> &#123;</span><br><span class="line">		commandB.execute();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Receiver receiver=<span class="keyword">new</span> <span class="title class_">Receiver</span>();</span><br><span class="line">		Invoker invoker=<span class="keyword">new</span> <span class="title class_">Invoker</span>(<span class="keyword">new</span> <span class="title class_">CommandA</span>(receiver), <span class="keyword">new</span> <span class="title class_">CommandB</span>(receiver));</span><br><span class="line">		invoker.orderA();</span><br><span class="line">		invoker.orderB();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：客户端调用Invoker，通过传入命令对象，代码中将命令和执行命令耦合一起形成一个命令和操作，通过调用Invoker的不同命令操作来执行。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Facade/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -590,142 +603,6 @@
 <p>很轻松的调用这个接口</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Facade</span> <span class="variable">fatest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Facade</span>();</span><br><span class="line">        fatest.test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Flyweight/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Flyweight/" itemprop="url">享元（Flyweight）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>利用共享的方式来支持大量细粒度的对象，这些对象一部分内部状态是相同的。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Flyweight：享元对象</p>
-<p>intrinsicState:内部状态，享元内部共享状态</p>
-<p>ExtrinsicState：外部状态，不同</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>享元接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Flyweight</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">doOperation</span><span class="params">(String extrinsicState)</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>享元实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateFlyweight</span> <span class="keyword">implements</span> <span class="title class_">Flyweight</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String intrinsicState;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">ConcreateFlyweight</span><span class="params">(String intrinsicState)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.intrinsicState=intrinsicState;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doOperation</span><span class="params">(String extrinsicState)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;Object address:&quot;</span>+System.identityHashCode(<span class="built_in">this</span>));</span><br><span class="line">		System.out.println(<span class="string">&quot;IntrinsicState:&quot;</span>+intrinsicState);</span><br><span class="line">		System.out.println(<span class="string">&quot;ExtrinsicState:&quot;</span>+extrinsicState);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>享元工厂类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FlyweightFactory</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String,Flyweight&gt; flyweights=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">	</span><br><span class="line">	Flyweight <span class="title function_">getFlyweight</span><span class="params">(String intrinsicState)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(!flyweights.containsKey(intrinsicState)) &#123;</span><br><span class="line">			Flyweight flyweight=<span class="keyword">new</span> <span class="title class_">ConcreateFlyweight</span>(intrinsicState);</span><br><span class="line">			flyweights.put(intrinsicState, flyweight);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> flyweights.get(intrinsicState);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		FlyweightFactory factory=<span class="keyword">new</span> <span class="title class_">FlyweightFactory</span>();</span><br><span class="line">		Flyweight flyweight=factory.getFlyweight(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line">		Flyweight flyweight2=factory.getFlyweight(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line">		flyweight.doOperation(<span class="string">&quot;x&quot;</span>);</span><br><span class="line">		flyweight2.doOperation(<span class="string">&quot;y&quot;</span>);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：只判断内部状态，如果没有内部状态，则存入HashMap，如果有，则取出。并显示HashCode和内部与外部状态。</p>
 
           
         
@@ -1044,7 +921,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Mediator/">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Flyweight/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1063,7 +940,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/12/Mediator/" itemprop="url">中介者（Mediator）</a></h1>
+                <a class="post-title-link" href="/2021/01/12/Flyweight/" itemprop="url">享元（Flyweight）</a></h1>
         
 
         <div class="post-meta">
@@ -1115,28 +992,23 @@
       
         
           
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>集中对象之间复杂的沟通与控制方式。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Mediator：中介，用于相关对象之间的通信与控制。</p>
-<p>Colleague：相关对象。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>中介抽象类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Mediator</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">doEvent</span><span class="params">(String eventType)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>利用共享的方式来支持大量细粒度的对象，这些对象一部分内部状态是相同的。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Flyweight：享元对象</p>
+<p>intrinsicState:内部状态，享元内部共享状态</p>
+<p>ExtrinsicState：外部状态，不同</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>享元接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Flyweight</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">doOperation</span><span class="params">(String extrinsicState)</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>对象抽象类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Colleague</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>享元实现类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateFlyweight</span> <span class="keyword">implements</span> <span class="title class_">Flyweight</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String intrinsicState;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">ConcreateFlyweight</span><span class="params">(String intrinsicState)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.intrinsicState=intrinsicState;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doOperation</span><span class="params">(String extrinsicState)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;Object address:&quot;</span>+System.identityHashCode(<span class="built_in">this</span>));</span><br><span class="line">		System.out.println(<span class="string">&quot;IntrinsicState:&quot;</span>+intrinsicState);</span><br><span class="line">		System.out.println(<span class="string">&quot;ExtrinsicState:&quot;</span>+extrinsicState);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>对象抽象实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ColleagueA</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		mediator.doEvent(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doA</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;doA()&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>享元工厂类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FlyweightFactory</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String,Flyweight&gt; flyweights=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">	</span><br><span class="line">	Flyweight <span class="title function_">getFlyweight</span><span class="params">(String intrinsicState)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(!flyweights.containsKey(intrinsicState)) &#123;</span><br><span class="line">			Flyweight flyweight=<span class="keyword">new</span> <span class="title class_">ConcreateFlyweight</span>(intrinsicState);</span><br><span class="line">			flyweights.put(intrinsicState, flyweight);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> flyweights.get(intrinsicState);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ColleagueB</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		mediator.doEvent(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doB</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;dB()&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		FlyweightFactory factory=<span class="keyword">new</span> <span class="title class_">FlyweightFactory</span>();</span><br><span class="line">		Flyweight flyweight=factory.getFlyweight(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line">		Flyweight flyweight2=factory.getFlyweight(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line">		flyweight.doOperation(<span class="string">&quot;x&quot;</span>);</span><br><span class="line">		flyweight2.doOperation(<span class="string">&quot;y&quot;</span>);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>中介抽象实现类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateMediator</span> <span class="keyword">extends</span> <span class="title class_">Mediator</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> ColleagueA colleagueA;</span><br><span class="line">	<span class="keyword">private</span> ColleagueB colleagueB;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">ConcreateMediator</span><span class="params">(ColleagueA a,ColleagueB b)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.colleagueA=a;</span><br><span class="line">		<span class="built_in">this</span>.colleagueB=b;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doEvent</span><span class="params">(String eventType)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">switch</span>(eventType) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&quot;A&quot;</span>:</span><br><span class="line">				doA();</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&quot;B&quot;</span>:</span><br><span class="line">				doB();</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doA</span><span class="params">()</span> &#123;</span><br><span class="line">		colleagueA.doA();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doB</span><span class="params">()</span> &#123;</span><br><span class="line">		colleagueB.doB();</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		ColleagueA colleagueA=<span class="keyword">new</span> <span class="title class_">ColleagueA</span>();</span><br><span class="line">		ColleagueB colleagueB=<span class="keyword">new</span> <span class="title class_">ColleagueB</span>();</span><br><span class="line">		</span><br><span class="line">		<span class="type">Mediator</span> <span class="variable">mediator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreateMediator</span>(colleagueA, colleagueB);</span><br><span class="line">		colleagueB.onEvent(mediator);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<p>客户端调用相关对象并传入中介对象，给中介传入命令，中介判断命令后或执行中介方法，或执行相关对象方法，或执行其他行为。</p>
+<p>思路：只判断内部状态，如果没有内部状态，则存入HashMap，如果有，则取出。并显示HashCode和内部与外部状态。</p>
 
           
         
@@ -1279,6 +1151,147 @@
 <p>思路：</p>
 <p>程序执行，聚合类创建被遍历的对象，且创建迭代器的方法，并将被迭代遍历的对象同时传入，</p>
 <p>将遍历（hasNext or next）的对象执行后输出。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Mediator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Mediator/" itemprop="url">中介者（Mediator）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>集中对象之间复杂的沟通与控制方式。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>Mediator：中介，用于相关对象之间的通信与控制。</p>
+<p>Colleague：相关对象。</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>中介抽象类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Mediator</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">doEvent</span><span class="params">(String eventType)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象抽象类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Colleague</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象抽象实现类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ColleagueA</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		mediator.doEvent(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doA</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;doA()&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ColleagueB</span> <span class="keyword">extends</span> <span class="title class_">Colleague</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onEvent</span><span class="params">(Mediator mediator)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		mediator.doEvent(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doB</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;dB()&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中介抽象实现类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreateMediator</span> <span class="keyword">extends</span> <span class="title class_">Mediator</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> ColleagueA colleagueA;</span><br><span class="line">	<span class="keyword">private</span> ColleagueB colleagueB;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">ConcreateMediator</span><span class="params">(ColleagueA a,ColleagueB b)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.colleagueA=a;</span><br><span class="line">		<span class="built_in">this</span>.colleagueB=b;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doEvent</span><span class="params">(String eventType)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">switch</span>(eventType) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&quot;A&quot;</span>:</span><br><span class="line">				doA();</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&quot;B&quot;</span>:</span><br><span class="line">				doB();</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doA</span><span class="params">()</span> &#123;</span><br><span class="line">		colleagueA.doA();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doB</span><span class="params">()</span> &#123;</span><br><span class="line">		colleagueB.doB();</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		ColleagueA colleagueA=<span class="keyword">new</span> <span class="title class_">ColleagueA</span>();</span><br><span class="line">		ColleagueB colleagueB=<span class="keyword">new</span> <span class="title class_">ColleagueB</span>();</span><br><span class="line">		</span><br><span class="line">		<span class="type">Mediator</span> <span class="variable">mediator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreateMediator</span>(colleagueA, colleagueB);</span><br><span class="line">		colleagueB.onEvent(mediator);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<p>客户端调用相关对象并传入中介对象，给中介传入命令，中介判断命令后或执行中介方法，或执行相关对象方法，或执行其他行为。</p>
 
           
         

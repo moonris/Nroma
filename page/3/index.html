@@ -231,134 +231,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Prototype/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Prototype/" itemprop="url">原型模式（Prototype）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>使用原型实例指定要创建的对象类型，通过复制这个原型来创建新对象。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。在请求时返回它的克隆。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>原型：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> Prototype <span class="title function_">myClone</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>克隆：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreatePrototype</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String filed;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">ConcreatePrototype</span><span class="params">(String filed)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.filed=filed;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    Prototype <span class="title function_">myClone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(filed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> filed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>请求原型，返回克隆对象：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">clone</span> <span class="operator">=</span> prototype.myClone();</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Observer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -453,6 +325,134 @@
 <p>思路：程序创建观察者实例，观察者调用StatisticsDisplay并传入主题对象来注册</p>
 <p>创建之后通过主题对象来通知或移除观察者。</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Prototype/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Prototype/" itemprop="url">原型模式（Prototype）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>使用原型实例指定要创建的对象类型，通过复制这个原型来创建新对象。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。在请求时返回它的克隆。</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>原型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> Prototype <span class="title function_">myClone</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>克隆：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreatePrototype</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String filed;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">ConcreatePrototype</span><span class="params">(String filed)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.filed=filed;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    Prototype <span class="title function_">myClone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(filed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> filed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请求原型，返回克隆对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">clone</span> <span class="operator">=</span> prototype.myClone();</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
