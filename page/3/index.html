@@ -231,6 +231,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Prototype/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Prototype/" itemprop="url">原型模式（Prototype）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>使用原型实例指定要创建的对象类型，通过复制这个原型来创建新对象。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。在请求时返回它的克隆。</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>原型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> Prototype <span class="title function_">myClone</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>克隆：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreatePrototype</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String filed;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">ConcreatePrototype</span><span class="params">(String filed)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.filed=filed;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    Prototype <span class="title function_">myClone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(filed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> filed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请求原型，返回克隆对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">clone</span> <span class="operator">=</span> prototype.myClone();</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Observer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -372,7 +500,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Prototype/">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -391,7 +519,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/12/Prototype/" itemprop="url">原型模式（Prototype）</a></h1>
+                <a class="post-title-link" href="/2021/01/12/Proxy/" itemprop="url">代理（Proxy）</a></h1>
         
 
         <div class="post-meta">
@@ -443,16 +571,31 @@
       
         
           
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>使用原型实例指定要创建的对象类型，通过复制这个原型来创建新对象。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。在请求时返回它的克隆。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>原型：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Prototype</span> &#123;</span><br><span class="line">	<span class="keyword">abstract</span> Prototype <span class="title function_">myClone</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>控制其他对象的访问。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>代理分为四类：</p>
+<ul>
+<li>远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。</li>
+<li>虚拟代理（Virtual Proxy）：根据需要创建开销很大的对象，它可以缓存实体的附加信息，以便延迟对它的访问，例如在网站加载一个很大图片时，不能马上完成，可以用虚拟代理缓存图片的大小信息，然后生成一张临时图片代替原始图片。</li>
+<li>保护代理（Protection Proxy）：按权限控制对象的访问，它负责检查调用者是否具有实现一个请求所必须的访问权限。</li>
+<li>智能代理（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作：记录对象的引用次数；当第一次引用一个对象时，将它装入内存；在访问一个实际对象前，检查是否已经锁定了它，以确保其它对象不能改变它。</li>
+</ul>
+<p>Subject：抽象主题角色，声明了目标对象和代理对象的共同接口，这样一来在任何可以使用目标对象的地方都可以使用代理对象。</p>
+<p>RealSubject：具体主题角色，也称为委托角色或者被代理角色。定义了代理对象所代表的目标对象。</p>
+<p>Proxy：代理主题角色，也叫委托类、代理类。代理对象内部含有目标对象的引用，从而可以在任何时候操作目标对象；代理对象提供一个与目标对象相同的接口，以便可以在任何时候替代目标对象。代理对象通常在客户端调用传递给目标对象之前或之后，执行某个操作，而不是单纯地将调用传递给目标对象。</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>主题角色接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>克隆：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreatePrototype</span> <span class="keyword">extends</span> <span class="title class_">Prototype</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String filed;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="title function_">ConcreatePrototype</span><span class="params">(String filed)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.filed=filed;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    Prototype <span class="title function_">myClone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(filed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> filed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主题角色实现类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;RealSubject&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>请求原型，返回克隆对象：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">prototype</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcretePrototype</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="type">Prototype</span> <span class="variable">clone</span> <span class="operator">=</span> prototype.myClone();</span><br><span class="line">        System.out.println(clone.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代理类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Subject subject=<span class="literal">null</span>;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">if</span>(subject==<span class="literal">null</span>) &#123;</span><br><span class="line">			subject=<span class="keyword">new</span> <span class="title class_">RealSubject</span>();</span><br><span class="line">			System.out.println(<span class="string">&quot;Proxy&quot;</span>);</span><br><span class="line">			<span class="built_in">this</span>.subject.operate();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Subject subject=<span class="keyword">new</span> <span class="title class_">Proxy</span>();</span><br><span class="line">		subject.operate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：在代理类内代理创建具体角色的对象并处理一些业务之后，调用具体对象的方法后，将Proxy返回出来，用于都继承自Subject，故可以被用户看成具体角色。</p>
+
           
         
       
@@ -593,6 +736,155 @@
 <p>将需要的类实例化调用</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		SimpleFactory simpleFactory=<span class="keyword">new</span> <span class="title class_">SimpleFactory</span>();</span><br><span class="line">		Product product=simpleFactory.createProduct(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Singleton/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不可思议">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/12/Singleton/" itemprop="url">单例(Singleton)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
+                2021-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>确保一个类只有一个实例，并通过该实例的全局访问方法。</p>
+<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p> 使用一个私有构造方法、私有静态变量和一个公有静态方法实现。</p>
+<p>其中，</p>
+<p>私有构造方法保证其他类不能通过构造方法来创建对象实例。</p>
+<p>私有静态变量保证此静态变量不能被其他类调用。</p>
+<p>公有静态方法是全局访问方法。</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><h5 id="1、懒汉式-线程不安全"><a href="#1、懒汉式-线程不安全" class="headerlink" title="1、懒汉式-线程不安全"></a>1、懒汉式-线程不安全</h5><p>私有静态实例被延迟创建，如果没有用到该实例，可节约资源</p>
+<p>但是如果多个线程同时进入<code>if(uniqueInstance==null)</code>，会导致多次创建实例，故线程不安全。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="2、饿汉式-线程安全"><a href="#2、饿汉式-线程安全" class="headerlink" title="2、饿汉式-线程安全"></a>2、饿汉式-线程安全</h5><p>预先实例化，不会产生线程安全问题，但是也丢失了延迟实例化带来的节约资源的好处。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">uniqueInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、懒汉式-线程安全"><a href="#3、懒汉式-线程安全" class="headerlink" title="3、懒汉式-线程安全"></a>3、懒汉式-线程安全</h5><p>可以给全局访问方法加一个锁，从而避免一个时间点多个线程进入。</p>
+<p>但是仍然有性能问题，如阻塞问题。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、双重校验锁-线程安全"><a href="#4、双重校验锁-线程安全" class="headerlink" title="4、双重校验锁-线程安全"></a>4、双重校验锁-线程安全</h5><p>对象只需要被实例化一次，之后可以直接使用，所以加锁只需要加部分代码，并在进入时判断是否被实例化，如果没有再加锁。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(uniqueInstance == <span class="literal">null</span>)&#123;</span><br><span class="line">             		uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个 if 语句用来避免 uniqueInstance 已经被实例化之后的加锁操作，而第二个 if 语句进行了加锁，所以只能有一个线程进入，就不会出现 uniqueInstance &#x3D;&#x3D; null 时两个线程同时进行实例化操作。</p>
+<h5 id="5、静态内部类实现-线程安全"><a href="#5、静态内部类实现-线程安全" class="headerlink" title="5、静态内部类实现-线程安全"></a>5、静态内部类实现-线程安全</h5><p>当Singleton被加载时，静态内部类并没有被加载，只有当有方法调用全局访问方法时，JVM初始化实例一次。</p>
+<p>既可以延迟初始化，也可以有JVM提供的线程安全。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">SingletonHolder</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> SingletonHolder.INSTANCE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="6、枚举实现"><a href="#6、枚举实现" class="headerlink" title="6、枚举实现"></a>6、枚举实现</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	INSTANCE;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String objectName;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getObject</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setObjectName</span><span class="params">(String objectName)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.objectName=objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//单例测试</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> &#123;</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">firstSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		firstSingleton.setObjectName(<span class="string">&quot;firstName&quot;</span>);</span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">secondSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		secondSingleton.setObjectName(<span class="string">&quot;secondName&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建实例会被覆盖</span></span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		System.out.println(secondSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//反射获取</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Singleton[] enumConstants = Singleton.class.getEnumConstants();</span><br><span class="line">			<span class="keyword">for</span>(Singleton enumConstant : enumConstants) &#123;</span><br><span class="line">				System.out.println(enumConstant.getObject());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以防止反射攻击。因为JVM会保证只实例化一次，且多次序列化后只会覆盖，并不会产生多个实例，不需要用transient 修饰</p>
+<p>反射攻击：通过setAccessible()可以将私有构造方法设置为公有，然后就可以实例化了。</p>
+<p>transient ：用transient关键字标记的成员变量不参与序列化过程。</p>
 
           
         
@@ -1152,298 +1444,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		ObjectStructure objectStructure=<span class="keyword">new</span> <span class="title class_">ObjectStructure</span>();</span><br><span class="line">		objectStructure.add(<span class="keyword">new</span> <span class="title class_">ConcreateElementA</span>());</span><br><span class="line">		objectStructure.add(<span class="keyword">new</span> <span class="title class_">ConcreateElementB</span>());</span><br><span class="line">		</span><br><span class="line">		Visitor visitor=<span class="keyword">new</span> <span class="title class_">ConcreateVisitorA</span>();</span><br><span class="line">		objectStructure.accept(visitor);</span><br><span class="line">		</span><br><span class="line">		Visitor visitor2=<span class="keyword">new</span> <span class="title class_">ConcreateVisitorB</span>();</span><br><span class="line">		objectStructure.accept(visitor2);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>思路：将具体元素对象存入对象结构类，再将具体访问对象通过对象结构类间接执行具体元素类accept方法，间接调用具体访问类的visit方法，同时调用动作方法。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Proxy/" itemprop="url">代理（Proxy）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>控制其他对象的访问。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p>代理分为四类：</p>
-<ul>
-<li>远程代理（Remoto Proxy）:控制对远程对象（不同地址空间）的访问，它负责将请求及其参数进行编码，并向不同地址空间中的对象发送已经编码的请求。</li>
-<li>虚拟代理（Virtual Proxy）：根据需要创建开销很大的对象，它可以缓存实体的附加信息，以便延迟对它的访问，例如在网站加载一个很大图片时，不能马上完成，可以用虚拟代理缓存图片的大小信息，然后生成一张临时图片代替原始图片。</li>
-<li>保护代理（Protection Proxy）：按权限控制对象的访问，它负责检查调用者是否具有实现一个请求所必须的访问权限。</li>
-<li>智能代理（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作：记录对象的引用次数；当第一次引用一个对象时，将它装入内存；在访问一个实际对象前，检查是否已经锁定了它，以确保其它对象不能改变它。</li>
-</ul>
-<p>Subject：抽象主题角色，声明了目标对象和代理对象的共同接口，这样一来在任何可以使用目标对象的地方都可以使用代理对象。</p>
-<p>RealSubject：具体主题角色，也称为委托角色或者被代理角色。定义了代理对象所代表的目标对象。</p>
-<p>Proxy：代理主题角色，也叫委托类、代理类。代理对象内部含有目标对象的引用，从而可以在任何时候操作目标对象；代理对象提供一个与目标对象相同的接口，以便可以在任何时候替代目标对象。代理对象通常在客户端调用传递给目标对象之前或之后，执行某个操作，而不是单纯地将调用传递给目标对象。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>主题角色接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主题角色实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;RealSubject&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代理类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">Subject</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Subject subject=<span class="literal">null</span>;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operate</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">if</span>(subject==<span class="literal">null</span>) &#123;</span><br><span class="line">			subject=<span class="keyword">new</span> <span class="title class_">RealSubject</span>();</span><br><span class="line">			System.out.println(<span class="string">&quot;Proxy&quot;</span>);</span><br><span class="line">			<span class="built_in">this</span>.subject.operate();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		Subject subject=<span class="keyword">new</span> <span class="title class_">Proxy</span>();</span><br><span class="line">		subject.operate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：在代理类内代理创建具体角色的对象并处理一些业务之后，调用具体对象的方法后，将Proxy返回出来，用于都继承自Subject，故可以被用户看成具体角色。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/2021/01/12/Singleton/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/12/Singleton/" itemprop="url">单例(Singleton)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-12T08:00:00+08:00">
-                2021-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h4><p>确保一个类只有一个实例，并通过该实例的全局访问方法。</p>
-<h4 id="Design-principle"><a href="#Design-principle" class="headerlink" title="Design principle"></a>Design principle</h4><p> 使用一个私有构造方法、私有静态变量和一个公有静态方法实现。</p>
-<p>其中，</p>
-<p>私有构造方法保证其他类不能通过构造方法来创建对象实例。</p>
-<p>私有静态变量保证此静态变量不能被其他类调用。</p>
-<p>公有静态方法是全局访问方法。</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><h5 id="1、懒汉式-线程不安全"><a href="#1、懒汉式-线程不安全" class="headerlink" title="1、懒汉式-线程不安全"></a>1、懒汉式-线程不安全</h5><p>私有静态实例被延迟创建，如果没有用到该实例，可节约资源</p>
-<p>但是如果多个线程同时进入<code>if(uniqueInstance==null)</code>，会导致多次创建实例，故线程不安全。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="2、饿汉式-线程安全"><a href="#2、饿汉式-线程安全" class="headerlink" title="2、饿汉式-线程安全"></a>2、饿汉式-线程安全</h5><p>预先实例化，不会产生线程安全问题，但是也丢失了延迟实例化带来的节约资源的好处。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">uniqueInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3、懒汉式-线程安全"><a href="#3、懒汉式-线程安全" class="headerlink" title="3、懒汉式-线程安全"></a>3、懒汉式-线程安全</h5><p>可以给全局访问方法加一个锁，从而避免一个时间点多个线程进入。</p>
-<p>但是仍然有性能问题，如阻塞问题。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">			uniqueInstance=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="4、双重校验锁-线程安全"><a href="#4、双重校验锁-线程安全" class="headerlink" title="4、双重校验锁-线程安全"></a>4、双重校验锁-线程安全</h5><p>对象只需要被实例化一次，之后可以直接使用，所以加锁只需要加部分代码，并在进入时判断是否被实例化，如果没有再加锁。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance==<span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(uniqueInstance == <span class="literal">null</span>)&#123;</span><br><span class="line">             		uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第一个 if 语句用来避免 uniqueInstance 已经被实例化之后的加锁操作，而第二个 if 语句进行了加锁，所以只能有一个线程进入，就不会出现 uniqueInstance &#x3D;&#x3D; null 时两个线程同时进行实例化操作。</p>
-<h5 id="5、静态内部类实现-线程安全"><a href="#5、静态内部类实现-线程安全" class="headerlink" title="5、静态内部类实现-线程安全"></a>5、静态内部类实现-线程安全</h5><p>当Singleton被加载时，静态内部类并没有被加载，只有当有方法调用全局访问方法时，JVM初始化实例一次。</p>
-<p>既可以延迟初始化，也可以有JVM提供的线程安全。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">SingletonHolder</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE=<span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> SingletonHolder.INSTANCE;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="6、枚举实现"><a href="#6、枚举实现" class="headerlink" title="6、枚举实现"></a>6、枚举实现</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.nroma;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">	</span><br><span class="line">	INSTANCE;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String objectName;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getObject</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setObjectName</span><span class="params">(String objectName)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.objectName=objectName;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//单例测试</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> &#123;</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">firstSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		firstSingleton.setObjectName(<span class="string">&quot;firstName&quot;</span>);</span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="type">Singleton</span> <span class="variable">secondSingleton</span> <span class="operator">=</span> Singleton.INSTANCE;</span><br><span class="line">		secondSingleton.setObjectName(<span class="string">&quot;secondName&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建实例会被覆盖</span></span><br><span class="line">		System.out.println(firstSingleton.getObject());</span><br><span class="line">		System.out.println(secondSingleton.getObject());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//反射获取</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Singleton[] enumConstants = Singleton.class.getEnumConstants();</span><br><span class="line">			<span class="keyword">for</span>(Singleton enumConstant : enumConstants) &#123;</span><br><span class="line">				System.out.println(enumConstant.getObject());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以防止反射攻击。因为JVM会保证只实例化一次，且多次序列化后只会覆盖，并不会产生多个实例，不需要用transient 修饰</p>
-<p>反射攻击：通过setAccessible()可以将私有构造方法设置为公有，然后就可以实例化了。</p>
-<p>transient ：用transient关键字标记的成员变量不参与序列化过程。</p>
 
           
         
