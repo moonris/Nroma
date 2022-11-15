@@ -1,91 +1,28 @@
+
+
 <!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Nroma/img/fluid.png">
+  <link rel="icon" href="/Nroma/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="李龙飞">
+  <meta name="keywords" content="">
   
-  <link href="/Nroma/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/Nroma/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/Nroma/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/Nroma/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/Nroma/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/Nroma/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/Nroma/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="实验环境搭建">
+    <meta name="description" content="实验环境搭建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析">
 <meta property="og:url" content="https://moonris.github.io/Nroma/2020/10/19/OSCODE/index.html">
 <meta property="og:site_name" content="不可思议">
 <meta property="og:description" content="实验环境搭建">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://moonris.github.io/Nroma/1.JPG">
 <meta property="og:image" content="https://moonris.github.io/Nroma/22.JPG">
 <meta property="og:image" content="https://moonris.github.io/Nroma/33.JPG">
@@ -112,248 +49,254 @@
 <meta property="article:published_time" content="2020-10-19T14:20:11.000Z">
 <meta property="article:modified_time" content="2021-01-16T08:52:47.056Z">
 <meta property="article:author" content="李龙飞">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://moonris.github.io/Nroma/1.JPG">
+  
+  
+  
+  <title>关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析 - 不可思议</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
-  <link rel="canonical" href="https://moonris.github.io/Nroma/2020/10/19/OSCODE/"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-  <title>关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析 | 不可思议</title>
+<link  rel="stylesheet" href="/Nroma/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/Nroma/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/Nroma/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"moonris.github.io","root":"/Nroma/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Nroma/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/Nroma/js/utils.js" ></script>
+  <script  src="/Nroma/js/color-schema.js" ></script>
+  
 
 
-
-
+  
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
+<body>
   
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <header>
     
 
-    <div class="custom-logo-site-title">
-      <a href="/Nroma/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">不可思议</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/Nroma/">
+      <strong>LongFei</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/Nroma/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-10-19 22:20" pubdate>
+          2020年10月19日 晚上
+        </time>
+      </span>
+    
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          20k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          165 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
   </div>
 </div>
 
-<nav class="site-nav">
-  
+</div>
 
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/Nroma/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/Nroma/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/Nroma/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/Nroma/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/Nroma/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
+  </header>
 
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <main>
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/Nroma/2020/10/19/OSCODE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/Nroma/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-19T22:20:11+08:00">
-                2020-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-        <h2 id="实验环境搭建"><a href="#实验环境搭建" class="headerlink" title="实验环境搭建"></a>实验环境搭建</h2><span id="more"></span>
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="实验环境搭建"><a href="#实验环境搭建" class="headerlink" title="实验环境搭建"></a>实验环境搭建</h2><span id="more"></span>
 
 <h4 id="（一）介绍"><a href="#（一）介绍" class="headerlink" title="（一）介绍"></a>（一）介绍</h4><blockquote>
 <p><strong>Vmware:</strong></p>
@@ -376,58 +319,58 @@
 <p>​		也可以网上找别的Linux发行版，效果是一样的。</p>
 </blockquote>
 <h4 id="（三）、安装Vmware-Workstation"><a href="#（三）、安装Vmware-Workstation" class="headerlink" title="（三）、安装Vmware-Workstation"></a>（三）、安装Vmware-Workstation</h4><p>下载后双击安装包，进入安装页面</p>
-<p><img src="/Nroma/1.JPG"></p>
+<p><img src="/Nroma/1.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>点击Next</p>
-<p><img src="/Nroma/22.JPG"></p>
+<p><img src="/Nroma/22.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>勾选I accept the terms in the License Agreement，之后点击Next</p>
-<p><img src="/Nroma/33.JPG"></p>
+<p><img src="/Nroma/33.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>点击Change更改安装位置，Keyboard driver可安可不安，点击Next</p>
-<p><img src="/Nroma/44,JPG"></p>
+<p><img src="/Nroma/44,JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>勾选所需的快捷方式，点击Next</p>
-<p><img src="/Nroma/55.JPG"></p>
+<p><img src="/Nroma/55.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>准备安装，点击Install安装</p>
 <p>等待安装完毕</p>
-<p><img src="/Nroma/66.JPG"></p>
+<p><img src="/Nroma/66.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>点击License</p>
-<p><img src="/Nroma/77.JPG"></p>
+<p><img src="/Nroma/77.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>此版本内置破解脚本，会自动将许可证复制入文本框内，直接点Enter</p>
-<p><img src="/Nroma/88.JPG"></p>
+<p><img src="/Nroma/88.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>点击Finish</p>
 <p>安装结束！！！</p>
 <p>注意：可能会需要重启，也可能需要开启虚拟化，直接在bootloader 或BISO更改</p>
 <h4 id="四、安装Linux镜像文件"><a href="#四、安装Linux镜像文件" class="headerlink" title="四、安装Linux镜像文件"></a>四、安装Linux镜像文件</h4><p>打开Vmware-Workstation后</p>
-<p><img src="/Nroma/99.JPG"></p>
+<p><img src="/Nroma/99.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>进入主页面</p>
 <p>点击File-</p>
 <p>​		New Virtual Machine Wizard</p>
-<p><img src="/Nroma/9.JPG"></p>
+<p><img src="/Nroma/9.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>​	选择Custom，点击Next</p>
-<p><img src="/Nroma/a1.JPG"></p>
+<p><img src="/Nroma/a1.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>Hardware选择Workstation 15.x，点击Next</p>
-<p><img src="/Nroma/a2.JPG"></p>
+<p><img src="/Nroma/a2.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择Installer disc image file，点击Browser选择Linux镜像文件，之后点击Next</p>
-<p><img src="/Nroma/a3.JPG"></p>
+<p><img src="/Nroma/a3.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>输入Full name，之后输入UserName(用户名)，password(密码)，confirm(确认密码)</p>
 <p>注：此密码适用于root and user </p>
-<p><img src="/Nroma/a4.JPG"></p>
+<p><img src="/Nroma/a4.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>输入虚拟机名字和更改安装位置，之后点击Next</p>
-<p><img src="/Nroma/a5.JPG"></p>
+<p><img src="/Nroma/a5.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择处理器核心总数，建议1，1，点击Next</p>
-<p><img src="/Nroma/a6.JPG"></p>
+<p><img src="/Nroma/a6.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>滑动选择运行内存，建议1024MB~2048MB，点击Next</p>
-<p><img src="/Nroma/a7.JPG"></p>
+<p><img src="/Nroma/a7.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择网络类型，建议选择桥接网络或NAT地址转换，也就是第一第二项，点击Next</p>
-<p><img src="/Nroma/a8.JPG"></p>
+<p><img src="/Nroma/a8.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择I&#x2F;O控制器，建议选择LSI Logic默认，点击Next</p>
-<p><img src="/Nroma/a9.JPG"></p>
+<p><img src="/Nroma/a9.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择磁盘结构类型，建议SCSI 或 SATA 或NVMe，点击Next</p>
-<p><img src="/Nroma/a10.JPG"></p>
+<p><img src="/Nroma/a10.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>选择如何创建使用磁盘，建议选择第一项</p>
-<p><img src="/Nroma/a11.JPG"></p>
+<p><img src="/Nroma/a11.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>设置磁盘大小，建议10GB~40GB，之后选择最后项Split Virtual disk intomultiple files，点击Next</p>
-<p><img src="/Nroma/a12.JPG"></p>
+<p><img src="/Nroma/a12.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>设置磁盘文件在windows中的名字（不重要），点击Next</p>
-<p><img src="/Nroma/a13.JPG"></p>
+<p><img src="/Nroma/a13.JPG" srcset="/Nroma/img/loading.gif" lazyload></p>
 <p>点击Finish，安装虚拟机</p>
 <p>等待几秒后成功开启虚拟机</p>
 <p>注：如跳出VMware Toole安装对话框，点击Download and Install 安装<strong>Vmware Tools</strong></p>
@@ -439,22 +382,22 @@
 <p>其中，<em><strong>最值得注意的是软件选择，需要安装开发工具，GUI，GNOME桌面等</strong></em></p>
 <p><em><strong>文件系统可以用默认自动分配</strong></em></p>
 <p>之后点击开始安装等待安装完成即可。</p>
-<h2 id="实验三：进程管理和控制API"><a href="#实验三：进程管理和控制API" class="headerlink" title="实验三：进程管理和控制API"></a>实验三：进程管理和控制API</h2><h4 id="获取当前进程及其父进程的ID（get-process-pId-c）"><a href="#获取当前进程及其父进程的ID（get-process-pId-c）" class="headerlink" title="获取当前进程及其父进程的ID（get_process_pId.c）"></a>获取当前进程及其父进程的ID（get_process_pId.c）</h4><h6 id="程序："><a href="#程序：" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/13</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;current process ID is %d\n&quot;</span>,getpid());</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;paerent process ID is %d\n&quot;</span>,getppid());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实验三：进程管理和控制API"><a href="#实验三：进程管理和控制API" class="headerlink" title="实验三：进程管理和控制API"></a>实验三：进程管理和控制API</h2><h4 id="获取当前进程及其父进程的ID（get-process-pId-c）"><a href="#获取当前进程及其父进程的ID（get-process-pId-c）" class="headerlink" title="获取当前进程及其父进程的ID（get_process_pId.c）"></a>获取当前进程及其父进程的ID（get_process_pId.c）</h4><h6 id="程序："><a href="#程序：" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/13</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;current process ID is %d\n&quot;</span>,getpid());<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;paerent process ID is %d\n&quot;</span>,getppid());<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc get_process_pId.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out</span><br><span class="line">current process ID is 12870</span><br><span class="line">paerent process ID is 12748</span><br><span class="line">[nroma@localhost Desktop]$</span><br></pre></td></tr></table></figure>
+<h6 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[nroma@localhost Desktop]</span>$ gcc get_process_pId.c <br><span class="hljs-string">[nroma@localhost Desktop]</span>$ ./a.<span class="hljs-keyword">out</span><br>current process ID <span class="hljs-keyword">is</span> <span class="hljs-number">12870</span><br>paerent process ID <span class="hljs-keyword">is</span> <span class="hljs-number">12748</span><br><span class="hljs-string">[nroma@localhost Desktop]</span>$<br></code></pre></td></tr></table></figure>
 
 
 
 <h6 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析:"></a>程序分析:</h6><blockquote>
 <p>虚拟机装的redhet7运行99%都是父进程先运行，但是很多低版本的Lunux进程是异步执行的，以下进程执行顺序都是 父&gt;子</p>
 </blockquote>
-<h4 id="使用fork-函数创建子进程-fork-create-child-process-c"><a href="#使用fork-函数创建子进程-fork-create-child-process-c" class="headerlink" title="使用fork()函数创建子进程(fork_create_child_process.c)"></a>使用fork()函数创建子进程(fork_create_child_process.c)</h4><h6 id="程序：-1"><a href="#程序：-1" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/13</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pid;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;process create test\n&quot;</span>);</span><br><span class="line">	pid = fork();</span><br><span class="line">	<span class="keyword">switch</span>( pid )</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;this is child process,return id is %d,ppid is %d\n&quot;</span>,pid,getppid());</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">-1</span>:</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;fork error\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;this parent process,pid is %d,return id is %d\n&quot;</span>,getpid(),pid);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="使用fork-函数创建子进程-fork-create-child-process-c"><a href="#使用fork-函数创建子进程-fork-create-child-process-c" class="headerlink" title="使用fork()函数创建子进程(fork_create_child_process.c)"></a>使用fork()函数创建子进程(fork_create_child_process.c)</h4><h6 id="程序：-1"><a href="#程序：-1" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/13</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> pid;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;process create test\n&quot;</span>);<br>	pid = fork();<br>	<span class="hljs-keyword">switch</span>( pid )<br>    &#123;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is child process,return id is %d,ppid is %d\n&quot;</span>,pid,getppid());<br>			<span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">-1</span>:<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fork error\n&quot;</span>);<br>			<span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">default</span>:<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this parent process,pid is %d,return id is %d\n&quot;</span>,getpid(),pid);<br>			<span class="hljs-keyword">break</span>;<br>	&#125;<br>	<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-1"><a href="#运行结果：-1" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc fork_create_child_process.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">process create test</span><br><span class="line">this parent process,pid is 13376,return id is 13377</span><br><span class="line">this is child process,return id is 0,ppid is 1</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-1"><a href="#运行结果：-1" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ gcc fork_create_child_process.c <br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ ./a.<span class="hljs-keyword">out</span> <br>process create test<br><span class="hljs-keyword">this</span> parent process,pid <span class="hljs-keyword">is</span> <span class="hljs-number">13376</span>,<span class="hljs-keyword">return</span> id <span class="hljs-keyword">is</span> <span class="hljs-number">13377</span><br><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> child process,<span class="hljs-keyword">return</span> id <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>,ppid <span class="hljs-keyword">is</span> <span class="hljs-number">1</span><br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ <br></code></pre></td></tr></table></figure>
 
 
 
@@ -464,11 +407,11 @@
 <p>设先父程序执行，因为执行成功，所以父程序的pid变量值被fork()返回了子进程的PID值，故当进入switch时，条件default成立，依次输出父进程当前PID和父程序的pid属性（也就是子进程的PID），此时，父进程结束。</p>
 <p>子进程此时开始执行，因为fork()执行成功，所以子程序的pid变量值被fork()返回了0，故当进入switch时，条件case成立，依次输出当前的pid变量0和当前的父进程PID，但是由于父进程早已结束，且未调用wait()方法来处理这个子进程，故这个进程变成一个孤儿进程，因其没有父亲，故被linux的进程0（init）或者进程1（systemd）收养，故返回的父进程PID为0或1。</p>
 </blockquote>
-<h4 id="例3-3：孤儿进程的收养（orphan-process-adopted-c）"><a href="#例3-3：孤儿进程的收养（orphan-process-adopted-c）" class="headerlink" title="例3.3：孤儿进程的收养（orphan_process_adopted.c）"></a>例3.3：孤儿进程的收养（orphan_process_adopted.c）</h4><h6 id="程序：-2"><a href="#程序：-2" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/13</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">	<span class="type">int</span> pid ;</span><br><span class="line">	pid = fork();</span><br><span class="line">	<span class="keyword">if</span>(pid == <span class="number">-1</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;fork error&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>(pid == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;before father dead,pid is %d,ppid is %d\n&quot;</span>,getpid(),getppid());</span><br><span class="line">		sleep(<span class="number">2</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;after father dead,pid is %d,ppid is %d\n&quot;</span>,getpid(),getppid());</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;this is father process,pid is %d,child pid is %d\n&quot;</span>,getpid(),pid);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例3-3：孤儿进程的收养（orphan-process-adopted-c）"><a href="#例3-3：孤儿进程的收养（orphan-process-adopted-c）" class="headerlink" title="例3.3：孤儿进程的收养（orphan_process_adopted.c）"></a>例3.3：孤儿进程的收养（orphan_process_adopted.c）</h4><h6 id="程序：-2"><a href="#程序：-2" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/13</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>	<span class="hljs-type">int</span> pid ;<br>	pid = fork();<br>	<span class="hljs-keyword">if</span>(pid == <span class="hljs-number">-1</span>)<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fork error&quot;</span>);<br>	<span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;before father dead,pid is %d,ppid is %d\n&quot;</span>,getpid(),getppid());<br>		sleep(<span class="hljs-number">2</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;after father dead,pid is %d,ppid is %d\n&quot;</span>,getpid(),getppid());<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>	&#125;<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is father process,pid is %d,child pid is %d\n&quot;</span>,getpid(),pid);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-2"><a href="#运行结果：-2" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc orphan_process_adopted.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out</span><br><span class="line">this is father process,pid is 3175,child pid is 3176</span><br><span class="line">before father dead,pid is 3176,ppid is 1</span><br><span class="line">[nroma@localhost Desktop]$ after father dead,pid is 3176,ppid is 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-2"><a href="#运行结果：-2" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ gcc orphan_process_adopted.c <br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ ./a.<span class="hljs-keyword">out</span><br><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> father process,pid <span class="hljs-keyword">is</span> <span class="hljs-number">3175</span>,child pid <span class="hljs-keyword">is</span> <span class="hljs-number">3176</span><br>before father dead,pid <span class="hljs-keyword">is</span> <span class="hljs-number">3176</span>,ppid <span class="hljs-keyword">is</span> <span class="hljs-number">1</span><br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ after father dead,pid <span class="hljs-keyword">is</span> <span class="hljs-number">3176</span>,ppid <span class="hljs-keyword">is</span> <span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
 
 
 
@@ -478,11 +421,11 @@
 <p>其后运行子程序，此时子程序已经没有父进程，被进程0（init）或进程1（systemd）收养，故输出当前子进程的pid的养父pid 0 或 1</p>
 <p>此时程序作为僵尸程序存在与系统中。</p>
 </blockquote>
-<h4 id="例3-4-使用wait-函数等待子进程结束-wait-process-end-c"><a href="#例3-4-使用wait-函数等待子进程结束-wait-process-end-c" class="headerlink" title="例3.4 使用wait()函数等待子进程结束(wait_process_end.c)"></a>例3.4 使用wait()函数等待子进程结束(wait_process_end.c)</h4><h6 id="程序：-3"><a href="#程序：-3" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pid;</span><br><span class="line">	<span class="type">int</span> stat_val;</span><br><span class="line">	<span class="type">int</span> end_pid;</span><br><span class="line">	<span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;fork error&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(pid == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;this is child process,pid is %d\n&quot;</span>,getpid());		</span><br><span class="line">		sleep(<span class="number">10</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">27</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;this is father process,pid is %d\n&quot;</span>,getpid());</span><br><span class="line">		end_pid=wait(&amp;stat_val);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;end status_val is %d\n&quot;</span>,stat_val);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;end status is %d\n&quot;</span>,WEXITSTATUS(stat_val));</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;wait return value is %d\n&quot;</span>,end_pid);			</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;process end pid = %d\n&quot;</span>,getpid());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例3-4-使用wait-函数等待子进程结束-wait-process-end-c"><a href="#例3-4-使用wait-函数等待子进程结束-wait-process-end-c" class="headerlink" title="例3.4 使用wait()函数等待子进程结束(wait_process_end.c)"></a>例3.4 使用wait()函数等待子进程结束(wait_process_end.c)</h4><h6 id="程序：-3"><a href="#程序：-3" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/wait.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>	<span class="hljs-type">int</span> pid;<br>	<span class="hljs-type">int</span> stat_val;<br>	<span class="hljs-type">int</span> end_pid;<br>	<span class="hljs-keyword">if</span>((pid = fork()) &lt; <span class="hljs-number">0</span>)<br>    &#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fork error&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);	<br>	&#125;<br>	<span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>)<br>    &#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is child process,pid is %d\n&quot;</span>,getpid());		<br>		sleep(<span class="hljs-number">10</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">27</span>);<br>	&#125;<span class="hljs-keyword">else</span><br>    &#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is father process,pid is %d\n&quot;</span>,getpid());<br>		end_pid=wait(&amp;stat_val);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;end status_val is %d\n&quot;</span>,stat_val);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;end status is %d\n&quot;</span>,WEXITSTATUS(stat_val));<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;wait return value is %d\n&quot;</span>,end_pid);			<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;process end pid = %d\n&quot;</span>,getpid());<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-3"><a href="#运行结果：-3" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc wait_process_end.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">this is father process,pid is 3576</span><br><span class="line">this is child process,pid is 3577</span><br><span class="line">end status_val is 6912</span><br><span class="line">end status is 27</span><br><span class="line">wait return value is 3577</span><br><span class="line">process end pid = 3576</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-3"><a href="#运行结果：-3" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ gcc wait_process_end.c <br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ ./a.<span class="hljs-keyword">out</span> <br><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> father process,pid <span class="hljs-keyword">is</span> <span class="hljs-number">3576</span><br><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> child process,pid <span class="hljs-keyword">is</span> <span class="hljs-number">3577</span><br>end status_val <span class="hljs-keyword">is</span> <span class="hljs-number">6912</span><br>end status <span class="hljs-keyword">is</span> <span class="hljs-number">27</span><br>wait <span class="hljs-keyword">return</span> value <span class="hljs-keyword">is</span> <span class="hljs-number">3577</span><br>process end pid = <span class="hljs-number">3576</span><br>[<span class="hljs-symbol">nroma@</span>localhost Desktop]$ <br></code></pre></td></tr></table></figure>
 
 
 
@@ -491,11 +434,11 @@
 <p>设父进程先运行，在创建子进程之后，进入else内，输出父进程PID，然后通过wait等待子进程结束</p>
 <p>等待中执行子进程，输出当前PID后，执行sleep10 ，之后通过exit(27)结束，此时父进程等待到子进程结束，把子进程退出时的状态存入stat_val，且将子进程结束的PID传入end_pid中，接着输出整型的状态值stat_val，然后通过宏方法WEXITSTATUS(stat_val)来提取这个子进程的返回值并输出，最后输出end_pid和当前pid，父进程结束。</p>
 </blockquote>
-<h2 id="实验四：进程通信API"><a href="#实验四：进程通信API" class="headerlink" title="实验四：进程通信API"></a>实验四：进程通信API</h2><h4 id="软中断信号处理-忽略信号（singnal-sig-ing-c）"><a href="#软中断信号处理-忽略信号（singnal-sig-ing-c）" class="headerlink" title="软中断信号处理-忽略信号（singnal_sig_ing.c）"></a>软中断信号处理-忽略信号（singnal_sig_ing.c）</h4><h6 id="程序：-4"><a href="#程序：-4" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc,<span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	signal(SIGINT,SIG_IGN);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;ctrl+c&quot;</span>);</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实验四：进程通信API"><a href="#实验四：进程通信API" class="headerlink" title="实验四：进程通信API"></a>实验四：进程通信API</h2><h4 id="软中断信号处理-忽略信号（singnal-sig-ing-c）"><a href="#软中断信号处理-忽略信号（singnal-sig-ing-c）" class="headerlink" title="软中断信号处理-忽略信号（singnal_sig_ing.c）"></a>软中断信号处理-忽略信号（singnal_sig_ing.c）</h4><h6 id="程序：-4"><a href="#程序：-4" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc,<span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>	signal(SIGINT,SIG_IGN);<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;	<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ctrl+c&quot;</span>);<br>		sleep(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-4"><a href="#运行结果：-4" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc signal_sig_ing.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">^C^\Quit (core dumped)</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-4"><a href="#运行结果：-4" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>gcc signal_sig_ing.c <br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>./a.<span class="hljs-keyword">out</span> <br>^C^\Quit (core dumped)<br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -506,11 +449,11 @@
 <p>通过传入signal(SIGINT,SIG_INT)来忽略SIGINT信号，也就是Ctrl+C，也就是此句之后Ctrl+C将不起作用，会被忽略。</p>
 <p>设置一个死循环，测试Ctrl+C，之后用Ctrl+\结束死循环。</p>
 </blockquote>
-<h4 id="软中断信号处理-默认处理（signal-sig-dfl-c）"><a href="#软中断信号处理-默认处理（signal-sig-dfl-c）" class="headerlink" title="软中断信号处理-默认处理（signal_sig_dfl.c）"></a>软中断信号处理-默认处理（signal_sig_dfl.c）</h4><h6 id="程序：-5"><a href="#程序：-5" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc,<span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	signal(SIGINT,SIG_DFL);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;ctrl+c&quot;</span>);</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="软中断信号处理-默认处理（signal-sig-dfl-c）"><a href="#软中断信号处理-默认处理（signal-sig-dfl-c）" class="headerlink" title="软中断信号处理-默认处理（signal_sig_dfl.c）"></a>软中断信号处理-默认处理（signal_sig_dfl.c）</h4><h6 id="程序：-5"><a href="#程序：-5" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc,<span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>	signal(SIGINT,SIG_DFL);<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>    &#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ctrl+c&quot;</span>);<br>		sleep(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span>(<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-5"><a href="#运行结果：-5" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc signal_sig_dfl.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">^C</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-5"><a href="#运行结果：-5" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>gcc signal_sig_dfl.c <br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>./a.<span class="hljs-keyword">out</span> <br>^C<br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -521,11 +464,11 @@
 <p>通过传入signal(SIGINT,SIG_DFL)来设置默认SIGINT信号，也就是Ctrl+C，执行此句之后Ctrl+C将可以起到默认的作用。</p>
 <p>设置一个死循环，测试，用Ctrl+C结束死循环。</p>
 </blockquote>
-<h4 id="自定义捕捉信号（signal-function-c）"><a href="#自定义捕捉信号（signal-function-c）" class="headerlink" title="自定义捕捉信号（signal_function.c）"></a>自定义捕捉信号（signal_function.c）</h4><h6 id="程序：-6"><a href="#程序：-6" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">function</span><span class="params">(<span class="type">int</span> sigNo)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;catch a signal %d\n&quot;</span>,sigNo);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	signal(SIGINT,function);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;ctrl+c&quot;</span>);</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="自定义捕捉信号（signal-function-c）"><a href="#自定义捕捉信号（signal-function-c）" class="headerlink" title="自定义捕捉信号（signal_function.c）"></a>自定义捕捉信号（signal_function.c）</h4><h6 id="程序：-6"><a href="#程序：-6" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">function</span><span class="hljs-params">(<span class="hljs-type">int</span> sigNo)</span><br>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;catch a signal %d\n&quot;</span>,sigNo);<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	signal(SIGINT,function);<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>    &#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ctrl+c&quot;</span>);<br>		sleep(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-6"><a href="#运行结果：-6" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc signal_function.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">^Cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+ccatch a signal 2</span><br><span class="line">^\Quit (core dumped)</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-6"><a href="#运行结果：-6" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>gcc signal_function.c <br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>./a.<span class="hljs-keyword">out</span> <br>^Cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+cctrl+ccatch a signal <span class="hljs-number">2</span><br>^\Quit (core dumped)<br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -538,11 +481,11 @@
 <h4 id="管道通信机制-pipe-test-c"><a href="#管道通信机制-pipe-test-c" class="headerlink" title="管道通信机制(pipe_test.c )"></a>管道通信机制(pipe_test.c )</h4><p>注：此程序通过与老师讨论，结论为实训指导书代码与描述有误。</p>
 <p>管道是双向的，其一端既可以通过管道文件描述符定义为写端，也可以定义为读端。</p>
 <p>为配合描述，已修改代码！！！</p>
-<h6 id="程序：-7"><a href="#程序：-7" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> pid;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="type">int</span> fd[<span class="number">2</span>];<span class="comment">//0 r or 1 w</span></span><br><span class="line">	<span class="type">char</span> Outpipe[<span class="number">100</span>],Inpipe[<span class="number">100</span>];</span><br><span class="line">	pipe(fd);</span><br><span class="line">	<span class="keyword">while</span>((pid = fork()) == <span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">if</span>(pid != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		lockf(fd[<span class="number">0</span>],<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(Outpipe,<span class="string">&quot;\n Parent process is sending message!\n&quot;</span>);</span><br><span class="line">		write(fd[<span class="number">1</span>],Outpipe,<span class="number">50</span>);</span><br><span class="line">		lockf(fd[<span class="number">0</span>],<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		read(fd[<span class="number">0</span>],Inpipe,<span class="number">50</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,Inpipe);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="程序：-7"><a href="#程序：-7" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> pid;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-type">int</span> fd[<span class="hljs-number">2</span>];<span class="hljs-comment">//0 r or 1 w</span><br>	<span class="hljs-type">char</span> Outpipe[<span class="hljs-number">100</span>],Inpipe[<span class="hljs-number">100</span>];<br>	pipe(fd);<br>	<span class="hljs-keyword">while</span>((pid = fork()) == <span class="hljs-number">-1</span>);<br>	<span class="hljs-keyword">if</span>(pid != <span class="hljs-number">0</span>)<br>    &#123;<br>		lockf(fd[<span class="hljs-number">0</span>],<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);<br>		<span class="hljs-built_in">sprintf</span>(Outpipe,<span class="hljs-string">&quot;\n Parent process is sending message!\n&quot;</span>);<br>		write(fd[<span class="hljs-number">1</span>],Outpipe,<span class="hljs-number">50</span>);<br>		lockf(fd[<span class="hljs-number">0</span>],<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<span class="hljs-keyword">else</span><br>	&#123;<br>		read(fd[<span class="hljs-number">0</span>],Inpipe,<span class="hljs-number">50</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>,Inpipe);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;	<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-7"><a href="#运行结果：-7" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc pipe_test.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line"></span><br><span class="line"> Parent process is sending message!</span><br><span class="line"></span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-7"><a href="#运行结果：-7" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>gcc pipe_test.c <br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>./a.<span class="hljs-keyword">out</span> <br><br> Parent process is sending message!<br><br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -553,11 +496,11 @@
 <p>此时，数据写入结束，父进程通过lockf()解锁fd[0]，可理解为给管道解异步锁，开放管道读取端，使得子程序可以进入。</p>
 <p>其后运行子程序，通过fd[0]找到管道读取端口，将数据读入InPipe，最后输出，结束进程。</p>
 </blockquote>
-<h2 id="实验五：内存管理命令和共享内存通信"><a href="#实验五：内存管理命令和共享内存通信" class="headerlink" title="实验五：内存管理命令和共享内存通信"></a>实验五：内存管理命令和共享内存通信</h2><h4 id="将内容写入共享存储区-shm-write-c"><a href="#将内容写入共享存储区-shm-write-c" class="headerlink" title="将内容写入共享存储区(shm_write.c)"></a>将内容写入共享存储区(shm_write.c)</h4><h6 id="程序：-8"><a href="#程序：-8" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim </span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFSIZE 4096</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> shmid;</span><br><span class="line">	<span class="type">char</span> *shmbuf;</span><br><span class="line">	<span class="keyword">if</span>((shmid = shmget(<span class="number">1526792193</span>,BUFSIZE,MODE|IPC_CREAT)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		perror(<span class="string">&quot;shmget&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;segment created:%d\n&quot;</span>,shmid);</span><br><span class="line">	system(<span class="string">&quot;ipcs -m&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		perror(<span class="string">&quot;shmat&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;after shmget\n&quot;</span>);</span><br><span class="line">	system(<span class="string">&quot;ipcs -m&quot;</span>);</span><br><span class="line">	<span class="built_in">strcpy</span>(shmbuf,<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实验五：内存管理命令和共享内存通信"><a href="#实验五：内存管理命令和共享内存通信" class="headerlink" title="实验五：内存管理命令和共享内存通信"></a>实验五：内存管理命令和共享内存通信</h2><h4 id="将内容写入共享存储区-shm-write-c"><a href="#将内容写入共享存储区-shm-write-c" class="headerlink" title="将内容写入共享存储区(shm_write.c)"></a>将内容写入共享存储区(shm_write.c)</h4><h6 id="程序：-8"><a href="#程序：-8" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim </span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/shm.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> BUFSIZE 4096</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>	<span class="hljs-type">int</span> shmid;<br>	<span class="hljs-type">char</span> *shmbuf;<br>	<span class="hljs-keyword">if</span>((shmid = shmget(<span class="hljs-number">1526792193</span>,BUFSIZE,MODE|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)<br>    &#123;<br>		perror(<span class="hljs-string">&quot;shmget&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);	<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;segment created:%d\n&quot;</span>,shmid);<br>	system(<span class="hljs-string">&quot;ipcs -m&quot;</span>);<br>	<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)<br>    &#123;<br>		perror(<span class="hljs-string">&quot;shmat&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;after shmget\n&quot;</span>);<br>	system(<span class="hljs-string">&quot;ipcs -m&quot;</span>);<br>	<span class="hljs-built_in">strcpy</span>(shmbuf,<span class="hljs-string">&quot;Hello world&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-8"><a href="#运行结果：-8" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc shm_write.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">segment created:720902</span><br><span class="line"></span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status      </span><br><span class="line">0x00000000 131072     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 229377     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 327682     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 360451     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 458756     nroma      600        16777216   2          dest         </span><br><span class="line">0x00000000 557061     nroma      600        524288     2          dest         </span><br><span class="line">0x5b010001 720902     nroma      744        4096       0                       </span><br><span class="line"></span><br><span class="line">after shmget</span><br><span class="line"></span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status      </span><br><span class="line">0x00000000 131072     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 229377     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 327682     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 360451     nroma      600        524288     2          dest         </span><br><span class="line">0x00000000 458756     nroma      600        16777216   2          dest         </span><br><span class="line">0x00000000 557061     nroma      600        524288     2          dest         </span><br><span class="line">0x5b010001 720902     nroma      744        4096       1                       </span><br><span class="line"></span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-8"><a href="#运行结果：-8" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs dns">[nroma@localhost Desktop]$ gcc shm_write.c <br>[nroma@localhost Desktop]$ ./a.out <br>segment created:<span class="hljs-number">720902</span><br><br>------ Shared Memory Segments --------<br>key        shmid      owner      perms      bytes      nattch     status      <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">131072</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">229377</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">327682</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">360451</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">458756</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">16777216</span>   <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">557061</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0</span>x<span class="hljs-number">5b010001</span> <span class="hljs-number">720902</span>     nroma      <span class="hljs-number">744</span>        <span class="hljs-number">4096</span>       <span class="hljs-number">0</span>                       <br><br>after shmget<br><br>------ Shared Memory Segments --------<br>key        shmid      owner      perms      bytes      nattch     status      <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">131072</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">229377</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">327682</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">360451</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">458756</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">16777216</span>   <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0x00000000</span> <span class="hljs-number">557061</span>     nroma      <span class="hljs-number">600</span>        <span class="hljs-number">524288</span>     <span class="hljs-number">2</span>          dest         <br><span class="hljs-number">0</span>x<span class="hljs-number">5b010001</span> <span class="hljs-number">720902</span>     nroma      <span class="hljs-number">744</span>        <span class="hljs-number">4096</span>       <span class="hljs-number">1</span>                       <br><br>[nroma@localhost Desktop]$ <br></code></pre></td></tr></table></figure>
 
 
 
@@ -599,30 +542,30 @@
 <p>进程结束。</p>
 </blockquote>
 <h4 id="读出共享存储区内容-shm-read-c"><a href="#读出共享存储区内容-shm-read-c" class="headerlink" title="读出共享存储区内容(shm_read.c)"></a>读出共享存储区内容(shm_read.c)</h4><p>注：此程序在实训指导书上的缩进有误</p>
-<h6 id="程序：-9"><a href="#程序：-9" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Date:2020/10/14</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFSIZE 4096</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> shmid;</span><br><span class="line">	<span class="type">char</span> *shmbuf;</span><br><span class="line">	<span class="keyword">if</span>((shmid = shmget(<span class="number">1526792193</span>,BUFSIZE,MODE|IPC_CREAT)) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">&quot;shmget&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;segment created\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">&quot;shmat&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	write(STDOUT_FILENO,shmbuf,<span class="number">11</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="程序：-9"><a href="#程序：-9" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Date:2020/10/14</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/shm.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/ipc.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> BUFSIZE 4096</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>	<span class="hljs-type">int</span> shmid;<br>	<span class="hljs-type">char</span> *shmbuf;<br>	<span class="hljs-keyword">if</span>((shmid = shmget(<span class="hljs-number">1526792193</span>,BUFSIZE,MODE|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)&#123;<br>		perror(<span class="hljs-string">&quot;shmget&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;segment created\n&quot;</span>);<br>	<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)&#123;<br>		perror(<span class="hljs-string">&quot;shmat&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>	&#125;<br>	write(STDOUT_FILENO,shmbuf,<span class="hljs-number">11</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc shm_read.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">segment created</span><br><span class="line">Hello world[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h6><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>gcc shm_read.c <br>[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span>./a.<span class="hljs-keyword">out</span> <br>segment created<br>Hello world[nroma<span class="hljs-variable">@localhost</span> Desktop]<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
 
 <h6 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h6><blockquote>
 <p>此进程在创建共享内存后，发现标识符为1526792193的共享内存已经存在了、则返回该共享内存的ID，之后进行挂接，最后通过write读取了上个进程写入此共享内存的“Hello world”</p>
 </blockquote>
 <h4 id="父子进程共享存储区-shm-share-c"><a href="#父子进程共享存储区-shm-share-c" class="headerlink" title="父子进程共享存储区(shm_share.c)"></a>父子进程共享存储区(shm_share.c)</h4><p>注：此程序在实训指导书上的缩进有误</p>
-<h6 id="程序：-10"><a href="#程序：-10" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Data:2020/10/13</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pid,shm_key,shmid;</span><br><span class="line">	<span class="type">char</span> *shmbuf;</span><br><span class="line">	<span class="keyword">if</span>((pid=fork())&lt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(<span class="string">&quot;fork&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>((shm_key = ftok(<span class="string">&quot;\tmp&quot;</span>,<span class="number">1</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;ftok&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="number">0600</span>|IPC_CREAT)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmget&quot;</span>);			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmat&quot;</span>);			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">strcpy</span>(shmbuf,<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">		sleep(<span class="number">10</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;child pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);		</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>((shm_key = ftok(<span class="string">&quot;/tmp&quot;</span>,<span class="number">1</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;ftok&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="number">0660</span>|IPC_CREAT)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmget&quot;</span>);	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmat&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		sleep(<span class="number">10</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;father pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="程序：-10"><a href="#程序：-10" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Data:2020/10/13</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/shm.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SIZE 1024</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> pid,shm_key,shmid;<br>	<span class="hljs-type">char</span> *shmbuf;<br>	<span class="hljs-keyword">if</span>((pid=fork())&lt;<span class="hljs-number">0</span>)<br>	&#123;<br>		perror(<span class="hljs-string">&quot;fork&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-keyword">if</span>((shm_key = ftok(<span class="hljs-string">&quot;\tmp&quot;</span>,<span class="hljs-number">1</span>)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;ftok&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="hljs-number">0600</span>|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmget&quot;</span>);			<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmat&quot;</span>);			<br>		&#125;<br>		<span class="hljs-built_in">strcpy</span>(shmbuf,<span class="hljs-string">&quot;Hello world&quot;</span>);<br>		sleep(<span class="hljs-number">10</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);		<br>	&#125;<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-keyword">if</span>((shm_key = ftok(<span class="hljs-string">&quot;/tmp&quot;</span>,<span class="hljs-number">1</span>)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;ftok&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="hljs-number">0660</span>|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmget&quot;</span>);	<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmat&quot;</span>);<br>		&#125;<br>		sleep(<span class="hljs-number">10</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;father pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-9"><a href="#运行结果：-9" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc shm_share.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">ftok: No such file or directory</span><br><span class="line">father pid is 6047,the share memory start at 7fe14c6aa000,end at 7fe14c6aa400,content is </span><br><span class="line">child pid is 6048,the share memory start at 7fe14c6aa000,end at 7fe14c6aa400,content is Hello world</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-9"><a href="#运行结果：-9" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[nroma@localhost Desktop]$ gcc shm_share.c <br>[nroma@localhost Desktop]$ ./a.<span class="hljs-keyword">out</span> <br>ftok: <span class="hljs-keyword">No</span> such file <span class="hljs-keyword">or</span> directory<br>father pid <span class="hljs-keyword">is</span> <span class="hljs-number">6047</span>,the <span class="hljs-keyword">share</span> memory <span class="hljs-keyword">start</span> at <span class="hljs-number">7</span>fe14c6aa000,<span class="hljs-keyword">end</span> at <span class="hljs-number">7</span>fe14c6aa400,content <span class="hljs-keyword">is</span> <br>child pid <span class="hljs-keyword">is</span> <span class="hljs-number">6048</span>,the <span class="hljs-keyword">share</span> memory <span class="hljs-keyword">start</span> at <span class="hljs-number">7</span>fe14c6aa000,<span class="hljs-keyword">end</span> at <span class="hljs-number">7</span>fe14c6aa400,content <span class="hljs-keyword">is</span> Hello world<br>[nroma@localhost Desktop]$ <br></code></pre></td></tr></table></figure>
 
 
 
 <p>注：由于本人redhet7.0运行99%都是父进程先运行，子进程写入的字符串的时候父进程早已结束。故将父子功能其进行调换，故对此程序进行修改，程序如下：</p>
-<h6 id="程序：-11"><a href="#程序：-11" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Created by RedHat-vim</span></span><br><span class="line"><span class="comment"> * Author: Longfei Li</span></span><br><span class="line"><span class="comment"> * Data:2020/10/13</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pid,shm_key,shmid;</span><br><span class="line">	<span class="type">char</span> *shmbuf;</span><br><span class="line">	<span class="keyword">if</span>((pid=fork())&lt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(<span class="string">&quot;fork&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>((shm_key = ftok(<span class="string">&quot;\tmp&quot;</span>,<span class="number">1</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;ftok&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="number">0600</span>|IPC_CREAT)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmget&quot;</span>);			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmat&quot;</span>);			</span><br><span class="line">		&#125;</span><br><span class="line">		sleep(<span class="number">10</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;child pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);		</span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>((shm_key = ftok(<span class="string">&quot;/tmp&quot;</span>,<span class="number">1</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;ftok&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="number">0660</span>|IPC_CREAT)) &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmget&quot;</span>);	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((shmbuf = shmat(shmid,<span class="number">0</span>,<span class="number">0</span>)) &lt; (<span class="type">char</span>*)<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(<span class="string">&quot;shmat&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="built_in">strcpy</span>(shmbuf,<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">		sleep(<span class="number">10</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;father pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="程序：-11"><a href="#程序：-11" class="headerlink" title="程序："></a>程序：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Created by RedHat-vim</span><br><span class="hljs-comment"> * Author: Longfei Li</span><br><span class="hljs-comment"> * Data:2020/10/13</span><br><span class="hljs-comment"> * */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/shm.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SIZE 1024</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> pid,shm_key,shmid;<br>	<span class="hljs-type">char</span> *shmbuf;<br>	<span class="hljs-keyword">if</span>((pid=fork())&lt;<span class="hljs-number">0</span>)<br>	&#123;<br>		perror(<span class="hljs-string">&quot;fork&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-keyword">if</span>((shm_key = ftok(<span class="hljs-string">&quot;\tmp&quot;</span>,<span class="hljs-number">1</span>)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;ftok&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="hljs-number">0600</span>|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmget&quot;</span>);			<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmat&quot;</span>);			<br>		&#125;<br>		sleep(<span class="hljs-number">10</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);		<br>	&#125;<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-keyword">if</span>((shm_key = ftok(<span class="hljs-string">&quot;/tmp&quot;</span>,<span class="hljs-number">1</span>)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;ftok&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmid = shmget(shm_key,SIZE,<span class="hljs-number">0660</span>|IPC_CREAT)) &lt; <span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmget&quot;</span>);	<br>		&#125;<br>		<span class="hljs-keyword">if</span>((shmbuf = shmat(shmid,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) &lt; (<span class="hljs-type">char</span>*)<span class="hljs-number">0</span>)<br>		&#123;<br>			perror(<span class="hljs-string">&quot;shmat&quot;</span>);<br>		&#125;<br>        <span class="hljs-built_in">strcpy</span>(shmbuf,<span class="hljs-string">&quot;Hello world&quot;</span>);<br>		sleep(<span class="hljs-number">10</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;father pid is %d,the share memory start at %lx,end at %lx,content is %s\n&quot;</span>,getpid(),shmbuf,shmbuf+SIZE,shmbuf);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果：-10"><a href="#运行结果：-10" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ gcc shm_share.c </span><br><span class="line">[nroma@localhost Desktop]$ ./a.out </span><br><span class="line">ftok: No such file or directory</span><br><span class="line">father pid is 6047,the share memory start at 7fe14c6aa000,end at 7fe14c6aa400,content is Hello world</span><br><span class="line">child pid is 6048,the share memory start at 7fe14c6aa000,end at 7fe14c6aa400,content is Hello world</span><br><span class="line">[nroma@localhost Desktop]$ </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果：-10"><a href="#运行结果：-10" class="headerlink" title="运行结果："></a>运行结果：</h6><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[nroma@localhost Desktop]$ gcc shm_share.c <br>[nroma@localhost Desktop]$ ./a.<span class="hljs-keyword">out</span> <br>ftok: <span class="hljs-keyword">No</span> such file <span class="hljs-keyword">or</span> directory<br>father pid <span class="hljs-keyword">is</span> <span class="hljs-number">6047</span>,the <span class="hljs-keyword">share</span> memory <span class="hljs-keyword">start</span> at <span class="hljs-number">7</span>fe14c6aa000,<span class="hljs-keyword">end</span> at <span class="hljs-number">7</span>fe14c6aa400,content <span class="hljs-keyword">is</span> Hello world<br>child pid <span class="hljs-keyword">is</span> <span class="hljs-number">6048</span>,the <span class="hljs-keyword">share</span> memory <span class="hljs-keyword">start</span> at <span class="hljs-number">7</span>fe14c6aa000,<span class="hljs-keyword">end</span> at <span class="hljs-number">7</span>fe14c6aa400,content <span class="hljs-keyword">is</span> Hello world<br>[nroma@localhost Desktop]$ <br></code></pre></td></tr></table></figure>
 
 <h6 id="程序分析：-8"><a href="#程序分析：-8" class="headerlink" title="程序分析："></a>程序分析：</h6><blockquote>
 <p>首先程序通过fork()创建子进程。</p>
@@ -638,11 +581,11 @@
 <p>挂接共享内存并将共享内存段的指针保存下来，</p>
 <p>最后输出当前进程的pid&#x3D;6048、共享内存段指针&#x3D;7fe14c6aa000、共享内存段指针+SIZE（1024），由于指针地址为16进制，需将1024转换为16进制，为400H，故结果为7fe14c6aa400，最后输出之前被父进程写入的共享内存段指针指向的内容&#x3D;“Hello world”。</p>
 </blockquote>
-<h2 id="实验六：文件系统"><a href="#实验六：文件系统" class="headerlink" title="实验六：文件系统"></a>实验六：文件系统</h2><h4 id="练习文件操作函数-file-c"><a href="#练习文件操作函数-file-c" class="headerlink" title="练习文件操作函数(file.c)"></a>练习文件操作函数(file.c)</h4><h6 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFSIZE 1024</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">chmodMyFile</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> choice;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;File chmod modification:\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 Read and write and execute\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;2 Read file\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;3 Write file\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;4 Execute\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Please enter your choice:\n&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;choice);</span><br><span class="line">	<span class="keyword">switch</span>(choice)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			chmod(<span class="string">&quot;mytestfile&quot;</span>,S_IRWXU);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			chmod(<span class="string">&quot;mytestfile&quot;</span>,S_IRUSR);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">       	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			chmod(<span class="string">&quot;mytestfile&quot;</span>,S_IWUSR);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">       	<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">			chmod(<span class="string">&quot;mytestfile&quot;</span>,S_IXUSR);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Sorry,your input is wrong!\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    	<span class="type">int</span> choice,fd,n;</span><br><span class="line">    	<span class="type">char</span> buf[BUFSIZE];</span><br><span class="line">    	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    	&#123;</span><br><span class="line">       		<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">&quot;1 Create new file\n&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;2 Write file\n&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;3 Read file\n&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;4 Modify file permissions\n&quot;</span>);</span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">&quot;5 View current file\n&quot;</span>);</span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">&quot;0 exit\n&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">        	<span class="built_in">printf</span>(<span class="string">&quot;Please enter your choice:\n&quot;</span>);</span><br><span class="line">        	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;choice);</span><br><span class="line">			<span class="keyword">switch</span>(choice)</span><br><span class="line">			&#123;</span><br><span class="line">        		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                	fd=open(<span class="string">&quot;/home/mytestfile&quot;</span>,O_RDWR|O_TRUNC|O_CREAT,MODE);</span><br><span class="line">         			<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)</span><br><span class="line">                		perror(<span class="string">&quot;open&quot;</span>);</span><br><span class="line">                	<span class="keyword">else</span></span><br><span class="line">                    	<span class="built_in">printf</span>(<span class="string">&quot;File create success\n&quot;</span>);</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">           		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                	<span class="built_in">printf</span>(<span class="string">&quot;Please enter the content to be weitten:\n&quot;</span>);</span><br><span class="line">                	n=read(<span class="number">0</span>,buf,BUFSIZE);</span><br><span class="line">               		<span class="keyword">if</span>(n&lt;<span class="number">0</span>)</span><br><span class="line">                  	  	perror(<span class="string">&quot;read&quot;</span>);</span><br><span class="line">                	<span class="keyword">if</span>(write(fd,buf,n) &lt; <span class="number">0</span>)</span><br><span class="line">                    	perror(<span class="string">&quot;write&quot;</span>);</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">            	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                	<span class="built_in">printf</span>(<span class="string">&quot;View File content:\n&quot;</span>);</span><br><span class="line">                	lseek(fd,<span class="number">0</span>,SEEK_SET);</span><br><span class="line">                	n = read(fd,buf,BUFSIZE);</span><br><span class="line">                	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)</span><br><span class="line">                   	 	perror(<span class="string">&quot;read&quot;</span>);</span><br><span class="line">                	<span class="keyword">else</span></span><br><span class="line">                   	 	write(<span class="number">1</span>,buf,n);</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">            	<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                	chmodMyFile();</span><br><span class="line">                	<span class="built_in">printf</span>(<span class="string">&quot;Permission modified successfully!\n&quot;</span>);</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">            	<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                	system(<span class="string">&quot;ls -l /home/mytestfile&quot;</span>);</span><br><span class="line">                	system(<span class="string">&quot;cat /home/mytestfile&quot;</span>);</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">            	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">               		close(fd);</span><br><span class="line">              		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">            	<span class="keyword">default</span>:</span><br><span class="line">                	<span class="built_in">printf</span>(<span class="string">&quot;Your input is wrong!\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实验六：文件系统"><a href="#实验六：文件系统" class="headerlink" title="实验六：文件系统"></a>实验六：文件系统</h2><h4 id="练习文件操作函数-file-c"><a href="#练习文件操作函数-file-c" class="headerlink" title="练习文件操作函数(file.c)"></a>练习文件操作函数(file.c)</h4><h6 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MODE (S_IRWXU|S_IRGRP|S_IROTH)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> BUFSIZE 1024</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">chmodMyFile</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> choice;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;File chmod modification:\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;****************************\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1 Read and write and execute\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2 Read file\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;3 Write file\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;4 Execute\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;****************************\n&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your choice:\n&quot;</span>);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;choice);<br>	<span class="hljs-keyword">switch</span>(choice)<br>	&#123;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>			chmod(<span class="hljs-string">&quot;mytestfile&quot;</span>,S_IRWXU);<br>			<span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>			chmod(<span class="hljs-string">&quot;mytestfile&quot;</span>,S_IRUSR);<br>            <span class="hljs-keyword">break</span>;<br>       	<span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>			chmod(<span class="hljs-string">&quot;mytestfile&quot;</span>,S_IWUSR);<br>            <span class="hljs-keyword">break</span>;<br>       	<span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>			chmod(<span class="hljs-string">&quot;mytestfile&quot;</span>,S_IXUSR);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sorry,your input is wrong!\n&quot;</span>);<br>	&#125;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    	<span class="hljs-type">int</span> choice,fd,n;<br>    	<span class="hljs-type">char</span> buf[BUFSIZE];<br>    	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>    	&#123;<br>       		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;****************************\n&quot;</span>);<br>        	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1 Create new file\n&quot;</span>);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2 Write file\n&quot;</span>);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;3 Read file\n&quot;</span>);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;4 Modify file permissions\n&quot;</span>);<br>        	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;5 View current file\n&quot;</span>);<br>        	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0 exit\n&quot;</span>);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;****************************\n&quot;</span>);<br>        	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your choice:\n&quot;</span>);<br>        	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;choice);<br>			<span class="hljs-keyword">switch</span>(choice)<br>			&#123;<br>        		<span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>                	fd=open(<span class="hljs-string">&quot;/home/mytestfile&quot;</span>,O_RDWR|O_TRUNC|O_CREAT,MODE);<br>         			<span class="hljs-keyword">if</span>(fd &lt; <span class="hljs-number">0</span>)<br>                		perror(<span class="hljs-string">&quot;open&quot;</span>);<br>                	<span class="hljs-keyword">else</span><br>                    	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;File create success\n&quot;</span>);<br>                	<span class="hljs-keyword">break</span>;<br>           		<span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>                	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter the content to be weitten:\n&quot;</span>);<br>                	n=read(<span class="hljs-number">0</span>,buf,BUFSIZE);<br>               		<span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>)<br>                  	  	perror(<span class="hljs-string">&quot;read&quot;</span>);<br>                	<span class="hljs-keyword">if</span>(write(fd,buf,n) &lt; <span class="hljs-number">0</span>)<br>                    	perror(<span class="hljs-string">&quot;write&quot;</span>);<br>                	<span class="hljs-keyword">break</span>;<br>            	<span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>                	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;View File content:\n&quot;</span>);<br>                	lseek(fd,<span class="hljs-number">0</span>,SEEK_SET);<br>                	n = read(fd,buf,BUFSIZE);<br>                	<span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">0</span>)<br>                   	 	perror(<span class="hljs-string">&quot;read&quot;</span>);<br>                	<span class="hljs-keyword">else</span><br>                   	 	write(<span class="hljs-number">1</span>,buf,n);<br>                	<span class="hljs-keyword">break</span>;<br>            	<span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>                	chmodMyFile();<br>                	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Permission modified successfully!\n&quot;</span>);<br>                	<span class="hljs-keyword">break</span>;<br>            	<span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>                	system(<span class="hljs-string">&quot;ls -l /home/mytestfile&quot;</span>);<br>                	system(<span class="hljs-string">&quot;cat /home/mytestfile&quot;</span>);<br>                	<span class="hljs-keyword">break</span>;<br>            	<span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>               		close(fd);<br>              		<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>            	<span class="hljs-keyword">default</span>:<br>                	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Your input is wrong!\n&quot;</span>);<br>    <br>			&#125;<br>		&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<h6 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果:"></a>运行结果:</h6>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[nroma@localhost Desktop]$ su root</span><br><span class="line">Password: </span><br><span class="line">ABRT has detected 1 problem(s). For more info run: abrt-cli list</span><br><span class="line">[root@localhost Desktop]# gcc file.c </span><br><span class="line">[root@localhost Desktop]# ./a.out </span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">1</span><br><span class="line">File create success</span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">2</span><br><span class="line">Please enter the content to be weitten:</span><br><span class="line">123</span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">3</span><br><span class="line">View File content:</span><br><span class="line">123</span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">4</span><br><span class="line">File chmod modification:</span><br><span class="line">****************************</span><br><span class="line">1 Read and write and execute</span><br><span class="line">2 Read file</span><br><span class="line">3 Write file</span><br><span class="line">4 Execute</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">1</span><br><span class="line">Permission modified successfully!</span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">5</span><br><span class="line">-rwxr--r--. 1 root root 4 Oct 17 02:19 /home/mytestfile</span><br><span class="line">123</span><br><span class="line">****************************</span><br><span class="line">1 Create new file</span><br><span class="line">2 Write file</span><br><span class="line">3 Read file</span><br><span class="line">4 Modify file permissions</span><br><span class="line">5 View current file</span><br><span class="line">0 exit</span><br><span class="line">****************************</span><br><span class="line">Please enter your choice:</span><br><span class="line">0</span><br><span class="line">[root@localhost Desktop]# </span><br></pre></td></tr></table></figure>
+<h6 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果:"></a>运行结果:</h6>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[nroma@localhost Desktop]$ su root<br>Password: <br>ABRT has detected 1 problem(s). For more info run: abrt-cli list<br>[root@localhost Desktop]# gcc file.c <br>[root@localhost Desktop]# ./a.out <br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>1<br>File create success<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>2<br>Please enter the content to be weitten:<br>123<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>3<br>View File content:<br>123<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>4<br>File chmod modification:<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Read and write and execute<br>2 Read file<br>3 Write file<br>4 Execute<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>1<br>Permission modified successfully!<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>5<br>-rwxr--r--. 1 root root 4 Oct 17 02:19 /home/mytestfile<br>123<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>1 Create new file<br>2 Write file<br>3 Read file<br>4 Modify file permissions<br>5 View current file<br>0 exit<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br>Please enter your choice:<br>0<br>[root@localhost Desktop]# <br></code></pre></td></tr></table></figure>
 
 
 
@@ -675,371 +618,341 @@
 <p>其他很简单，读代码即可。</p>
 </blockquote>
 
-      
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>关于操作系统实验环境搭建(使用GCC)及实训代码记录与分析</div>
+      <div>https://moonris.github.io/Nroma/2020/10/19/OSCODE/</div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
+    <div class="license-meta">
       
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/Nroma/2020/09/25/AT&T%E4%B8%8EIntel%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="AT&T与Intel的汇编指令的区别">
-                <i class="fa fa-chevron-left"></i> AT&T与Intel的汇编指令的区别
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Nroma/2020/11/08/JUC%E7%9A%84%E6%80%9D%E8%80%83/" rel="prev" title="JUC的思考">
-                JUC的思考 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>李龙飞</div>
         </div>
       
-
       
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年10月19日</div>
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
       
-
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
       
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/Nroma/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
-                  <span class="site-state-item-name">日志</span>
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
                 </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
               
             
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">实验环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">（一）介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.0.2.</span> <span class="nav-text">（二）、下载</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1%E3%80%81%E4%B8%8B%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.0.2.0.1.</span> <span class="nav-text">1、下载虚拟机</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2%E3%80%81%E4%B8%8B%E8%BD%BDlinux%E9%95%9C%E5%83%8F"><span class="nav-number">1.0.2.0.2.</span> <span class="nav-text">2、下载linux镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%81%E5%AE%89%E8%A3%85Vmware-Workstation"><span class="nav-number">1.0.3.</span> <span class="nav-text">（三）、安装Vmware-Workstation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85Linux%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、安装Linux镜像文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%89%E8%A3%85%E5%8F%82%E6%95%B0%EF%BC%8C%E7%AD%89%E5%BE%85%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%EF%BC%8C%E5%A4%A7%E6%A6%82%E5%88%86%E4%BB%A5%E4%B8%8B%E5%87%A0%E6%AD%A5"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">设置安装参数，等待系统安装完成，大概分以下几步</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E5%92%8C%E6%8E%A7%E5%88%B6API"><span class="nav-number">2.</span> <span class="nav-text">实验三：进程管理和控制API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E8%BF%9B%E7%A8%8B%E5%8F%8A%E5%85%B6%E7%88%B6%E8%BF%9B%E7%A8%8B%E7%9A%84ID%EF%BC%88get-process-pId-c%EF%BC%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">获取当前进程及其父进程的ID（get_process_pId.c）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="nav-number">2.0.1.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="nav-number">2.0.1.0.3.</span> <span class="nav-text">程序分析:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8fork-%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B-fork-create-child-process-c"><span class="nav-number">2.0.2.</span> <span class="nav-text">使用fork()函数创建子进程(fork_create_child_process.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-1"><span class="nav-number">2.0.2.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-1"><span class="nav-number">2.0.2.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">2.0.2.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B3-3%EF%BC%9A%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%94%B6%E5%85%BB%EF%BC%88orphan-process-adopted-c%EF%BC%89"><span class="nav-number">2.0.3.</span> <span class="nav-text">例3.3：孤儿进程的收养（orphan_process_adopted.c）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-2"><span class="nav-number">2.0.3.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-2"><span class="nav-number">2.0.3.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="nav-number">2.0.3.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B3-4-%E4%BD%BF%E7%94%A8wait-%E5%87%BD%E6%95%B0%E7%AD%89%E5%BE%85%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F-wait-process-end-c"><span class="nav-number">2.0.4.</span> <span class="nav-text">例3.4 使用wait()函数等待子进程结束(wait_process_end.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-3"><span class="nav-number">2.0.4.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-3"><span class="nav-number">2.0.4.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-2"><span class="nav-number">2.0.4.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%9B%9B%EF%BC%9A%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1API"><span class="nav-number">3.</span> <span class="nav-text">实验四：进程通信API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%B8%AD%E6%96%AD%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86-%E5%BF%BD%E7%95%A5%E4%BF%A1%E5%8F%B7%EF%BC%88singnal-sig-ing-c%EF%BC%89"><span class="nav-number">3.0.1.</span> <span class="nav-text">软中断信号处理-忽略信号（singnal_sig_ing.c）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-4"><span class="nav-number">3.0.1.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-4"><span class="nav-number">3.0.1.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-3"><span class="nav-number">3.0.1.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%B8%AD%E6%96%AD%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86-%E9%BB%98%E8%AE%A4%E5%A4%84%E7%90%86%EF%BC%88signal-sig-dfl-c%EF%BC%89"><span class="nav-number">3.0.2.</span> <span class="nav-text">软中断信号处理-默认处理（signal_sig_dfl.c）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-5"><span class="nav-number">3.0.2.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-5"><span class="nav-number">3.0.2.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-4"><span class="nav-number">3.0.2.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%95%E6%8D%89%E4%BF%A1%E5%8F%B7%EF%BC%88signal-function-c%EF%BC%89"><span class="nav-number">3.0.3.</span> <span class="nav-text">自定义捕捉信号（signal_function.c）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-6"><span class="nav-number">3.0.3.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-6"><span class="nav-number">3.0.3.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-5"><span class="nav-number">3.0.3.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6-pipe-test-c"><span class="nav-number">3.0.4.</span> <span class="nav-text">管道通信机制(pipe_test.c )</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-7"><span class="nav-number">3.0.4.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-7"><span class="nav-number">3.0.4.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-6"><span class="nav-number">3.0.4.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%94%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4%E5%92%8C%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">实验五：内存管理命令和共享内存通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E5%86%85%E5%AE%B9%E5%86%99%E5%85%A5%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E5%8C%BA-shm-write-c"><span class="nav-number">4.0.1.</span> <span class="nav-text">将内容写入共享存储区(shm_write.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-8"><span class="nav-number">4.0.1.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-8"><span class="nav-number">4.0.1.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-7"><span class="nav-number">4.0.1.0.3.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%87%BA%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E5%8C%BA%E5%86%85%E5%AE%B9-shm-read-c"><span class="nav-number">4.0.2.</span> <span class="nav-text">读出共享存储区内容(shm_read.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-9"><span class="nav-number">4.0.2.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">4.0.2.0.2.</span> <span class="nav-text">运行结果:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">4.0.2.0.3.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E5%8C%BA-shm-share-c"><span class="nav-number">4.0.3.</span> <span class="nav-text">父子进程共享存储区(shm_share.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-10"><span class="nav-number">4.0.3.0.1.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-9"><span class="nav-number">4.0.3.0.2.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%EF%BC%9A-11"><span class="nav-number">4.0.3.0.3.</span> <span class="nav-text">程序：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-10"><span class="nav-number">4.0.3.0.4.</span> <span class="nav-text">运行结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%EF%BC%9A-8"><span class="nav-number">4.0.3.0.5.</span> <span class="nav-text">程序分析：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%85%AD%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">实验六：文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0-file-c"><span class="nav-number">5.0.1.</span> <span class="nav-text">练习文件操作函数(file.c)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.0.1.0.1.</span> <span class="nav-text">程序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="nav-number">5.0.1.0.2.</span> <span class="nav-text">运行结果:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90-1"><span class="nav-number">5.0.1.0.3.</span> <span class="nav-text">程序分析:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
-            
-
           </div>
-        </section>
-      <!--/noindex-->
+        </div>
       
-
-      
-
     </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Nroma/2020/11/08/JUC%E7%9A%84%E6%80%9D%E8%80%83/" title="JUC的思考">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JUC的思考</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Nroma/2020/09/25/AT&amp;T%E4%B8%8EIntel%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T与Intel的汇编指令的区别">
+                        <span class="hidden-mobile">AT&amp;T与Intel的汇编指令的区别</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
   </aside>
 
 
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">李龙飞</span>
-
-  
+    </div>
+  </div>
 </div>
 
 
 
 
 
+  
 
 
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2019-2022 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/Nroma/js/events.js" ></script>
+<script  src="/Nroma/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/Nroma/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
 </script>
 
 
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/Nroma/js/local-search.js" ></script>
 
 
 
 
 
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/Nroma/js/boot.js" ></script>
 
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/Nroma/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/Nroma/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/Nroma/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/Nroma/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/Nroma/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

@@ -1,361 +1,282 @@
+
+
 <!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Nroma/img/fluid.png">
+  <link rel="icon" href="/Nroma/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="李龙飞">
+  <meta name="keywords" content="android">
   
-  <link href="/Nroma/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/Nroma/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/Nroma/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/Nroma/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/Nroma/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/Nroma/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/Nroma/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="android" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="android 目录结构(重要)">
+    <meta name="description" content="android 目录结构(重要)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android嵌入式项目讲义">
 <meta property="og:url" content="https://moonris.github.io/Nroma/2019/11/01/android1/index.html">
 <meta property="og:site_name" content="不可思议">
 <meta property="og:description" content="android 目录结构(重要)">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png">
 <meta property="article:published_time" content="2019-11-01T00:00:00.000Z">
 <meta property="article:modified_time" content="2021-01-16T08:48:39.714Z">
 <meta property="article:author" content="李龙飞">
 <meta property="article:tag" content="java">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp">
+  
+  
+  
+  <title>Android嵌入式项目讲义 - 不可思议</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
-  <link rel="canonical" href="https://moonris.github.io/Nroma/2019/11/01/android1/"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-  <title>Android嵌入式项目讲义 | 不可思议</title>
+<link  rel="stylesheet" href="/Nroma/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/Nroma/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/Nroma/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"moonris.github.io","root":"/Nroma/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Nroma/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/Nroma/js/utils.js" ></script>
+  <script  src="/Nroma/js/color-schema.js" ></script>
+  
 
 
-
-
+  
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
+<body>
   
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <header>
     
 
-    <div class="custom-logo-site-title">
-      <a href="/Nroma/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">不可思议</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/Nroma/">
+      <strong>LongFei</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Nroma/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/Nroma/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android嵌入式项目讲义"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-11-01 08:00" pubdate>
+          2019年11月1日 早上
+        </time>
+      </span>
+    
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
   </div>
 </div>
 
-<nav class="site-nav">
-  
+</div>
 
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/Nroma/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/Nroma/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/Nroma/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/Nroma/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/Nroma/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
+  </header>
 
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <main>
     
+      
 
-  
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
 
-  
-  
-  
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://moonris.github.io/Nroma/Nroma/2019/11/01/android1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/Nroma/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不可思议">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Android嵌入式项目讲义</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android嵌入式项目讲义</h1>
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T08:00:00+08:00">
-                2019-11-01
-              </time>
             
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/Nroma/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
+              <div class="markdown-body">
                 
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="android-目录结构-重要"><a href="#android-目录结构-重要" class="headerlink" title="android 目录结构(重要)"></a>android 目录结构(重要)</h1><span id="more"></span>
+                <h1 id="android-目录结构-重要"><a href="#android-目录结构-重要" class="headerlink" title="android 目录结构(重要)"></a>android 目录结构(重要)</h1><span id="more"></span>
 
 <p>rsc：java源码存放位置</p>
 <p>assets：可以存放资源，但不会生成资源ID，通过AssetManager以二进制流的形式访问。</p>
@@ -371,7 +292,7 @@
 <p>3.BroadCastReceiver(广播接收器):</p>
 <p>4.ContentProvider(内容提供者)：</p>
 <h1 id="UI概念"><a href="#UI概念" class="headerlink" title="UI概念"></a>UI概念</h1><p>ViewGroup  和 View</p>
-<h1 id="android-原有项目说明-or-通信协议"><a href="#android-原有项目说明-or-通信协议" class="headerlink" title="android 原有项目说明 or 通信协议"></a>android 原有项目说明 or 通信协议</h1><pre><code>Fragment:
+<h1 id="android-原有项目说明-or-通信协议"><a href="#android-原有项目说明-or-通信协议" class="headerlink" title="android 原有项目说明 or 通信协议"></a>android 原有项目说明 or 通信协议</h1><pre><code class="hljs">Fragment:
 简称碎片，是Android 3.0（API 11）提出的。它
 过去support-v4库是一个jar包，24.2.0版本开始，将support-v4库模块化为多个jar包，
 包含：support-fragment, support-ui, support-media-compat等，
@@ -390,12 +311,12 @@ Fragment有自己的生命周期，并能接收输入事件。
 </code></pre>
 <p>​	<br>​	Activity:<br>​	Activity是什么?<br>​	Activity是一个Android应用程序组件(也称为Android四大组件之一)，<br>​	它提供了一个屏幕，用户可以通过该屏幕进行交互以执行某些操作，<br>​	<br>​	Android应用程序通常由多个彼此松散绑定的Activity组成。<br>​	通常，应用程序中的一个Activity被指定为“主要”Activity，<br>​	该Activity在首次启动应用程序时呈现给用户。<br>​	然后，每个Activity可以启动另一个Activity以执行不同的操作。<br>​	每次新Activity开始时，前一个Activity都会停止，<br>​	但系统会将Activity保留在后台堆栈中（“后堆栈”）。<br>​	当一个新的Activity开始时，它会被推到后面的堆栈上，<br>​	并引起用户的注意。后栈遵循基本的“ 后进先出”堆栈机制，<br>​	因此，当用户完成当前活动并按下”后退按钮”时，<br>​	它从堆栈弹出（并销毁），之前的活动恢复。</p>
 <p>​	<br>​	<br>​	</p>
-<pre><code>登录
+<pre><code class="hljs">登录
 左Fragment:图片的读取，
 右Fragment:数据的发送和接收，
 通信协议
 </code></pre>
-<h2 id="Activity-和-Fragment-生命周期"><a href="#Activity-和-Fragment-生命周期" class="headerlink" title="Activity 和 Fragment 生命周期"></a>Activity 和 Fragment 生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp" alt="avatar"></p>
+<h2 id="Activity-和-Fragment-生命周期"><a href="#Activity-和-Fragment-生命周期" class="headerlink" title="Activity 和 Fragment 生命周期"></a>Activity 和 Fragment 生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp" srcset="/Nroma/img/loading.gif" lazyload alt="avatar"></p>
 <p>onCreate():Activity第一次启动时调用。创建布局，组件。</p>
 <p>onStart():onCreate()被调用之后调用，或者是当执行完onRestart（）后Activity用户重新可见时调用。</p>
 <p>onResume():在onRestoreInstanceState(),onRestart(),或者onPause() 被调用后，该方法用来处理与用户的交互。也就是获得用户焦点。</p>
@@ -403,13 +324,13 @@ Fragment有自己的生命周期，并能接收输入事件。
 <p>onStop():</p>
 <p>onDestory():</p>
 <p>onRestart():</p>
-<h2 id="android-项目运行时图片"><a href="#android-项目运行时图片" class="headerlink" title="android 项目运行时图片"></a>android 项目运行时图片</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png" alt="avatar"></p>
-<h1 id="android-新增方法位置说明及思路"><a href="#android-新增方法位置说明及思路" class="headerlink" title="android 新增方法位置说明及思路"></a>android 新增方法位置说明及思路</h1><pre><code>车牌识别的思路
+<h2 id="android-项目运行时图片"><a href="#android-项目运行时图片" class="headerlink" title="android 项目运行时图片"></a>android 项目运行时图片</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png" srcset="/Nroma/img/loading.gif" lazyload alt="avatar"></p>
+<h1 id="android-新增方法位置说明及思路"><a href="#android-新增方法位置说明及思路" class="headerlink" title="android 新增方法位置说明及思路"></a>android 新增方法位置说明及思路</h1><pre><code class="hljs">车牌识别的思路
 交通灯思路
 图像识别思路
 二维码思路
 </code></pre>
-<h1 id="Debug（测试重点一）"><a href="#Debug（测试重点一）" class="headerlink" title="Debug（测试重点一）"></a>Debug（测试重点一）</h1><pre><code>如何调试Android程序
+<h1 id="Debug（测试重点一）"><a href="#Debug（测试重点一）" class="headerlink" title="Debug（测试重点一）"></a>Debug（测试重点一）</h1><pre><code class="hljs">如何调试Android程序
 </code></pre>
 <h1 id="Toast（测试重点二）"><a href="#Toast（测试重点二）" class="headerlink" title="Toast（测试重点二）"></a>Toast（测试重点二）</h1><p>提示信息</p>
 <p>一般步骤</p>
@@ -427,9 +348,9 @@ Fragment有自己的生命周期，并能接收输入事件。
 <li><p>Log是理解程序，分析程序Bug的神兵利器。 熟用AS的日志工具log能使你在Android开发的旅途中事半功倍。log的重要性会在软件项目的测试阶段体现得尽致。</p>
 </li>
 </ul>
-<h1 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h1><pre><code>安卓软件开发包，全称为Android software development kit
+<h1 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h1><pre><code class="hljs">安卓软件开发包，全称为Android software development kit
 </code></pre>
-<h1 id="NDK"><a href="#NDK" class="headerlink" title="NDK"></a>NDK</h1><pre><code>Native Development Kit
+<h1 id="NDK"><a href="#NDK" class="headerlink" title="NDK"></a>NDK</h1><pre><code class="hljs">Native Development Kit
 
 帮助开发者快速开发C（或C++）的动态库，并能自动将so和java应用一起打包成apk。这些工具对开发者的帮助是巨大的。NDK集成了交叉编译器，并提供了相应的mk文件隔离CPU、平台、ABI等差异，开发人员只需要简单修改mk文件（指出“哪些文件需要编译”、“编译特性要求”等），就可以创建出so。NDK可以自动地将so和Java应用一起打包，极大地减轻了开发人员的打包工作
 
@@ -446,10 +367,10 @@ Fragment有自己的生命周期，并能接收输入事件。
 2.调试难度较高(以库的形式存在)
 3.增加开发团队规模
 </code></pre>
-<h1 id="Android-项目权限说明"><a href="#Android-项目权限说明" class="headerlink" title="Android 项目权限说明"></a>Android 项目权限说明</h1><pre><code>网络权限
+<h1 id="Android-项目权限说明"><a href="#Android-项目权限说明" class="headerlink" title="Android 项目权限说明"></a>Android 项目权限说明</h1><pre><code class="hljs">网络权限
 文件读写权限
 </code></pre>
-<h1 id="Gradle-说明"><a href="#Gradle-说明" class="headerlink" title="Gradle 说明"></a>Gradle 说明</h1><pre><code>java构建技术世界里具有巨大突破性的构建工具。Gradle具有如下特性：
+<h1 id="Gradle-说明"><a href="#Gradle-说明" class="headerlink" title="Gradle 说明"></a>Gradle 说明</h1><pre><code class="hljs">java构建技术世界里具有巨大突破性的构建工具。Gradle具有如下特性：
 
 A very flexible general purpose build tool like Ant.
 &lt;翻译&gt;一个像Ant一样灵活且通用的构建工具。
@@ -477,14 +398,14 @@ Groovy build scripts.
 A rich domain model for describing your build.
 &lt;翻译&gt;拥有丰富的领域模型来构建你的脚本。
 </code></pre>
-<h1 id="Android-Studio-介绍"><a href="#Android-Studio-介绍" class="headerlink" title="Android Studio 介绍"></a>Android Studio 介绍</h1><pre><code>完成安装和设置开发环境,然后你就可以开始学习android。
+<h1 id="Android-Studio-介绍"><a href="#Android-Studio-介绍" class="headerlink" title="Android Studio 介绍"></a>Android Studio 介绍</h1><pre><code class="hljs">完成安装和设置开发环境,然后你就可以开始学习android。
 首先,你将安装被称为Java开发工具包(JDK)的必要组件。
 然后你要下载和安装Android Studio以及Android软件开发工具包(SDK),这些都是开发Android应用程序所必需的工具。
 接着，我将向你展示如何使用新建项目向导来创建一个简单的项目HelloWorld。
 最后，我们将向你展示怎样连接Android虚拟设备（AVD）和Android物理设备。
 在结束的时候，你将在Android Studio中拥有开发Android应用程序的一切东西。
 </code></pre>
-<h1 id="Using-Code-Generation"><a href="#Using-Code-Generation" class="headerlink" title="Using Code Generation"></a>Using Code Generation</h1><pre><code>恰当的使用代码生成功能，这一特色将为你节约大量的时间，代码生成是生成各种方法的的强大功能，包括了构造，getters, setters, equals()，hashCode(), toString(),方法等等。
+<h1 id="Using-Code-Generation"><a href="#Using-Code-Generation" class="headerlink" title="Using Code Generation"></a>Using Code Generation</h1><pre><code class="hljs">恰当的使用代码生成功能，这一特色将为你节约大量的时间，代码生成是生成各种方法的的强大功能，包括了构造，getters, setters, equals()，hashCode(), toString(),方法等等。
 在你使用代码生成之前，确认Android Studio 是配置好了，可以忽略成员名称的前缀，如m和s，
 点击File ➤ Settings ➤ Code Style ➤ Java ➤ Code Generation将得到设置对话框，将会出现代码生成的标签页，如果域和静态域文本框不包含m和s，则键入他们并点击”应用“和”确定“
 
@@ -515,373 +436,363 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
 <h1 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h1><p>​	</p>
 <p>​	</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/Nroma/tags/java/" rel="tag"># java</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+                
+              </div>
             
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Nroma/2020/02/16/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="Android Shape And  Color Recognition(一)">
-                Android Shape And  Color Recognition(一) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
 
-      
-      
-    </footer>
-  </div>
+<span class="category-chains">
   
   
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
+    
+      <span class="category-chain">
         
-          
+  <a href="/Nroma/categories/android/" class="category-chain-item">android</a>
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  
+
+      </span>
+    
+  
+</span>
+
     </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/Nroma/tags/java/">#java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android嵌入式项目讲义</div>
+      <div>https://moonris.github.io/Nroma/2019/11/01/android1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>李龙飞</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年11月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
 
-      
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/Nroma/archives%7C%7Carchive">
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Nroma/2020/01/22/Nginx/" title="Nginx记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nginx记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
               
-                  <span class="site-state-item-count">43</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
+            </div>
 
             
-              
-              
-              <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
+          </article>
         </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-%E9%87%8D%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">android 目录结构(重要)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">Android 四大组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">UI概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#android-%E5%8E%9F%E6%9C%89%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E-or-%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.</span> <span class="nav-text">android 原有项目说明 or 通信协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity-%E5%92%8C-Fragment-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Activity 和 Fragment 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E6%97%B6%E5%9B%BE%E7%89%87"><span class="nav-number">4.2.</span> <span class="nav-text">android 项目运行时图片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#android-%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95%E4%BD%8D%E7%BD%AE%E8%AF%B4%E6%98%8E%E5%8F%8A%E6%80%9D%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">android 新增方法位置说明及思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Debug%EF%BC%88%E6%B5%8B%E8%AF%95%E9%87%8D%E7%82%B9%E4%B8%80%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">Debug（测试重点一）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Toast%EF%BC%88%E6%B5%8B%E8%AF%95%E9%87%8D%E7%82%B9%E4%BA%8C%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Toast（测试重点二）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log%EF%BC%88%E6%B5%8B%E8%AF%95%E9%87%8D%E7%82%B9%E4%B8%89%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">Log（测试重点三）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SDK"><span class="nav-number">9.</span> <span class="nav-text">SDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NDK"><span class="nav-number">10.</span> <span class="nav-text">NDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-%E9%A1%B9%E7%9B%AE%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E"><span class="nav-number">11.</span> <span class="nav-text">Android 项目权限说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradle-%E8%AF%B4%E6%98%8E"><span class="nav-number">12.</span> <span class="nav-text">Gradle 说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-Studio-%E4%BB%8B%E7%BB%8D"><span class="nav-number">13.</span> <span class="nav-text">Android Studio 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using-Code-Generation"><span class="nav-number">14.</span> <span class="nav-text">Using Code Generation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%E2%80%A6"><span class="nav-number">15.</span> <span class="nav-text">未完待续…</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+      </div>
     </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
   </aside>
 
 
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">李龙飞</span>
-
-  
+    </div>
+  </div>
 </div>
 
 
 
 
 
+  
 
 
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2019-2022 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/Nroma/js/events.js" ></script>
+<script  src="/Nroma/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/Nroma/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
 </script>
 
 
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/Nroma/js/local-search.js" ></script>
 
 
 
 
 
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/Nroma/js/boot.js" ></script>
 
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/Nroma/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/Nroma/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/Nroma/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/Nroma/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/Nroma/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/Nroma/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
