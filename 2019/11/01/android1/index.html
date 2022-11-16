@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/Nroma/img/fluid.png">
-  <link rel="icon" href="/Nroma/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="android 目录结构(重要)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android嵌入式项目讲义">
-<meta property="og:url" content="http://lilongfei.cn/Nroma/2019/11/01/android1/index.html">
+<meta property="og:url" content="http://lilongfei.cn/2019/11/01/android1/index.html">
 <meta property="og:site_name" content="不可思议">
 <meta property="og:description" content="android 目录结构(重要)">
 <meta property="og:locale" content="zh_CN">
@@ -58,12 +58,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/Nroma/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/Nroma/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/Nroma/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -72,15 +72,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"lilongfei.cn","root":"/Nroma/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Nroma/local-search.xml"};
+    var CONFIG = {"hostname":"lilongfei.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/Nroma/js/utils.js" ></script>
-  <script  src="/Nroma/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -97,7 +97,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/Nroma/">
+    <a class="navbar-brand" href="/">
       <strong>LongFei</strong>
     </a>
 
@@ -116,7 +116,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Nroma/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -128,7 +128,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Nroma/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -140,7 +140,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Nroma/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -152,7 +152,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Nroma/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -164,7 +164,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Nroma/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -193,7 +193,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/Nroma/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -316,7 +316,7 @@ Fragment有自己的生命周期，并能接收输入事件。
 右Fragment:数据的发送和接收，
 通信协议
 </code></pre>
-<h2 id="Activity-和-Fragment-生命周期"><a href="#Activity-和-Fragment-生命周期" class="headerlink" title="Activity 和 Fragment 生命周期"></a>Activity 和 Fragment 生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp" srcset="/Nroma/img/loading.gif" lazyload alt="avatar"></p>
+<h2 id="Activity-和-Fragment-生命周期"><a href="#Activity-和-Fragment-生命周期" class="headerlink" title="Activity 和 Fragment 生命周期"></a>Activity 和 Fragment 生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>onCreate():Activity第一次启动时调用。创建布局，组件。</p>
 <p>onStart():onCreate()被调用之后调用，或者是当执行完onRestart（）后Activity用户重新可见时调用。</p>
 <p>onResume():在onRestoreInstanceState(),onRestart(),或者onPause() 被调用后，该方法用来处理与用户的交互。也就是获得用户焦点。</p>
@@ -324,7 +324,7 @@ Fragment有自己的生命周期，并能接收输入事件。
 <p>onStop():</p>
 <p>onDestory():</p>
 <p>onRestart():</p>
-<h2 id="android-项目运行时图片"><a href="#android-项目运行时图片" class="headerlink" title="android 项目运行时图片"></a>android 项目运行时图片</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png" srcset="/Nroma/img/loading.gif" lazyload alt="avatar"></p>
+<h2 id="android-项目运行时图片"><a href="#android-项目运行时图片" class="headerlink" title="android 项目运行时图片"></a>android 项目运行时图片</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="android-新增方法位置说明及思路"><a href="#android-新增方法位置说明及思路" class="headerlink" title="android 新增方法位置说明及思路"></a>android 新增方法位置说明及思路</h1><pre><code class="hljs">车牌识别的思路
 交通灯思路
 图像识别思路
@@ -453,7 +453,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
     
       <span class="category-chain">
         
-  <a href="/Nroma/categories/android/" class="category-chain-item">android</a>
+  <a href="/categories/android/" class="category-chain-item">android</a>
   
   
 
@@ -468,7 +468,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/Nroma/tags/java/">#java</a>
+        <a href="/tags/java/">#java</a>
       
     </div>
   
@@ -481,7 +481,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
   <div class="license-box my-3">
     <div class="license-title">
       <div>Android嵌入式项目讲义</div>
-      <div>http://lilongfei.cn/Nroma/2019/11/01/android1/</div>
+      <div>http://lilongfei.cn/2019/11/01/android1/</div>
     </div>
     <div class="license-meta">
       
@@ -525,7 +525,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Nroma/2020/01/22/%E8%BF%91%E6%9C%9F%E7%9A%84%E6%80%9D%E8%80%83/" title="小小的思考">
+                      <a href="/2020/01/22/%E8%BF%91%E6%9C%9F%E7%9A%84%E6%80%9D%E8%80%83/" title="小小的思考">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">小小的思考</span>
                         <span class="visible-mobile">上一篇</span>
@@ -656,8 +656,8 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/Nroma/js/events.js" ></script>
-<script  src="/Nroma/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -679,7 +679,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
 
 
   
-    <script  src="/Nroma/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -778,7 +778,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/Nroma/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -786,7 +786,7 @@ Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/Nroma/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
