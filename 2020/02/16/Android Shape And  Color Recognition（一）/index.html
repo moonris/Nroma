@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="李龙飞">
+  <meta name="keywords" content="android">
+  
+    <meta name="description" content="代码记录 环境：Open CV 3.4.3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Shape And  Color Recognition(一)">
+<meta property="og:url" content="https://moonris.github.io/2020/02/16/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="不可思议">
+<meta property="og:description" content="代码记录 环境：Open CV 3.4.3">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-16T08:48:08.594Z">
+<meta property="article:author" content="李龙飞">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Android Shape And  Color Recognition(一) - 不可思议</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"moonris.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>LongFei</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android Shape And  Color Recognition(一)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-02-16 08:00" pubdate>
+          2020年2月16日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          126 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android Shape And  Color Recognition(一)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>代码记录</p>
+<p>环境：Open CV 3.4.3</p>
+<span id="more"></span>
+
+<h5 id="工具类"><a href="#工具类" class="headerlink" title="#工具类"></a>#工具类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">import</span> org.opencv.android.Utils;<br><span class="hljs-keyword">import</span> org.opencv.core.Core;<br><span class="hljs-keyword">import</span> org.opencv.core.CvType;<br><span class="hljs-keyword">import</span> org.opencv.core.Mat;<br><span class="hljs-keyword">import</span> org.opencv.core.MatOfPoint;<br><span class="hljs-keyword">import</span> org.opencv.core.Point;<br><span class="hljs-keyword">import</span> org.opencv.core.Scalar;<br><span class="hljs-keyword">import</span> org.opencv.core.Size;<br><span class="hljs-keyword">import</span> org.opencv.imgcodecs.Imgcodecs;<br><span class="hljs-keyword">import</span> org.opencv.imgproc.Imgproc;<br><br><span class="hljs-keyword">import</span> android.graphics.Bitmap;<br><span class="hljs-keyword">import</span> android.os.Environment;<br><span class="hljs-keyword">import</span> android.util.Log;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OpenCvUtils</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">tag</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;CVUT2&quot;</span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 得到图形中心点</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Point <span class="hljs-title function_">getCenterPoint</span><span class="hljs-params">(Point[] points)</span> &#123;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">centerX</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">centerY</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;<br>		<span class="hljs-keyword">for</span> (Point point : points) &#123;<br>			centerX += point.x;<br>			centerY += point.y;<br>		&#125;<br>		<span class="hljs-type">Point</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>();<br>		result.x = (<span class="hljs-type">int</span>) (centerX / points.length);<br>		result.y = (<span class="hljs-type">int</span>) (centerY / points.length);<br>		<span class="hljs-keyword">return</span> result;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 获得角点 传入单调且不能是二值化的图像</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Point[] findp(Mat mat) &#123;<br>		<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">maxCorners</span> <span class="hljs-operator">=</span> <span class="hljs-number">50</span>, blockSize = <span class="hljs-number">3</span>;<br>		<span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">qualityLevel</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.01</span>, minDistance = <span class="hljs-number">20.0</span>, k = <span class="hljs-number">0.04</span>;<br>		<span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">userHarrisDetector</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>		<span class="hljs-type">MatOfPoint</span> <span class="hljs-variable">corners</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MatOfPoint</span>();<span class="hljs-comment">// 省略了转化成灰度图像</span><br>		<span class="hljs-built_in">this</span>.toGrayMat(mat);<br>		<span class="hljs-comment">// 计算角点</span><br>		<span class="hljs-comment">// image：8位或32位浮点型输入图像，单通道</span><br>		<span class="hljs-comment">// corners：保存检测出的角点</span><br>		<span class="hljs-comment">// maxCorners：角点数目最大值，如果实际检测的角点超过此值，则只返回前maxCorners个强角点</span><br>		<span class="hljs-comment">// qualityLevel：角点的品质因子---------重要</span><br>		<span class="hljs-comment">// minDistance：对于初选出的角点而言，如果在其周围minDistance范围内存在其他更强角点，则将此角点删除</span><br>		<span class="hljs-comment">// mask：指定感兴趣区，如不需在整幅图上寻找角点，则用此参数指定ROI。也可以new Mat()来代替，这样就是没有mask.</span><br>		<span class="hljs-comment">// blockSize：计算协方差矩阵时的窗口大小</span><br>		<span class="hljs-comment">// useHarrisDetector：指示是否使用Harris角点检测，如不指定，则计算shi-tomasi角点</span><br>		<span class="hljs-comment">// harrisK：Harris角点检测需要的k值</span><br>		Imgproc.goodFeaturesToTrack(mat, corners, maxCorners, qualityLevel,<br>				minDistance, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mat</span>(), blockSize, userHarrisDetector, k);<br>		Point[] pCorners = corners.toArray();<br>		<span class="hljs-keyword">return</span> pCorners;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 画个圈圈祝福你</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">drawCircleByPoint</span><span class="hljs-params">(Mat mat, Point point)</span> &#123;<br>		Imgproc.circle(mat, point, <span class="hljs-number">2</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scalar</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>), <span class="hljs-number">1</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 横向填充杂色</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">coverBackGroundToBlack</span><span class="hljs-params">(Mat mat)</span> &#123;<br>		<span class="hljs-keyword">final</span> <span class="hljs-type">double</span> blackPixle[] = &#123; <span class="hljs-number">0.0</span> &#125;;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; y &lt; mat.height(); y++) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; x &lt; mat.width(); x++) &#123;<br>				<span class="hljs-type">double</span> pixle[] = mat.get(y, x);<br>				<span class="hljs-keyword">if</span> (pixle[<span class="hljs-number">0</span>] == <span class="hljs-number">255.0</span>) &#123;<span class="hljs-comment">// 如果是白色</span><br>					mat.put(y, x, blackPixle);<br>				&#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">// 遇到黑色</span><br>					<span class="hljs-keyword">break</span>;<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> mat.width() - <span class="hljs-number">1</span>; x &gt; <span class="hljs-number">0</span>; x--) &#123;<br>				<span class="hljs-type">double</span> pixle[] = mat.get(y, x);<br>				<span class="hljs-keyword">if</span> (pixle[<span class="hljs-number">0</span>] == <span class="hljs-number">255.0</span>) &#123;<span class="hljs-comment">// 如果是白色</span><br>					mat.put(y, x, blackPixle);<br>				&#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">// 遇到黑色</span><br>					<span class="hljs-keyword">break</span>;<br>				&#125;<br>			&#125;<br>		&#125;<br>		Log.d(tag, <span class="hljs-string">&quot;背景涂黑完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 从Bitmap得到Mat</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Mat <span class="hljs-title function_">bitmapToMat</span><span class="hljs-params">(Bitmap bitmap)</span> &#123;<br>		<span class="hljs-type">Bitmap</span> <span class="hljs-variable">bit</span> <span class="hljs-operator">=</span> bitmap.copy(Bitmap.Config.ARGB_8888, <span class="hljs-literal">false</span>);<br>		<span class="hljs-type">Mat</span> <span class="hljs-variable">src</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mat</span>(bit.getHeight(), bit.getWidth(), CvType.CV_8UC(<span class="hljs-number">3</span>));<br>		Utils.bitmapToMat(bit, src);<br>		Log.d(tag, <span class="hljs-string">&quot;Bitmap转换Mat完成&quot;</span>);<br>		<span class="hljs-keyword">return</span> src;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 膨胀处理 参数 3,3,1</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toDilate</span><span class="hljs-params">(Mat mat, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, <span class="hljs-type">int</span> iterations)</span> &#123;<br>		Imgproc.dilate(mat, mat, Imgproc.getStructuringElement(<br>				Imgproc.MORPH_RECT, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Size</span>(i, j)), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>),<br>				iterations);<br>		Log.d(tag, <span class="hljs-string">&quot;膨胀完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 腐蚀处理 参数3,3,1</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toErode</span><span class="hljs-params">(Mat mat, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, <span class="hljs-type">int</span> iterations)</span> &#123;<br>		Imgproc.erode(mat, mat, Imgproc.getStructuringElement(<br>				Imgproc.MORPH_RECT, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Size</span>(i, j)), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>),<br>				iterations);<br>		Log.d(tag, <span class="hljs-string">&quot;腐蚀完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 复制Mat对象</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Mat <span class="hljs-title function_">cloneMat</span><span class="hljs-params">(Mat mat)</span> &#123;<br>		<span class="hljs-keyword">return</span> mat.clone();<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 生成纯色Mat对象</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Mat <span class="hljs-title function_">makeBGRMat</span><span class="hljs-params">(<span class="hljs-type">int</span> b, <span class="hljs-type">int</span> g, <span class="hljs-type">int</span> r)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mat</span>(<span class="hljs-number">360</span>, <span class="hljs-number">640</span>, CvType.CV_8UC3, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scalar</span>(b, g, r));<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 查找轮廓并返回轮廓数组 最好传入阈值图</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> List&lt;MatOfPoint&gt; <span class="hljs-title function_">findContoursList</span><span class="hljs-params">(Mat mat)</span> &#123;<br>		List&lt;MatOfPoint&gt; contours = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;MatOfPoint&gt;();<br>		<span class="hljs-type">Mat</span> <span class="hljs-variable">hierarchy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mat</span>();<br>		Imgproc.findContours(mat, contours, hierarchy, Imgproc.RETR_LIST,<br>				Imgproc.CHAIN_APPROX_SIMPLE);<br>		Log.d(tag, <span class="hljs-string">&quot;找到轮廓&quot;</span> + contours.size() + <span class="hljs-string">&quot;个&quot;</span>);<br>		<span class="hljs-keyword">return</span> contours;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 画出轮廓 根据轮廓数组在一张图上画 需指定数组下标</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">drawContoursToMat</span><span class="hljs-params">(Mat mat, List&lt;MatOfPoint&gt; contours,</span><br><span class="hljs-params">			<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> g, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> size)</span> &#123;<br>		Imgproc.drawContours(mat, contours, index, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scalar</span>(b, g, r, <span class="hljs-number">0</span>), size);<br>		Log.v(tag, <span class="hljs-string">&quot;绘制第&quot;</span> + index + <span class="hljs-string">&quot;个轮廓&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 二值化图片 参数i,j参考150,255</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toBinaryMat</span><span class="hljs-params">(Mat from, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>		Imgproc.threshold(from, from, i, j, Imgproc.THRESH_BINARY);<br>		Log.d(tag, <span class="hljs-string">&quot;二值化完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 灰度化图像</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toGrayMat</span><span class="hljs-params">(Mat from)</span> &#123;<br>		Imgproc.cvtColor(from, from, Imgproc.COLOR_BGR2GRAY);<br>		Log.d(tag, <span class="hljs-string">&quot;灰度化完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 图像颜色反转</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toReverseColorMat</span><span class="hljs-params">(Mat from)</span> &#123;<br>		Core.bitwise_not(from, from);<br>		Log.d(tag, <span class="hljs-string">&quot;颜色反转完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 模糊图像，参数i,j,k参考5,5,0</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toGaussUnClearMat</span><span class="hljs-params">(Mat from, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, <span class="hljs-type">int</span> k)</span> &#123;<br>		Imgproc.GaussianBlur(from, from, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Size</span>(i, j), k);<br>		Log.d(tag, <span class="hljs-string">&quot;高斯模糊完成&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 在图上写字</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printWordsOnMat</span><span class="hljs-params">(Mat mat, Point p, String text)</span> &#123;<br>		p.x = p.x - <span class="hljs-number">100</span>;<br>		Imgproc.putText(mat, text, p, <span class="hljs-number">18</span>, <span class="hljs-number">0.5</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scalar</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), <span class="hljs-number">1</span>);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 合并直线上的点[汇总]</span><br><span class="hljs-comment">	 *</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@param</span> points</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Point[] checkPoint(Point[] points) &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">lastLength</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">thisLength</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		Point[] lp = points;<br>		Point[] np;<br>		<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>			np = checkPointOnce(lp);<br>			thisLength = np.length;<br>			<span class="hljs-keyword">if</span> (thisLength == lastLength) &#123;<br>				<span class="hljs-keyword">break</span>;<br>			&#125;<br>			lastLength = thisLength;<br>			lp = np;<br>		&#125;<br>		Log.d(tag, <span class="hljs-string">&quot;数组变化:&quot;</span> + points.length + <span class="hljs-string">&quot; -&gt; &quot;</span> + np.length);<br>		<span class="hljs-keyword">return</span> np;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 合并直线上的点[分步]</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> Point[] checkPointOnce(Point[] points) &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> points.length;<br>		<span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">// 是否找到可删除点</span><br>		<span class="hljs-keyword">if</span> (length &lt; <span class="hljs-number">4</span>) &#123;<br>			<span class="hljs-keyword">return</span> points;<span class="hljs-comment">// 如果小于四个点 免了判断</span><br>		&#125;<br>		label: <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<span class="hljs-comment">// 得到点1</span><br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; length; j++) &#123;<span class="hljs-comment">// 得到点2</span><br>				<span class="hljs-keyword">if</span> (j == i) &#123;<br>					<span class="hljs-keyword">continue</span>;<br>				&#125;<br>				<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; length; k++) &#123;<span class="hljs-comment">// 得到点3</span><br>					<span class="hljs-keyword">if</span> (k == j || k == i) &#123;<br>						<span class="hljs-keyword">continue</span>;<br>					&#125;<br>					<span class="hljs-comment">// int slope = 0;//斜率</span><br>					<span class="hljs-type">double</span> <span class="hljs-variable">d1</span> <span class="hljs-operator">=</span> twoPointsAngel(points[i], points[j]);<span class="hljs-comment">// i,j直线角度</span><br>					<span class="hljs-type">double</span> <span class="hljs-variable">d2</span> <span class="hljs-operator">=</span> twoPointsAngel(points[i], points[k]);<span class="hljs-comment">// i,k直线角度</span><br>					<span class="hljs-type">double</span> <span class="hljs-variable">angelMin</span> <span class="hljs-operator">=</span> d1 - d2;<br>					<span class="hljs-keyword">if</span> (Math.abs(angelMin) &lt; <span class="hljs-number">10</span>) &#123;<span class="hljs-comment">// 如果倾角非常接近，删除中间的点</span><br>						<span class="hljs-type">int</span> <span class="hljs-variable">needDelete</span> <span class="hljs-operator">=</span> deleteMiddlePointToNull(points[i],<br>								points[j], points[k]);<br>						<span class="hljs-keyword">if</span> (needDelete == <span class="hljs-number">1</span>) &#123;<br>							points[i] = <span class="hljs-literal">null</span>;<br>						&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (needDelete == <span class="hljs-number">2</span>) &#123;<br>							points[j] = <span class="hljs-literal">null</span>;<br>						&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (needDelete == <span class="hljs-number">3</span>) &#123;<br>							points[k] = <span class="hljs-literal">null</span>;<br>						&#125;<br>						flag = <span class="hljs-literal">true</span>;<br>						<span class="hljs-keyword">break</span> label;<br>					&#125;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (flag) &#123;<br>			Point[] newPoints = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>[length - <span class="hljs-number">1</span>];<br>			<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">for</span> (Point p : points) &#123;<span class="hljs-comment">// 准备一个没有空值的新数组</span><br>				<span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != p) &#123;<br>					newPoints[index] = p;<br>					index++;<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">return</span> newPoints;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			<span class="hljs-keyword">return</span> points;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 删除三点中处于中间的点</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">deleteMiddlePointToNull</span><span class="hljs-params">(Point p1, Point p2, Point p3)</span> &#123;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> p1.x + p1.y;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> p2.x + p2.y;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> p3.x + p3.y;<br>		<span class="hljs-keyword">if</span> ((a &gt; b &amp;&amp; b &gt; c) || (a &lt; b &amp;&amp; b &lt; c)) &#123;<span class="hljs-comment">// b在中间</span><br>			<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((c &gt; a &amp;&amp; a &gt; b) || (c &lt; a &amp;&amp; a &lt; b)) &#123;<span class="hljs-comment">// a在中间</span><br>			<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 通过描边点得出形状</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">findShape</span><span class="hljs-params">(Point[] checkedPoints)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> checkedPoints.length;<br>		<span class="hljs-keyword">if</span> (length &lt; <span class="hljs-number">3</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ShapeError&quot;</span>;<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (length == <span class="hljs-number">3</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;SanJiao&quot;</span>;<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (length == <span class="hljs-number">5</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;WuJiao&quot;</span>;<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">5</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;YuanXing&quot;</span>;<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (length == <span class="hljs-number">4</span>) &#123;<span class="hljs-comment">// 四边形</span><br>			<span class="hljs-type">double</span> <span class="hljs-variable">d1</span> <span class="hljs-operator">=</span> twoPointsDistance(checkedPoints[<span class="hljs-number">0</span>], checkedPoints[<span class="hljs-number">1</span>]);<br>			<span class="hljs-type">double</span> <span class="hljs-variable">d2</span> <span class="hljs-operator">=</span> twoPointsDistance(checkedPoints[<span class="hljs-number">0</span>], checkedPoints[<span class="hljs-number">2</span>]);<br>			<span class="hljs-type">double</span> <span class="hljs-variable">d3</span> <span class="hljs-operator">=</span> twoPointsDistance(checkedPoints[<span class="hljs-number">0</span>], checkedPoints[<span class="hljs-number">3</span>]);<br>			Point[] p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>[<span class="hljs-number">2</span>];<br>			<span class="hljs-comment">// 找与第一个点相邻的两个点(舍弃最远的那个点)</span><br>			<span class="hljs-keyword">if</span> (d1 &gt; d2 &amp;&amp; d1 &gt; d3) &#123;<span class="hljs-comment">// d1最大，舍弃下标1</span><br>				p[<span class="hljs-number">0</span>] = checkedPoints[<span class="hljs-number">2</span>];<br>				p[<span class="hljs-number">1</span>] = checkedPoints[<span class="hljs-number">3</span>];<br>			&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d2 &gt; d1 &amp;&amp; d2 &gt; d3) &#123;<span class="hljs-comment">// d2最大，舍弃下标2</span><br>				p[<span class="hljs-number">0</span>] = checkedPoints[<span class="hljs-number">1</span>];<br>				p[<span class="hljs-number">1</span>] = checkedPoints[<span class="hljs-number">3</span>];<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				p[<span class="hljs-number">0</span>] = checkedPoints[<span class="hljs-number">1</span>];<br>				p[<span class="hljs-number">1</span>] = checkedPoints[<span class="hljs-number">2</span>];<br>			&#125;<span class="hljs-comment">// 现在数组p中是两个最近的点</span><br>			<span class="hljs-type">double</span> <span class="hljs-variable">angelL1</span> <span class="hljs-operator">=</span> twoPointsAngel(checkedPoints[<span class="hljs-number">0</span>], p[<span class="hljs-number">0</span>]);<br>			<span class="hljs-type">double</span> <span class="hljs-variable">angelL2</span> <span class="hljs-operator">=</span> twoPointsAngel(checkedPoints[<span class="hljs-number">0</span>], p[<span class="hljs-number">1</span>]);<br>			<span class="hljs-type">double</span> <span class="hljs-variable">angelP</span> <span class="hljs-operator">=</span> Math.abs(angelL1 - angelL2);<br>			Log.d(tag, String.format(<span class="hljs-string">&quot;四边形某顶点角度为%.2f&quot;</span>, angelP));<br>			<span class="hljs-keyword">if</span> (angelP &gt; <span class="hljs-number">80</span> &amp;&amp; angelP &lt; <span class="hljs-number">100</span>) &#123;<span class="hljs-comment">// 直角</span><br>				<span class="hljs-type">double</span> <span class="hljs-variable">dis1</span> <span class="hljs-operator">=</span> twoPointsDistance(checkedPoints[<span class="hljs-number">0</span>], p[<span class="hljs-number">0</span>]);<br>				<span class="hljs-type">double</span> <span class="hljs-variable">dis2</span> <span class="hljs-operator">=</span> twoPointsDistance(checkedPoints[<span class="hljs-number">0</span>], p[<span class="hljs-number">1</span>]);<br>				<span class="hljs-type">double</span> <span class="hljs-variable">distanceRatio</span> <span class="hljs-operator">=</span> dis1 / dis2;<br>				Log.d(tag, String.format(<span class="hljs-string">&quot;四边形临边长度差距比为%.2f&quot;</span>, distanceRatio));<br>				<span class="hljs-keyword">if</span> (distanceRatio &gt; <span class="hljs-number">0.80</span> &amp;&amp; distanceRatio &lt; <span class="hljs-number">1.20</span>) &#123;<br>					<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ZhengFang&quot;</span>;<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ChangFang&quot;</span>;<br>				&#125;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;LingXing&quot;</span>;<br>			&#125;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ShapeError&quot;</span>;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 求两点之间距离</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">double</span> <span class="hljs-title function_">twoPointsDistance</span><span class="hljs-params">(Point p1, Point p2)</span> &#123;<br>		<span class="hljs-keyword">return</span> Math.sqrt(Math.pow(p1.x - p2.x, <span class="hljs-number">2</span>) + Math.pow(p1.y - p2.y, <span class="hljs-number">2</span>));<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 求两点所在直线水平夹角</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">double</span> <span class="hljs-title function_">twoPointsAngel</span><span class="hljs-params">(Point p1, Point p2)</span> &#123;<br>		<span class="hljs-keyword">if</span> (p1.y == p2.y) &#123;<br>			p1.y += <span class="hljs-number">0.01</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> Math.toDegrees(Math.atan((p1.x - p2.x) / (p1.y - p2.y)));<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 将Mat对象保存到文件系统</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">saveMatAsPngFile</span><span class="hljs-params">(Mat mat, String filename)</span> &#123;<br>		Log.d(tag, <span class="hljs-string">&quot;储存Mat&quot;</span>);<br>		<span class="hljs-keyword">try</span> &#123;<br>			Imgcodecs.imwrite(Environment.getExternalStorageDirectory()<br>					+ <span class="hljs-string">&quot;/CV/&quot;</span> + filename + <span class="hljs-string">&quot;.png&quot;</span>, mat);<br>			Log.i(tag, <span class="hljs-string">&quot;Mat存储完成&quot;</span>);<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			Log.e(tag, <span class="hljs-string">&quot;Mat存储出错&quot;</span>);<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 将Mat对象保存到文件系统</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">saveMatAsPngFileAndTimestamp</span><span class="hljs-params">(Mat mat, String filename)</span> &#123;<br>		Log.d(tag, <span class="hljs-string">&quot;储存Mat&quot;</span>);<br>		<span class="hljs-keyword">try</span> &#123;<br>			Imgcodecs.imwrite(Environment.getExternalStorageDirectory()<br>					+ <span class="hljs-string">&quot;/CV/&quot;</span> + filename + System.currentTimeMillis() + <span class="hljs-string">&quot;.jpg&quot;</span>,<br>					mat);<br>			Log.i(tag, <span class="hljs-string">&quot;Mat存储完成&quot;</span>);<br>		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			Log.e(tag, <span class="hljs-string">&quot;Mat存储出错&quot;</span>);<br>		&#125;<br>	&#125;<br><br><span class="hljs-comment">//	private static final int[] RED = &#123; 255, 0, 0 &#125;;</span><br><span class="hljs-comment">//	private static final int[] GREEN = &#123; 0, 255, 0 &#125;;</span><br><span class="hljs-comment">//	private static final int[] BLUE = &#123; 0, 0, 255 &#125;;</span><br><span class="hljs-comment">//	private static final int[] YELLOW = &#123; 255, 255, 0 &#125;;</span><br><span class="hljs-comment">//	private static final int[] PIN = &#123; 255, 0, 255 &#125;;</span><br><span class="hljs-comment">//	private static final int[] QING = &#123; 0, 255, 255 &#125;;</span><br><span class="hljs-comment">//	private static final int[] BLACK = &#123; 0, 0, 0 &#125;;</span><br><span class="hljs-comment">//	private static final int[] WHITE = &#123; 255, 255, 255 &#125;;</span><br><span class="hljs-comment">//	</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] RED = &#123; <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] GREEN = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] BLUE = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] YELLOW = &#123; <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] PIN = &#123; <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] QING = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] BLACK = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span>[] WHITE = &#123; <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span> &#125;;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ArrayList&lt;<span class="hljs-type">int</span>[]&gt; COLORS = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>	<span class="hljs-keyword">static</span> &#123;<br>		COLORS.add(RED);<br>		COLORS.add(GREEN);<br>		COLORS.add(BLUE);<br>		COLORS.add(YELLOW);<br>		COLORS.add(PIN);<br>		COLORS.add(QING);<br>		COLORS.add(BLACK);<br>		COLORS.add(WHITE);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 确定形状的颜色</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">findColor</span><span class="hljs-params">(Mat colorfulMat, Point[] checkedPoints)</span> &#123;<br>		<span class="hljs-type">Point</span> <span class="hljs-variable">centerPoint</span> <span class="hljs-operator">=</span> getCenterPoint(checkedPoints);<br>		<span class="hljs-type">double</span>[] colorBGR = colorfulMat.get((<span class="hljs-type">int</span>) centerPoint.y,<br>				(<span class="hljs-type">int</span>) centerPoint.x);<br>		<span class="hljs-type">double</span> <span class="hljs-variable">maxlightR</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<span class="hljs-comment">// 确定亮度增大系数</span><br>		<span class="hljs-type">double</span> <span class="hljs-variable">maxlightG</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">double</span> <span class="hljs-variable">maxlightB</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; y &lt; colorfulMat.height(); y++) &#123;<span class="hljs-comment">// 遍历图片 找到最亮的点做参考</span><br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; x &lt; colorfulMat.width(); x++) &#123;<br>				<span class="hljs-type">double</span> pixle[] = colorfulMat.get(y, x);<br>				<span class="hljs-keyword">if</span> (pixle[<span class="hljs-number">0</span>] &gt; maxlightB)<br>					maxlightB = pixle[<span class="hljs-number">0</span>];<br>				<span class="hljs-keyword">if</span> (pixle[<span class="hljs-number">1</span>] &gt; maxlightG)<br>					maxlightG = pixle[<span class="hljs-number">1</span>];<br>				<span class="hljs-keyword">if</span> (pixle[<span class="hljs-number">2</span>] &gt; maxlightR)<br>					maxlightR = pixle[<span class="hljs-number">2</span>];<br>			&#125;<br>		&#125;<span class="hljs-comment">// 用于去除亮度和色调影响</span><br>		maxlightR = <span class="hljs-number">255</span> / maxlightR;<br>		maxlightG = <span class="hljs-number">255</span> / maxlightG;<br>		maxlightB = <span class="hljs-number">255</span> / maxlightB;<br>		<span class="hljs-type">int</span>[] colorRGB = &#123; (<span class="hljs-type">int</span>) (colorBGR[<span class="hljs-number">2</span>] * maxlightR),<br>				(<span class="hljs-type">int</span>) (colorBGR[<span class="hljs-number">1</span>] * maxlightG),<br>				(<span class="hljs-type">int</span>) (colorBGR[<span class="hljs-number">0</span>] * maxlightB) &#125;;<br>		<span class="hljs-type">int</span>[] missNmuber = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">8</span>];<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) &#123;<br>			missNmuber[i] = colorMiss(colorRGB, COLORS.get(i));<br>		&#125;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">minIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">minNumb</span> <span class="hljs-operator">=</span> <span class="hljs-number">999</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; missNmuber.length; i++) &#123;<br>			<span class="hljs-keyword">if</span> (missNmuber[i] &lt; minNumb) &#123;<br>				minNumb = missNmuber[i];<br>				minIndex = i;<br>			&#125;<br>		&#125;<br>		Log.d(tag, String.format(<br>				<span class="hljs-string">&quot;R:%d, G:%d, B:%d, light:[%.2f * %.2f * %.2f]  =&gt;  &quot;</span>,<br>				colorRGB[<span class="hljs-number">0</span>], colorRGB[<span class="hljs-number">1</span>], colorRGB[<span class="hljs-number">2</span>], maxlightR, maxlightG,<br>				maxlightB));<br>		<span class="hljs-keyword">switch</span> (minIndex) &#123;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hong&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Lv&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Lan&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Huang&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Pin&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Qing&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hei&quot;</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">7</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Bai&quot;</span>;<br>		<span class="hljs-keyword">default</span>:<br>			<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ColorError&quot;</span>;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 计算颜色差距</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">colorMiss</span><span class="hljs-params">(<span class="hljs-type">int</span>[] c1, <span class="hljs-type">int</span>[] c2)</span> &#123;<br>		<span class="hljs-keyword">return</span> Math.abs(c1[<span class="hljs-number">0</span>] - c2[<span class="hljs-number">2</span>]) + Math.abs(c1[<span class="hljs-number">1</span>] - c2[<span class="hljs-number">1</span>])<br>				+ Math.abs(c1[<span class="hljs-number">2</span>] - c2[<span class="hljs-number">0</span>]);<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 从文件系统图片读取Mat对象</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> Mat <span class="hljs-title function_">getImageAsFile</span><span class="hljs-params">(String filename)</span> &#123;<span class="hljs-comment">// FIXME</span><br>		Log.d(tag, <span class="hljs-string">&quot;读取Mat&quot;</span>);<br>		<span class="hljs-type">Mat</span> <span class="hljs-variable">image</span> <span class="hljs-operator">=</span> Imgcodecs.imread(Environment.getExternalStorageDirectory()<br>				+ <span class="hljs-string">&quot;/CV/&quot;</span> + filename);<br>		Log.i(tag, <span class="hljs-string">&quot;Mat读取完成&quot;</span>);<br>		<span class="hljs-keyword">return</span> image;<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="调用方法"><a href="#调用方法" class="headerlink" title="#调用方法"></a>#调用方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">colorAndShape</span><span class="hljs-params">()</span> &#123;<br>		timer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Timer</span>();<br>		timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TimerTask</span>() &#123;<br>			<span class="hljs-type">OpenCvUtils</span> <span class="hljs-variable">cvut</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OpenCvUtils</span>();<br>			ArrayList&lt;ColorShapeInfo&gt; resultList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>			<span class="hljs-type">int</span> <span class="hljs-variable">erzhi</span> <span class="hljs-operator">=</span> <span class="hljs-number">130</span>;<br><br>			<span class="hljs-meta">@Override</span><br>			<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// timer线程</span><br>				Log.d(<span class="hljs-string">&quot;pzj&quot;</span>, <span class="hljs-string">&quot;in to cv !!&quot;</span>);<br>				<span class="hljs-comment">// new FileService().savePhoto(bitmap, &quot;CV/doit.png&quot;);</span><br>				<span class="hljs-comment">// Mat image = cvut.getImageAsFile(&quot;CV/doit.png&quot;);</span><br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">image</span> <span class="hljs-operator">=</span> cvut.bitmapToMat(bitmap);<br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">m1</span> <span class="hljs-operator">=</span> cvut.cloneMat(image);<br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">declarMat</span> <span class="hljs-operator">=</span> cvut.cloneMat(image);<br>				cvut.toReverseColorMat(image);<span class="hljs-comment">// 反色</span><br>				cvut.toGaussUnClearMat(declarMat, <span class="hljs-number">9</span>, <span class="hljs-number">9</span>, <span class="hljs-number">9</span>);<span class="hljs-comment">// 模糊图像，用于推测颜色</span><br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">m2</span> <span class="hljs-operator">=</span> cvut.cloneMat(declarMat);<br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">srcWrite</span> <span class="hljs-operator">=</span> cvut.cloneMat(declarMat);<br>				cvut.toDilate(image, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<span class="hljs-comment">// 膨胀</span><br>				cvut.toGrayMat(image);<span class="hljs-comment">// 灰度化</span><br>				<span class="hljs-type">Mat</span> <span class="hljs-variable">binary</span> <span class="hljs-operator">=</span> cvut.cloneMat(image);<br>				cvut.toBinaryMat(binary, erzhi, <span class="hljs-number">255</span>);<span class="hljs-comment">// 二值化</span><br>				cvut.coverBackGroundToBlack(binary);<span class="hljs-comment">// 背景变黑</span><br>				cvut.saveMatAsPngFileAndTimestamp(binary, <span class="hljs-string">&quot;binary&quot;</span>);<span class="hljs-comment">// SAVE</span><br>				List&lt;MatOfPoint&gt; contoursList = cvut.findContoursList(binary);<span class="hljs-comment">// 找到轮廓</span><br>				<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; contoursList.size()<br>						&amp;&amp; contoursList.size() &lt;= <span class="hljs-number">9</span>; i++) &#123;<span class="hljs-comment">// 处理单个轮廓</span><br>					<span class="hljs-type">Mat</span> <span class="hljs-variable">mat</span> <span class="hljs-operator">=</span> cvut.makeBGRMat(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<span class="hljs-comment">// 黑色背景</span><br>					cvut.drawContoursToMat(mat, contoursList, i, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<span class="hljs-comment">// 白色描边</span><br>					Point[] points = cvut.findp(mat);<span class="hljs-comment">// 找到描边点</span><br>					Point[] checkedPoints = cvut.checkPoint(points);<span class="hljs-comment">// 清除同一条直线上的点</span><br>					<span class="hljs-comment">//ColorShapeInfo csi = ;</span><br>					<span class="hljs-comment">//String shape = cvut.findShape(checkedPoints);// 确定形状</span><br>					<span class="hljs-comment">//String color = cvut.findColor(declarMat, checkedPoints);// 确定颜色</span><br>					resultList.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ColorShapeInfo</span>(cvut.findColor(declarMat, checkedPoints), cvut.findShape(checkedPoints)));<br>					<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; checkedPoints.length; j++) &#123;<br>						cvut.drawCircleByPoint(mat, checkedPoints[j]);<br>					&#125;<br>					cvut.saveMatAsPngFile(mat, <span class="hljs-string">&quot;Shape&quot;</span> + i);<br>				&#125;<br>				<span class="hljs-keyword">if</span> (resultList.size() != <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-comment">//结果resultList通过Log打印出来了</span><br>					Log.d(<span class="hljs-string">&quot;CvResoult&quot;</span>, Arrays.toString(resultList.toArray()));<br>					cvut.saveMatAsPngFileAndTimestamp(m2, <span class="hljs-string">&quot;declar&quot;</span>);<span class="hljs-comment">// SAVE</span><br>					cvut.saveMatAsPngFileAndTimestamp(m1, <span class="hljs-string">&quot;image&quot;</span>);<span class="hljs-comment">// SAVE</span><br>					timer.cancel();<br>					<span class="hljs-built_in">this</span>.cancel();<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					resultList.clear();<br>					<span class="hljs-keyword">if</span> (erzhi &lt;= <span class="hljs-number">180</span>) &#123;<br>						erzhi += <span class="hljs-number">5</span>;<br>					&#125; <span class="hljs-keyword">else</span> &#123;<br>						erzhi = <span class="hljs-number">150</span>;<br>					&#125;<br>				&#125;<br>			&#125;<br>		&#125;, <span class="hljs-number">0</span>, <span class="hljs-number">200</span>);<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/android/" class="category-chain-item">android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java/">#java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android Shape And  Color Recognition(一)</div>
+      <div>https://moonris.github.io/2020/02/16/Android Shape And  Color Recognition（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>李龙飞</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年2月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/11/Android%20Shape%20And%20%20Color%20Recognition%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Android Shape And  Color Recognition(二)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android Shape And  Color Recognition(二)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/01/Security/" title="Security基础">
+                        <span class="hidden-mobile">Security基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2019-2022 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="李龙飞">
+  <meta name="keywords" content="android">
+  
+    <meta name="description" content="android 目录结构(重要)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android嵌入式项目讲义">
+<meta property="og:url" content="https://moonris.github.io/2019/11/01/android1/index.html">
+<meta property="og:site_name" content="不可思议">
+<meta property="og:description" content="android 目录结构(重要)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png">
+<meta property="article:published_time" content="2019-11-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-16T08:48:39.714Z">
+<meta property="article:author" content="李龙飞">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp">
+  
+  
+  
+  <title>Android嵌入式项目讲义 - 不可思议</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"moonris.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>LongFei</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android嵌入式项目讲义"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-11-01 08:00" pubdate>
+          2019年11月1日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android嵌入式项目讲义</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="android-目录结构-重要"><a href="#android-目录结构-重要" class="headerlink" title="android 目录结构(重要)"></a>android 目录结构(重要)</h1><span id="more"></span>
+
+<p>rsc：java源码存放位置</p>
+<p>assets：可以存放资源，但不会生成资源ID，通过AssetManager以二进制流的形式访问。</p>
+<p>res：存放应用到的所有资源，如界面布局，主题样式，字符串，图片，多媒体资源。</p>
+<p>res&#x2F;layout&#x2F;：界面布局文件</p>
+<p>res&#x2F;menu&#x2F;：选项菜单文件</p>
+<p>res&#x2F;values&#x2F;：存放字符串，主题样式资源。</p>
+<p>AndroidManifest.xml：配置清单，配置与应用相关的重要信息，包括权限，程序组件等。</p>
+<h1 id="Android-四大组件"><a href="#Android-四大组件" class="headerlink" title="Android 四大组件"></a>Android 四大组件</h1><p>1.Activity(活动)：</p>
+<p>​	显示android程序界面，一个应用可以有多个界面。</p>
+<p>2.Service(服务):</p>
+<p>​	没有界面的后台服务。</p>
+<p>3.BroadCastReceiver(广播接收器):</p>
+<p>4.ContentProvider(内容提供者)：</p>
+<h1 id="UI概念"><a href="#UI概念" class="headerlink" title="UI概念"></a>UI概念</h1><p>ViewGroup  和 View</p>
+<h1 id="android-原有项目说明-or-通信协议"><a href="#android-原有项目说明-or-通信协议" class="headerlink" title="android 原有项目说明 or 通信协议"></a>android 原有项目说明 or 通信协议</h1><pre><code class="hljs">Fragment:
+简称碎片，是Android 3.0（API 11）提出的。它
+过去support-v4库是一个jar包，24.2.0版本开始，将support-v4库模块化为多个jar包，
+包含：support-fragment, support-ui, support-media-compat等，
+这么做是为了减少APK包大小，你需要用哪个模块就引入哪个模块。
+
+如果想引入整个support-v4库，
+则compile &#39;com.android.support:support-v4:24.2.1&#39;，
+如果只想引入support-fragment库，
+则com.android.support:support-fragment:24.2.1。
+
+Fragment是依赖于Activity的，不能独立存在的。
+一个Activity里可以有多个Fragment。
+一个Fragment可以被多个Activity重用。
+Fragment有自己的生命周期，并能接收输入事件。
+我们能在Activity运行时动态地添加或删除Fragment。
+</code></pre>
+<p>​	<br>​	Activity:<br>​	Activity是什么?<br>​	Activity是一个Android应用程序组件(也称为Android四大组件之一)，<br>​	它提供了一个屏幕，用户可以通过该屏幕进行交互以执行某些操作，<br>​	<br>​	Android应用程序通常由多个彼此松散绑定的Activity组成。<br>​	通常，应用程序中的一个Activity被指定为“主要”Activity，<br>​	该Activity在首次启动应用程序时呈现给用户。<br>​	然后，每个Activity可以启动另一个Activity以执行不同的操作。<br>​	每次新Activity开始时，前一个Activity都会停止，<br>​	但系统会将Activity保留在后台堆栈中（“后堆栈”）。<br>​	当一个新的Activity开始时，它会被推到后面的堆栈上，<br>​	并引起用户的注意。后栈遵循基本的“ 后进先出”堆栈机制，<br>​	因此，当用户完成当前活动并按下”后退按钮”时，<br>​	它从堆栈弹出（并销毁），之前的活动恢复。</p>
+<p>​	<br>​	<br>​	</p>
+<pre><code class="hljs">登录
+左Fragment:图片的读取，
+右Fragment:数据的发送和接收，
+通信协议
+</code></pre>
+<h2 id="Activity-和-Fragment-生命周期"><a href="#Activity-和-Fragment-生命周期" class="headerlink" title="Activity 和 Fragment 生命周期"></a>Activity 和 Fragment 生命周期</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/Acivity.webp" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<p>onCreate():Activity第一次启动时调用。创建布局，组件。</p>
+<p>onStart():onCreate()被调用之后调用，或者是当执行完onRestart（）后Activity用户重新可见时调用。</p>
+<p>onResume():在onRestoreInstanceState(),onRestart(),或者onPause() 被调用后，该方法用来处理与用户的交互。也就是获得用户焦点。</p>
+<p>onPause():</p>
+<p>onStop():</p>
+<p>onDestory():</p>
+<p>onRestart():</p>
+<h2 id="android-项目运行时图片"><a href="#android-项目运行时图片" class="headerlink" title="android 项目运行时图片"></a>android 项目运行时图片</h2><p><img src="https://cdn.jsdelivr.net/gh/moonris/IMG@v1.1.3/img/car.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h1 id="android-新增方法位置说明及思路"><a href="#android-新增方法位置说明及思路" class="headerlink" title="android 新增方法位置说明及思路"></a>android 新增方法位置说明及思路</h1><pre><code class="hljs">车牌识别的思路
+交通灯思路
+图像识别思路
+二维码思路
+</code></pre>
+<h1 id="Debug（测试重点一）"><a href="#Debug（测试重点一）" class="headerlink" title="Debug（测试重点一）"></a>Debug（测试重点一）</h1><pre><code class="hljs">如何调试Android程序
+</code></pre>
+<h1 id="Toast（测试重点二）"><a href="#Toast（测试重点二）" class="headerlink" title="Toast（测试重点二）"></a>Toast（测试重点二）</h1><p>提示信息</p>
+<p>一般步骤</p>
+<p>1.调用Toast的静态方法makeText()。</p>
+<p>2.添加文本和显示时长</p>
+<p>格式：</p>
+<p>​	Toast.makeText(getApplicayionContext,显示文本，显示时长);</p>
+<p>3,。调用Toast的show()方法显示提示信息。</p>
+<h1 id="Log（测试重点三）"><a href="#Log（测试重点三）" class="headerlink" title="Log（测试重点三）"></a>Log（测试重点三）</h1><p>Log（android.util.log）是Android Studio中的日志工具类,熟练使用log会对你以后的Android开发之旅有很大的帮助。 </p>
+<ul>
+<li><p>log类有五个方法，分别是（级别由低到高）：</p>
+<p>​	1.Log.v()：打印一些最为繁琐、意义不大的日志信息<br>​	2.Log.d()：打印一些调试信息(logd+tab)<br>​	3.Log.i()：打印一些比较重要的数据，可帮助你分析用户行为数据	<br>​	4.Log.w()：打印一些警告信息，提示程序该处可能存在的风险<br>​	5.Log.e()：打印程序中的错误信息<br>​	（这五个方法都可以进行重载） </p>
+<p>Log的所有打印方法都要传入一个tag参数，每次都写一遍显然太麻烦，这里有个小技巧：在onCreate()方法的外面输入logt，然后按下Tab键，这时就会以当前的类名作为值产生一个tag常量。</p>
+</li>
+<li><p>Log是理解程序，分析程序Bug的神兵利器。 熟用AS的日志工具log能使你在Android开发的旅途中事半功倍。log的重要性会在软件项目的测试阶段体现得尽致。</p>
+</li>
+</ul>
+<h1 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h1><pre><code class="hljs">安卓软件开发包，全称为Android software development kit
+</code></pre>
+<h1 id="NDK"><a href="#NDK" class="headerlink" title="NDK"></a>NDK</h1><pre><code class="hljs">Native Development Kit
+
+帮助开发者快速开发C（或C++）的动态库，并能自动将so和java应用一起打包成apk。这些工具对开发者的帮助是巨大的。NDK集成了交叉编译器，并提供了相应的mk文件隔离CPU、平台、ABI等差异，开发人员只需要简单修改mk文件（指出“哪些文件需要编译”、“编译特性要求”等），就可以创建出so。NDK可以自动地将so和Java应用一起打包，极大地减轻了开发人员的打包工作
+
+比如android一些复杂的数学运算，这些复杂的操作基本都是放在底层的库中运行的，而且不是通过java语言写出来的，因为java是基于虚拟机的，比C直接面向CPU的执行效率要低很多。所以在Android架构中，底层代码是以C语言，库的形式来完成，
+
+优点：
+1.运行效率高
+2.利于充分发挥软硬件优势
+3.利于代码复用
+4.降低版本控制成本
+5.降低开发成本
+缺点：
+1.开发难度较高
+2.调试难度较高(以库的形式存在)
+3.增加开发团队规模
+</code></pre>
+<h1 id="Android-项目权限说明"><a href="#Android-项目权限说明" class="headerlink" title="Android 项目权限说明"></a>Android 项目权限说明</h1><pre><code class="hljs">网络权限
+文件读写权限
+</code></pre>
+<h1 id="Gradle-说明"><a href="#Gradle-说明" class="headerlink" title="Gradle 说明"></a>Gradle 说明</h1><pre><code class="hljs">java构建技术世界里具有巨大突破性的构建工具。Gradle具有如下特性：
+
+A very flexible general purpose build tool like Ant.
+&lt;翻译&gt;一个像Ant一样灵活且通用的构建工具。
+
+Switchable, build-by-convention frameworks a la Maven. But we never lock you in!
+&lt;翻译&gt;一种可切换的，像Maven一样的基于约定的构建框架，却又从不约束你（约定优于配置）。
+
+Very powerful support for multi-project builds.
+&lt;翻译&gt;对多项目构建的强力支持。
+
+Very powerful dependency management (based on Apache Ivy).
+&lt;翻译&gt;对依赖管理的强力支持（基于Apache Ivy）。
+
+Full support for your existing Maven or Ivy repository infrastructure.
+&lt;翻译&gt;对已有的Maven和Ivy仓库有着全面的支持。
+
+Support for transitive dependency management without the need for remote repositories or pom.xml and ivy.xml files.
+&lt;翻译&gt;支持可传递性的依赖管理，而不需要远程仓库或者pom.xml和ivy.xml配置文件。
+
+Ant tasks and builds as first class citizens.
+&lt;翻译&gt;Gradle能够很好地支持Ant任务和构建 。
+
+Groovy build scripts.
+&lt;翻译&gt;支持用Groovy语言编写Gradle的脚本。
+A rich domain model for describing your build.
+&lt;翻译&gt;拥有丰富的领域模型来构建你的脚本。
+</code></pre>
+<h1 id="Android-Studio-介绍"><a href="#Android-Studio-介绍" class="headerlink" title="Android Studio 介绍"></a>Android Studio 介绍</h1><pre><code class="hljs">完成安装和设置开发环境,然后你就可以开始学习android。
+首先,你将安装被称为Java开发工具包(JDK)的必要组件。
+然后你要下载和安装Android Studio以及Android软件开发工具包(SDK),这些都是开发Android应用程序所必需的工具。
+接着，我将向你展示如何使用新建项目向导来创建一个简单的项目HelloWorld。
+最后，我们将向你展示怎样连接Android虚拟设备（AVD）和Android物理设备。
+在结束的时候，你将在Android Studio中拥有开发Android应用程序的一切东西。
+</code></pre>
+<h1 id="Using-Code-Generation"><a href="#Using-Code-Generation" class="headerlink" title="Using Code Generation"></a>Using Code Generation</h1><pre><code class="hljs">恰当的使用代码生成功能，这一特色将为你节约大量的时间，代码生成是生成各种方法的的强大功能，包括了构造，getters, setters, equals()，hashCode(), toString(),方法等等。
+在你使用代码生成之前，确认Android Studio 是配置好了，可以忽略成员名称的前缀，如m和s，
+点击File ➤ Settings ➤ Code Style ➤ Java ➤ Code Generation将得到设置对话框，将会出现代码生成的标签页，如果域和静态域文本框不包含m和s，则键入他们并点击”应用“和”确定“
+
+Getters/Setters
+&lt;翻译&gt;Getters/Setters
+
+Java类通常是封装好的,这意味着类成员通常声明为私有的,并且访问这些成员的公共接口是通过公有访问器(getter)和公有修改器(setter)方法爱提供的。
+在Sandbox.java类域范围内点击你的鼠标。并且按Alt+insert（ Cmd + N）。你会注意到有一个选项是Getter,一个为Setter，还有Getter和Setter的组合。
+Getter和setter方法一般都是成对出现的,除非你有一个很好的理由要省略其中一个或着另一个,否则最好是生成后面的组合选项。
+从列表中选择Getter and Setter, 在随后的选择字段生成getter和setter对话框中,从列表中选择mGreetings:List&lt;String&gt;列表并点击OK。
+你的类现在为变量mGreeting有了getter和setter,请注意,生成的代码忽略了m前缀，在生成方法名称的时候,因为你在之前的设置中把m和s设置为了前缀。
+
+Override Methods
+&lt;翻译&gt;方法重载
+
+代码生成是理解类继承结构的,所以你可以覆盖包含在任何父类或接口实现的方法。
+Sandbox.java 是一个简单的普通java对象(POJO)。现在你修改Sandbox类来继承RectShape。
+当你输入继承RectShape时,这个词RectShape可能以红色突出显示。如果适合你需要的情景,按Alt + Enter来导入RectShape类。
+
+toString( ) Method
+&lt;翻译&gt;toString( )方法
+
+Android Studio 可以为你生成toString()方法。让我们为Sandbox创建一个toString()方法,同时也包括mGreetings成员。
+按Alt +Insert| Cmd + N并选择toString()。选择你的唯一成员——mGreetings,并单击OK。Android Studio生成一个返回字符串,如“Sandbox&#123;“+”mGreetings = &quot; + mGreetings +‘&#125;’。
+如果在类中有多个成员,可选择他们,他们也会被附加到这个方法的返回字符串。
+当然toString()方法生成的代码并不是一成不变的,这个方法是可以改变为任何你想要的,只要它返回是一个字符串。
+</code></pre>
+<h1 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h1><p>​	</p>
+<p>​	</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/android/" class="category-chain-item">android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java/">#java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android嵌入式项目讲义</div>
+      <div>https://moonris.github.io/2019/11/01/android1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>李龙飞</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年11月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/22/%E8%BF%91%E6%9C%9F%E7%9A%84%E6%80%9D%E8%80%83/" title="小小的思考">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">小小的思考</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       2019-2022 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
