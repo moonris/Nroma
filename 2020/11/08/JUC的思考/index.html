@@ -19,7 +19,7 @@
     <meta name="description" content="一、多个线程同时修改一个值如何保证被修改的值的可见性？答：正常情况下，多个线程同时访问且修改一个值，当a线程修改这个值，由于线程是异步的，若b线程想修改这个值，则b线程看到的是在主存中还未被修改的值，所以如果不想上锁来阻塞线程用来等待a同步完成这个值的话，可以利用volatile关键字修饰变量，被修饰地变量会被其他线程注意到，其被修改后会及时刷新到主存中，代码如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC的思考">
-<meta property="og:url" content="https://moonris.github.io/Nroma/2020/11/08/JUC%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:url" content="https://moonris.github.io/2020/11/08/JUC%E7%9A%84%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="不可思议">
 <meta property="og:description" content="一、多个线程同时修改一个值如何保证被修改的值的可见性？答：正常情况下，多个线程同时访问且修改一个值，当a线程修改这个值，由于线程是异步的，若b线程想修改这个值，则b线程看到的是在主存中还未被修改的值，所以如果不想上锁来阻塞线程用来等待a同步完成这个值的话，可以利用volatile关键字修饰变量，被修饰地变量会被其他线程注意到，其被修改后会及时刷新到主存中，代码如下：">
 <meta property="og:locale" content="zh_CN">
@@ -317,7 +317,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>JUC的思考</div>
-      <div>https://moonris.github.io/Nroma/2020/11/08/JUC的思考/</div>
+      <div>https://moonris.github.io/2020/11/08/JUC的思考/</div>
     </div>
     <div class="license-meta">
       
